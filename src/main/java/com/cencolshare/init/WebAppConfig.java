@@ -108,9 +108,9 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
 	private Properties hibProperties() {
 		Properties properties = new Properties();
-		properties.put(PROPERTY_NAME_HIBERNATE_DIALECT,	PROPERTY_NAME_HIBERNATE_DIALECT);
-		properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, PROPERTY_NAME_HIBERNATE_SHOW_SQL);
-		properties.put(PROPERTY_NAME_HIBERNATE_DDL, PROPERTY_NAME_HIBERNATE_DDL);
+		properties.put("hibernate.dialect", PROPERTY_NAME_HIBERNATE_DIALECT);
+		properties.put("hibernate.show_sql", PROPERTY_NAME_HIBERNATE_SHOW_SQL);
+		properties.put("hibernate.hbm2ddl.auto", PROPERTY_NAME_HIBERNATE_DDL);
 		return properties;
 	}
 

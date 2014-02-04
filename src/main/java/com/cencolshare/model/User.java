@@ -26,22 +26,23 @@ import com.cencolshare.enums.Role;
 public class User {
         
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="seq_user_id")
-	@SequenceGenerator(name="seq_user_id", sequenceName="seq_user_id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="user_id")
-    private Integer id;
+    private int userId;
 
-	@Column(name="username", nullable=false)
-    public String username;
+	@Column(name="first_name", nullable=false)
+	private String firstName;
 
+	@Column(name="last_name", nullable=false)
+	private String lastName;
+	
+	@Column(name="email", nullable=false)
+	private String email;
+	
 	@Column(name="password", nullable=false)
-    public String password;
+    private String password;
 
 	@Column(name="enabled", nullable=false)
     public Boolean enabled;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name="role", nullable=false)
-    public Role role;
-        
+	    
 }

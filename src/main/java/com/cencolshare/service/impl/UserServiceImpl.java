@@ -19,10 +19,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User loadUserByUsername(String username) {
-		List<User> users = userRepository.findByUsername(username);
-		if(users.size() != 0) {
-			return users.get(0);
-		}
+		//List<User> users = userRepository.findByUsername(username);
+		//if(users.size() != 0) {
+			//return users.get(0);
+		//}
 		return null;
 	}
 	
@@ -30,10 +30,10 @@ public class UserServiceImpl implements UserService {
 	public User insertUser(String username, String password) {
 		
 		User u = new User();
-		u.setUsername(username);
+		//u.setUsername(username);
 		u.setPassword(password);
 		u.setEnabled(true);
-		u.setRole(Role.ROLE_USER);
+		//u.setRole(Role.ROLE_USER);
 		u = userRepository.save(u);
 		return u;
 	}
