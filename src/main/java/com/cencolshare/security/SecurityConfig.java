@@ -20,46 +20,42 @@ import com.cencolshare.repository.UserRepository;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-    private UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-    private DataSource dataSource;
-	
+	private DataSource dataSource;
+
 	public SecurityConfig() {
 		log.debug("creating spring security configuration");
 	}
-	
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-    	 auth
-         .jdbcAuthentication()
-         	 .dataSource(dataSource)
-         	 .usersByUsernameQuery("select username, password, true from tbl_user where username=?")
-         	 .authoritiesByUsernameQuery("select username as username, role from tbl_user where username = ?");
-    	
-    }
-    
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-    	AccessDeniedHandlerImpl hl = new AccessDeniedHandlerImpl();
-    	hl.setErrorPage("/accessdenied");
-    	
-        http
-        	.csrf().disable()
-        	.authorizeRequests()
-            	.antMatchers("/shop/**").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-            .logout()
-            	.logoutSuccessUrl("/login")
-            	.and()
-            .formLogin()
-                .loginPage("/login") 
-                .permitAll();
-        
-        http.exceptionHandling().accessDeniedHandler(hl);
-    	
-    }
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth)
+			throws Exception {
+
+		auth.jdbcAuthentication()
+				.dataSource(dataSource)
+				.usersByUsernameQuery(
+						"select username, password, true from tbl_user where username=?")
+				.authoritiesByUsernameQuery(
+						"select username as username, role from tbl_user where username = ?");
+
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		AccessDeniedHandlerImpl hl = new AccessDeniedHandlerImpl();
+		hl.setErrorPage("/accessdenied");
+
+		http.csrf().disable().authorizeRequests()
+				.antMatchers("/document/**").permitAll()
+				.antMatchers("/shop/**").hasAuthority("ADMIN")
+				.anyRequest().authenticated().and().logout()
+				.logoutSuccessUrl("/login").and().formLogin()
+				.loginPage("/login").permitAll();
+
+		http.exceptionHandling().accessDeniedHandler(hl);
+
+	}
 
 }
