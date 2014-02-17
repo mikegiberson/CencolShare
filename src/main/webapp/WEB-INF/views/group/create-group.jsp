@@ -1,43 +1,26 @@
 <%@ include file="..\common\header.jsp"%>
 
-<div class="container">
-	<div class="row">
-		<form class="form-horizontal">
-			<fieldset>
-				<!-- Address form -->
-
-				<h2>Create Group</h2>
-
-				<!-- Group-Name input-->
-				<div class="control-group">
-					<label class="control-label">Group Name</label>
-					<div class="controls">
-						<input id="group-name" name="Group-name" type="text"
-							placeholder="Group Name" class="input-xlarge">
-						<p class="help-block"></p>
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label">Group Description</label>
-					<div class="controls">
-						<textarea class="col-sm-2 form-control" rows="3"></textarea>
-						<p class="help-block"></p>
-					</div>
-				</div>
-				<br>
-				
-				<div class="control-group">
-					<button type="button" class="btn btn-success"> 
-					
-						Create Group <i class="fa fa-users"></i> 
-					</button>
-					
-				</div>
-				
-			</fieldset>
-		</form>
-	</div>
-</div>
+<form class="col-sm-8 form-horizontal" role="form">
+  <h2>Create Group</h2>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Group Name</label>
+    <div class="col-sm-6">
+      <input type="email" class="form-control" id="inputEmail3">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Group Description</label>
+    <div class="col-sm-6">
+      <textarea class="col-sm-2 form-control" rows="3"></textarea>
+    </div>
+  </div>
+ 
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-success">Save <i class="fa fa-users"></i></button>
+      <a  href="${pageContext.request.contextPath}/group/list" class="btn btn-danger">Cancel <i class="fa fa-caret-left"></i></a>
+    </div>
+  </div>
+</form>
 
 <%@ include file="..\common\footer.jsp"%>
