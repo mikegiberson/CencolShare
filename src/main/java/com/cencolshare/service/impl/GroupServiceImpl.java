@@ -23,5 +23,16 @@ public class GroupServiceImpl implements GroupService {
 		log.debug("groups count: {}", groups.size());
 		return groups;
 	}
+	
+	public Group saveGroup(Group grp) {
+		grp = groupRepository.save(grp);
+		log.debug("New Group saved by group service: {}", grp.getGroupName());
+		return grp;
+	}
+	
+	public Group getGroupById(Long groupId) {
+		final Group grp = groupRepository.findOne(groupId);
+		return grp;
+	}
 
 }
