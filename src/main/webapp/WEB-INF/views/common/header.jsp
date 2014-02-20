@@ -16,6 +16,7 @@
 	<title>CencolShare Web Application</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link rel="stylesheet" href="http://collectivepush.com/plugins/bootstrap/assets/css/bootstrap-tag-cloud.css" >
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
