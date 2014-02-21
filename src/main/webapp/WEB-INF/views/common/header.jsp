@@ -38,8 +38,8 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="/cencolshare/dashboard">Dashboard</a></li>
+            <li><a href="/cencolshare/profile">My Profile</a></li>
             <li><a href="#">Notifications</a></li>
             <sec:authorize access="isAnonymous()">
 		    	<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
