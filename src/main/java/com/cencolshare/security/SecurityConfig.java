@@ -21,11 +21,11 @@ import com.cencolshare.repository.UserRepository;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-    private UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-    private DataSource dataSource;
-	
+	private DataSource dataSource;
+
 	public SecurityConfig() {
 		log.debug("creating spring security configuration");
 	}
@@ -49,6 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
         	.csrf().disable()
         	.authorizeRequests()
+        		.antMatchers("/group/edit/**").permitAll()
+        		.antMatchers("/group/**").permitAll()
+        		.antMatchers("/document/**").permitAll()
             	.antMatchers("/shop/**").hasAuthority("ADMIN")
             	.antMatchers("/dashboard/**").permitAll()
             	.antMatchers("/docs/**").permitAll()
@@ -65,6 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedHandler(hl);
     	
     }
+
     
     @Override
     public void configure(WebSecurity web) throws Exception {
