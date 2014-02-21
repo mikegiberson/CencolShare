@@ -45,21 +45,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	AccessDeniedHandlerImpl hl = new AccessDeniedHandlerImpl();
     	hl.setErrorPage("/accessdenied");
     	
-        http
-        	.csrf().disable()
-        	.authorizeRequests()
-            	.antMatchers("/shop/**").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-            .logout()
-            	.logoutSuccessUrl("/login")
-            	.and()
-            .formLogin()
-                .loginPage("/login") 
-                .permitAll();
-        
-        http.exceptionHandling().accessDeniedHandler(hl);
-    	
+    	 http
+         .csrf().disable()
+         .authorizeRequests()
+                 .antMatchers("/group/edit/**").permitAll()
+                 .antMatchers("/group/**").permitAll()
+                 .antMatchers("/document/**").permitAll()
+             .antMatchers("/shop/**").hasAuthority("ADMIN")
+         .anyRequest().authenticated()
+         .and()
+     .logout()
+             .logoutSuccessUrl("/login")
+             .and()
+     .formLogin()
+         .loginPage("/login") 
+         .permitAll();
+ 
+ http.exceptionHandling().accessDeniedHandler(hl);
     }
 
 }
