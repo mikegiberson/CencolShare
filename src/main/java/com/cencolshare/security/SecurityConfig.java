@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandlerImpl;
@@ -20,11 +21,11 @@ import com.cencolshare.repository.UserRepository;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-    private UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-    private DataSource dataSource;
-	
+	private DataSource dataSource;
+
 	public SecurityConfig() {
 		log.debug("creating spring security configuration");
 	}
@@ -45,23 +46,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	AccessDeniedHandlerImpl hl = new AccessDeniedHandlerImpl();
     	hl.setErrorPage("/accessdenied");
     	
-    	 http
-         .csrf().disable()
-         .authorizeRequests()
-                 .antMatchers("/group/edit/**").permitAll()
-                 .antMatchers("/group/**").permitAll()
-                 .antMatchers("/document/**").permitAll()
-             .antMatchers("/shop/**").hasAuthority("ADMIN")
-         .anyRequest().authenticated()
-         .and()
-     .logout()
-             .logoutSuccessUrl("/login")
-             .and()
-     .formLogin()
-         .loginPage("/login") 
-         .permitAll();
- 
- http.exceptionHandling().accessDeniedHandler(hl);
+        http
+        	.csrf().disable()
+        	.authorizeRequests()
+        		.antMatchers("/discussion/**").permitAll()
+        		.antMatchers("/group/edit/**").permitAll()
+        		.antMatchers("/group/**").permitAll()
+        		.antMatchers("/document/**").permitAll()
+            	.antMatchers("/shop/**").hasAuthority("ADMIN")
+            	.antMatchers("/dashboard/**").permitAll()
+            	.antMatchers("/docs/**").permitAll()
+            	.antMatchers("/profile/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+            .logout()
+            	.logoutSuccessUrl("/login")
+            	.and()
+            .formLogin()
+                .loginPage("/login") 
+                .permitAll();
+        
+        http.exceptionHandling().accessDeniedHandler(hl);
+    	
+    }
+
+    
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+      web
+        .ignoring()
+           .antMatchers("/resources/**");
     }
 
 }
