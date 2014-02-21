@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandlerImpl;
@@ -49,6 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	.csrf().disable()
         	.authorizeRequests()
             	.antMatchers("/shop/**").hasAuthority("ADMIN")
+            	.antMatchers("/dashboard/**").permitAll()
+            	.antMatchers("/docs/**").permitAll()
+            	.antMatchers("/profile/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .logout()
@@ -60,6 +64,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         
         http.exceptionHandling().accessDeniedHandler(hl);
     	
+    }
+    
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+      web
+        .ignoring()
+           .antMatchers("/resources/**");
     }
 
 }
