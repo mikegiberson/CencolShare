@@ -51,8 +51,12 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     applicationProperties.setIgnoreUnresolvablePlaceholders(true);
 
     log.debug("Loading application.properties.");
-    applicationProperties.setLocation(new ClassPathResource("application.properties"));
-
+    if(System.getProperty("spring.profiles.active").contains("test")){
+    	applicationProperties.setLocation(new ClassPathResource("test.properties"));
+    }
+    else{
+    	applicationProperties.setLocation(new ClassPathResource("application.properties"));
+    }
     return applicationProperties;
   }
     @Value("${hibernate.hbm2ddl.auto}") 

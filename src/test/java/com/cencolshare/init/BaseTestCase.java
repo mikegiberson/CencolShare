@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public abstract class BaseTestCase {
 	
 	public BaseTestCase() {
+		System.setProperty("spring.profiles.active", "test");
 		log.debug("init test config");
 	}	
 }
