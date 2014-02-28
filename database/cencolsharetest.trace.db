@@ -1,0 +1,12 @@
+02-28 10:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TBL_DISCUSSION" not found; SQL statement:
+alter table tbl_discussion drop constraint FK_6jpx7nntbhbpuejnrj0xumk38 if exists [42102-174]
+02-28 10:44:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Value too long for column "DISCUSSION_CONTENT VARCHAR(255) NOT NULL": "'Sit nulla sint. Qui eligendi quod molestiae et. Voluptates doloribus sed quia ea sit. Ea debitis consequatur dolorem. Molestiae... (3827)"; SQL statement:
+insert into tbl_discussion (discussion_id, discussion_content, discussion_date, discussion_topic, user_id) values (null, ?, ?, ?, ?) [22001-174]
+02-28 10:46:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Value too long for column "DISCUSSION_CONTENT VARCHAR(255) NOT NULL": "'Inventore vero et. Quo voluptate reiciendis reiciendis voluptatum. Architecto in possimus sunt et quae. Enim labore sint. Volup... (3949)"; SQL statement:
+insert into tbl_discussion (discussion_id, discussion_content, discussion_date, discussion_topic, user_id) values (null, ?, ?, ?, ?) [22001-174]
+02-28 10:48:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Value too long for column "DISCUSSION_CONTENT VARCHAR(255) NOT NULL": "'Autem eligendi et nihil ea. Rerum sint ipsam eos fugiat est. Quasi placeat consequuntur consequatur velit fugiat sed amet. Ipsa... (4089)"; SQL statement:
+insert into tbl_discussion (discussion_id, discussion_content, discussion_date, discussion_topic, user_id) values (null, ?, ?, ?, ?) [22001-174]

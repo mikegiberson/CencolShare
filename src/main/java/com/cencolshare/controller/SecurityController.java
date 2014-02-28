@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cencolshare.model.User;
 import com.cencolshare.service.UserService;
 
 @Controller
@@ -43,7 +44,13 @@ public class SecurityController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
     public String redirectRequestToRegistrationPage() {
 		log.debug("creating user");
-		userService.insertUser("sumit", "123456");
+		final User user = new User();
+		user.setEmail("sonny@gmail.com");
+		user.setPassword("12345");
+		userService.insertUser(user);
+		
+		// userService.insertUser("sumit", "123456");
+		// userService.insertUser("sonny", "abcd");
 		return "";
     }
 	
