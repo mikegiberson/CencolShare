@@ -31,10 +31,12 @@ public class GroupController extends BaseController {
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView listGroup() {
-		List<Group> groups=groupService.getAllGroups();
+		User user=getLoggedInUser();
+		int userId=user.getUserId();
+		List<Group> groups=groupService.getAllGroupsByUser(user);
 		ModelAndView mav = new ModelAndView("group/list-group");
 		mav.addObject("groups", groups);
-		User user=getLoggedInUser();
+	
 		return mav;
 	}
 	
@@ -47,9 +49,11 @@ public class GroupController extends BaseController {
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public ModelAndView saveGroup() {
 		log.debug("Inside save group:");
+		User user=getLoggedInUser();
 		Group grp = new Group();
 		grp.setGroupName(request.getParameter("groupName"));
 		grp.setGroupDescription(request.getParameter("groupDescription"));
+		grp.setUser(user);
 		
 		if(!request.getParameter("groupId").equals("")) {
 			grp.setGroupId(Long.parseLong(request.getParameter("groupId")));

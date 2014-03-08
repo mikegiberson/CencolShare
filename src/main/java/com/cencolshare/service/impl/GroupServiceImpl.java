@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cencolshare.model.Group;
+import com.cencolshare.model.User;
 import com.cencolshare.repository.GroupRepository;
 import com.cencolshare.service.GroupService;
+import com.cencolshare.service.UserService;
 
 @Service
 @Slf4j
@@ -17,12 +19,6 @@ public class GroupServiceImpl implements GroupService {
 
 	@Autowired
 	GroupRepository groupRepository;
-	
-	public List<Group> getAllGroups() {
-		final List<Group> groups= (List<Group>) groupRepository.findAll();
-		log.debug("groups count: {}", groups.size());
-		return groups;
-	}
 	
 	public Group saveGroup(Group grp) {
 		grp = groupRepository.save(grp);
@@ -34,5 +30,16 @@ public class GroupServiceImpl implements GroupService {
 		final Group grp = groupRepository.findOne(groupId);
 		return grp;
 	}
+
+
+	@Override
+	public List<Group> getAllGroupsByUser(final User user) {
+		
+		final List<Group> groups= (List<Group>) groupRepository.findByUser(user);
+		log.debug("groups count: {}", groups.size());
+		return groups;
+	}
+	
+	
 
 }
