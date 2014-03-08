@@ -19,7 +19,7 @@
   	<td>${grp.groupDescription}</td>
   	<td>
   		<a href="${pageContext.request.contextPath}/group/edit/${grp.groupId}" class="btn btn-primary">
-  			<i class="fa fa-pencil"></i>
+  			<i class="fa fa-pencil-square-o"></i>
   		</a>
   		<a class="btn btn-danger">
   			<i class="fa fa-trash-o"></i>
