@@ -15,12 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.cencolshare.model.Group;
+import com.cencolshare.model.User;
 import com.cencolshare.service.GroupService;
 
 @Controller
 @RequestMapping(value="/group")
 @Slf4j
-public class GroupController {
+public class GroupController extends BaseController {
 
 	@Autowired
 	GroupService groupService;
@@ -33,6 +34,7 @@ public class GroupController {
 		List<Group> groups=groupService.getAllGroups();
 		ModelAndView mav = new ModelAndView("group/list-group");
 		mav.addObject("groups", groups);
+		User user=getLoggedInUser();
 		return mav;
 	}
 	
@@ -67,6 +69,8 @@ public class GroupController {
 		mav.addObject("group", grp);
 		return mav;
 	}
+	
+	
 	
 }
 
