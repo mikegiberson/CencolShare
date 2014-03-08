@@ -49,8 +49,8 @@
 			</sec:authorize>
             </li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
+          <form class="navbar-form navbar-right" method="get" action="${pageContext.request.contextPath}/group/search">
+            <input type="text" name ="searchInput" class="form-control" placeholder="Search...">
           </form>
         </div>
       </div>

@@ -2,6 +2,10 @@ package com.cencolshare.service.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,9 @@ public class GroupServiceImpl implements GroupService {
 
 	@Autowired
 	GroupRepository groupRepository;
+	
+	@PersistenceContext
+	EntityManager em;
 	
 	public Group saveGroup(Group grp) {
 		grp = groupRepository.save(grp);
@@ -38,6 +45,14 @@ public class GroupServiceImpl implements GroupService {
 		final List<Group> groups= (List<Group>) groupRepository.findByUser(user);
 		log.debug("groups count: {}", groups.size());
 		return groups;
+	}
+
+	@Override
+	public List<Group> searchGroupsByNameDescription(String groupName) {
+		
+		final String query = "SELECT * FROM tbl_group WHERE (group_name LIKE '%"+groupName+"%' OR group_description LIKE '%"+groupName+"%')";
+		final Query q = em.createNativeQuery(query, Group.class);
+		return q.getResultList();
 	}
 	
 	

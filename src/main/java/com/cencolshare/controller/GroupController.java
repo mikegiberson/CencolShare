@@ -32,7 +32,6 @@ public class GroupController extends BaseController {
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView listGroup() {
 		User user=getLoggedInUser();
-		int userId=user.getUserId();
 		List<Group> groups=groupService.getAllGroupsByUser(user);
 		ModelAndView mav = new ModelAndView("group/list-group");
 		mav.addObject("groups", groups);
@@ -71,6 +70,15 @@ public class GroupController extends BaseController {
 		final Group grp = groupService.getGroupById(id);
 		ModelAndView mav = new ModelAndView("group/create-group");
 		mav.addObject("group", grp);
+		return mav;
+	}
+	
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public ModelAndView searchGroup() {
+		System.out.println("value to search:"+request.getParameter("searchInput"));
+		List<Group> groups=groupService.searchGroupsByNameDescription(request.getParameter("searchInput"));
+		ModelAndView mav = new ModelAndView("group/search-group");
+		mav.addObject("groups", groups);	
 		return mav;
 	}
 	

@@ -10,6 +10,8 @@ public interface GroupService {
 
 	List<Group> getAllGroupsByUser(final User user);
 	
+	List<Group> searchGroupsByNameDescription(String groupName);
+	
 	Group saveGroup(Group grp);
 	
 	Group getGroupById(Long groupId);
