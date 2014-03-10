@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/docs")
-public class DocumentController {
-	
+@RequestMapping("/profile")
+public class ProfileController {
+
 	@RequestMapping(value={"", "index"}, method=RequestMethod.GET)
 	public ModelAndView showDashboard() {
-		ModelAndView mav = new ModelAndView("docs/index");
+		ModelAndView mav = new ModelAndView("profile/index");
 		return mav;
 	}
-
+	
 }

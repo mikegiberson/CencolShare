@@ -7,46 +7,52 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="shortcut icon" href="../../assets/ico/favicon.png">
-	<title>CencolShare Web Application</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-	<link rel="stylesheet" href="http://collectivepush.com/plugins/bootstrap/assets/css/bootstrap-tag-cloud.css" >
-</head>
-<body>
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">CencolShare</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/cencolshare/">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav pull-right">
-		<sec:authorize access="isAnonymous()">
-		    <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-		</sec:authorize>
-		<sec:authorize access="isAuthenticated()">
-		    <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-		</sec:authorize>        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
-<br/><br/><br/>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-<div class="container">
+    <title>Dashboard - CencolShare</title>
+
+    <!-- Bootstrap core CSS -->
+	<link href="/cencolshare/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="/cencolshare/resources/css/dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">CENCOLSHARE</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="#">Notifications</a></li>
+            <sec:authorize access="isAnonymous()">
+		    	<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+		    	<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+			</sec:authorize>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </div>
+    
