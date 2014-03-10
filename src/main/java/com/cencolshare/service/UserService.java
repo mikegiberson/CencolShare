@@ -6,5 +6,8 @@ public interface UserService {
   
   public User loadUserByUsername(String username);
 
-  public User insertUser(String username, String password);
+  public User insertUser(User user);
+  
+  public User loadUserByEmail(String email);
+  
 }

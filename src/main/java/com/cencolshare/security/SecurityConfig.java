@@ -36,8 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	 auth
          .jdbcAuthentication()
          	 .dataSource(dataSource)
-         	 .usersByUsernameQuery("select username, password, true from tbl_user where username=?")
-         	 .authoritiesByUsernameQuery("select username as username, role from tbl_user where username = ?");
+         	 .usersByUsernameQuery("SELECT email AS username, PASSWORD, TRUE FROM tbl_user WHERE email=?")
+         	 .authoritiesByUsernameQuery("select email as username, role from tbl_user where email = ?");
     	
     }
     
@@ -49,14 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
         	.csrf().disable()
         	.authorizeRequests()
-        		.antMatchers("/discussion/**").permitAll()
+        		/*.antMatchers("/discussion/**").permitAll()
         		.antMatchers("/group/edit/**").permitAll()
         		.antMatchers("/group/**").permitAll()
         		.antMatchers("/document/**").permitAll()
             	.antMatchers("/shop/**").hasAuthority("ADMIN")
             	.antMatchers("/dashboard/**").permitAll()
             	.antMatchers("/docs/**").permitAll()
-            	.antMatchers("/profile/**").permitAll()
+            	.antMatchers("/profile/**").permitAll()*/
                 .anyRequest().authenticated()
                 .and()
             .logout()
@@ -64,6 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             	.and()
             .formLogin()
                 .loginPage("/login") 
+                .defaultSuccessUrl("/dashboard")
                 .permitAll();
         
         http.exceptionHandling().accessDeniedHandler(hl);

@@ -1,6 +1,8 @@
-<%@ include file="..\common\header.jsp"%>
+<%@ include file="../common/header.jsp"%>
+<%@ include file="../common/sidebar.jsp"%>
 
-<form class="col-sm-8 form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/group/save">
+<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
+<form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/group/save">
   <h2>Create Group</h2>
  <input type="hidden" name="groupId" value="${requestScope.group.groupId}">
   <div class="form-group">
@@ -23,5 +25,5 @@
     </div>
   </div>
 </form>
-
+</div>
 <%@ include file="..\common\footer.jsp"%>

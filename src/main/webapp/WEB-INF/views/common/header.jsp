@@ -38,8 +38,8 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="/cencolshare/dashboard">Dashboard</a></li>
+            <li><a href="/cencolshare/profile">My Profile</a></li>
             <li><a href="#">Notifications</a></li>
             <sec:authorize access="isAnonymous()">
 		    	<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
@@ -49,8 +49,8 @@
 			</sec:authorize>
             </li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
+          <form class="navbar-form navbar-right" method="get" action="${pageContext.request.contextPath}/group/search">
+            <input type="text" name ="searchInput" class="form-control" placeholder="Search...">
           </form>
         </div>
       </div>

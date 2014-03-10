@@ -1,12 +1,8 @@
 package com.cencolshare.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.cencolshare.enums.Role;
 import com.cencolshare.model.User;
 import com.cencolshare.repository.UserRepository;
 import com.cencolshare.service.UserService;
@@ -27,14 +23,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User insertUser(String username, String password) {
-		
-		User u = new User();
-		//u.setUsername(username);
-		u.setPassword(password);
-		u.setEnabled(true);
-		//u.setRole(Role.ROLE_USER);
-		u = userRepository.save(u);
+	public User loadUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+	
+	@Override
+	public User insertUser(User user) {
+
+		final User u = userRepository.save(user);
 		return u;
 	}
 

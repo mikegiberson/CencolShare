@@ -15,12 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.cencolshare.model.Group;
+import com.cencolshare.model.User;
 import com.cencolshare.service.GroupService;
 
 @Controller
 @RequestMapping(value="/group")
 @Slf4j
-public class GroupController {
+public class GroupController extends BaseController {
 
 	@Autowired
 	GroupService groupService;
@@ -30,9 +31,11 @@ public class GroupController {
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView listGroup() {
-		List<Group> groups=groupService.getAllGroups();
+		User user=getLoggedInUser();
+		List<Group> groups=groupService.getAllGroupsByUser(user);
 		ModelAndView mav = new ModelAndView("group/list-group");
 		mav.addObject("groups", groups);
+	
 		return mav;
 	}
 	
@@ -45,9 +48,11 @@ public class GroupController {
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public ModelAndView saveGroup() {
 		log.debug("Inside save group:");
+		User user=getLoggedInUser();
 		Group grp = new Group();
 		grp.setGroupName(request.getParameter("groupName"));
 		grp.setGroupDescription(request.getParameter("groupDescription"));
+		grp.setUser(user);
 		
 		if(!request.getParameter("groupId").equals("")) {
 			grp.setGroupId(Long.parseLong(request.getParameter("groupId")));
@@ -67,6 +72,17 @@ public class GroupController {
 		mav.addObject("group", grp);
 		return mav;
 	}
+	
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public ModelAndView searchGroup() {
+		System.out.println("value to search:"+request.getParameter("searchInput"));
+		List<Group> groups=groupService.searchGroupsByNameDescription(request.getParameter("searchInput"));
+		ModelAndView mav = new ModelAndView("group/search-group");
+		mav.addObject("groups", groups);	
+		return mav;
+	}
+	
+	
 	
 }
 
