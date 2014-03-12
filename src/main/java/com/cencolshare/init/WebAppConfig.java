@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
@@ -21,6 +20,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -159,4 +159,11 @@ public void addInterceptors(InterceptorRegistry registry) {
          log.info("adding interceptors");
          registry.addInterceptor(new DemoInterceptor()).addPathPatterns("/**").excludePathPatterns("/all/**");
 }
+ 
+ @Bean
+ public CommonsMultipartResolver multipartResolver() {
+   CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+   return multipartResolver;
+ }
+
 }
