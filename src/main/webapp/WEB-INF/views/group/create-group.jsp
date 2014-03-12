@@ -3,7 +3,11 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
 <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/group/save">
-  <h2>Create Group</h2>
+
+	<c:choose>
+		<c:when test="${requestScope.group.groupId > 0}"><h2>Edit Group</h2></c:when>
+		<c:otherwise><h2>New Group</h2></c:otherwise>
+	</c:choose>
  <input type="hidden" name="groupId" value="${requestScope.group.groupId}">
   <div class="form-group">
     <label class="col-sm-2 control-label" >Group Name</label>

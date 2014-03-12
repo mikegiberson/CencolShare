@@ -8,20 +8,20 @@
 <br>
 <br>
 <table class="table table-bordered">
-	<tr>
-		<th>Group Name</th>
-		<th>Group Description</th>
-		<th>Edit</th>
+	<tr >
+		<th class="text-center">Group Name</th>
+		<th class="text-center">Group Description</th>
+		<th class="text-center">Actions</th>
 	</tr>
 <c:forEach items="${requestScope.groups}" var="grp">
   <tr > 
-  	<td>${grp.groupName}</td>
+  	<td class="col-sm-2 text-info"><b>${grp.groupName}</b></td>
   	<td>${grp.groupDescription}</td>
-  	<td>
+  	<td class="col-sm-2 text-center">
   		<a href="${pageContext.request.contextPath}/group/edit/${grp.groupId}" class="btn btn-primary">
   			<i class="fa fa-pencil-square-o"></i>
   		</a>
-  		<a class="btn btn-danger">
+  		<a href="${pageContext.request.contextPath}/group/delete/${grp.groupId}" class="btn btn-danger">
   			<i class="fa fa-trash-o"></i>
   		</a>
   	</td>

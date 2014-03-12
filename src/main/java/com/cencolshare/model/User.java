@@ -1,16 +1,25 @@
 package com.cencolshare.model;
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.cencolshare.enums.Role;
 
@@ -44,5 +53,12 @@ public class User {
 	
 	@Column(name="role", nullable=false)
     public Role role;
+	
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name = "User_to_Group", 
+	joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "user_id") }, 
+	inverseJoinColumns = { @JoinColumn(name = "group_id", referencedColumnName = "group_id") })
+	@Fetch(FetchMode.JOIN)
+	private List<Group> comments;
 	    
 }

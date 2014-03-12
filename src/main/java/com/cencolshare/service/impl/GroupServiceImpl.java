@@ -54,7 +54,13 @@ public class GroupServiceImpl implements GroupService {
 		final Query q = em.createNativeQuery(query, Group.class);
 		return q.getResultList();
 	}
-	
-	
 
+	@Override
+	public boolean deleteGroupbyID(Long groupId) {
+		groupRepository.delete(groupId);
+		return true;
+	}
+	
+	
+	
 }

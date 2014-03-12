@@ -21,6 +21,7 @@
 	<link href="/cencolshare/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
     <link href="/cencolshare/resources/css/dashboard.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   </head>
 
   <body>
@@ -36,8 +37,10 @@
           </button>
           <a class="navbar-brand" href="#">CENCOLSHARE</a>
         </div>
+        
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="/cencolshare/group/search-group"><i class="fa fa-search"></i></a></li>
             <li><a href="/cencolshare/dashboard">Dashboard</a></li>
             <li><a href="/cencolshare/profile">My Profile</a></li>
             <li><a href="#">Notifications</a></li>
@@ -50,6 +53,12 @@
             </li>
           </ul>
           <form class="navbar-form navbar-right" method="get" action="${pageContext.request.contextPath}/group/search">
+          <select class="form-control">
+	  	      <option>Group</option>
+	 		  <option>Document</option>
+			  <option>Discussion</option>
+			 
+</select>
             <input type="text" name ="searchInput" class="form-control" placeholder="Search...">
           </form>
         </div>

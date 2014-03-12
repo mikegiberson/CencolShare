@@ -26,8 +26,7 @@ public class GroupController extends BaseController {
 	@Autowired
 	GroupService groupService;
 	
-	@Autowired
-	HttpServletRequest request;
+	
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView listGroup() {
@@ -82,7 +81,11 @@ public class GroupController extends BaseController {
 		return mav;
 	}
 	
-	
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+	public ModelAndView deleteGroup(@PathVariable Long id) {
+		groupService.deleteGroupbyID(id);
+		return new ModelAndView(new RedirectView("/cencolshare/group/list"));
+	}
 	
 }
 
