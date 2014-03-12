@@ -2,6 +2,8 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
+<input id="fileupload" type="file" name="file" data-url="${pageContext.request.contextPath}/upload/do" single>
+
 ${discussion.discussionTopic }
 <hr>
 <span id="error"></span>
@@ -16,9 +18,20 @@ ${discussion.discussionTopic }
 </c:forEach>
 
 </div>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#addComment").click(addComment);
+	
+   $('#fileupload').fileupload({
+       dataType: 'json',
+       done: function (e, data) {
+               console.log(data.result);
+           $("#profilepic").attr("src", data.result.filePath);
+           $("#photo").val(data.result.filePath);
+       }
+   });
+	
 });
 
 function addComment(){

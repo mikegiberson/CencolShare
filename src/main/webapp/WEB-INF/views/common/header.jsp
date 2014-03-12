@@ -24,6 +24,12 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
     <script src="../../assets/js/docs.min.js"></script>
+    
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/vendor/jquery.ui.widget.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.iframe-transport.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.fileupload.js"></script>    
+
   </head>
 
   <body>
