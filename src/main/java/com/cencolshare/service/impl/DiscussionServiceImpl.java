@@ -32,4 +32,10 @@ public class DiscussionServiceImpl implements DiscussionService {
 		
 		return discussionRepository.save(discussion);
 	}
+
+	@Override
+	public Discussion getDiscussionById(int discussionId) {
+		final Discussion discussion = discussionRepository.findOne(discussionId);
+		return discussion;
+	}
 }
