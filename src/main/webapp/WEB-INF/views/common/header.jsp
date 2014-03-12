@@ -22,6 +22,15 @@
     <!-- Custom styles for this template -->
     <link href="/cencolshare/resources/css/dashboard.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
+    
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/vendor/jquery.ui.widget.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.iframe-transport.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.fileupload.js"></script>    
+
   </head>
 
   <body>
