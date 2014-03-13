@@ -40,4 +40,10 @@ public class Document {
 	
 	@Column(name="tag", nullable=false)
 	private String tag;
+	
+	@Column(name="size", nullable=false)
+	private int size;
+	
+	@Column(name="format", nullable=false)
+	private String format;
 }
