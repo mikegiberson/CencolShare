@@ -49,7 +49,6 @@
         
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/cencolshare/group/search-group"><i class="fa fa-search"></i></a></li>
             <li><a href="/cencolshare/dashboard">Dashboard</a></li>
             <li><a href="/cencolshare/profile">My Profile</a></li>
             <li><a href="#">Notifications</a></li>
@@ -61,14 +60,14 @@
 			</sec:authorize>
             </li>
           </ul>
-          <form class="navbar-form navbar-right" method="get" action="${pageContext.request.contextPath}/group/search">
-          <select class="form-control">
-	  	      <option>Group</option>
-	 		  <option>Document</option>
-			  <option>Discussion</option>
-			 
-</select>
+          <form class="navbar-form navbar-right" method="get" action="${pageContext.request.contextPath}/search">
+          <select class="form-control" name="searchType">
+	  	      <option value="group">Group</option>
+	 		  <option value="document">Document</option>
+			  <option value="discussion">Discussion</option>		 
+			</select>
             <input type="text" name ="searchInput" class="form-control" placeholder="Search...">
+            <button><i class="fa fa-search"></i> </button>
           </form>
         </div>
       </div>

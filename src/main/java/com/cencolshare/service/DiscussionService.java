@@ -11,4 +11,6 @@ public interface DiscussionService {
 	public Discussion saveDiscussion(Discussion discussion);
 	
 	public Discussion getDiscussionById(int discussionId);
+	
+	public List<Discussion> searchDiscussionByNameDescription(String search);
 }

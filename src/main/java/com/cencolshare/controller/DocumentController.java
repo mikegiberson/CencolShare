@@ -19,13 +19,4 @@ public class DocumentController extends BaseController {
 		return mav;
 	}
 	
-//	@RequestMapping(value="/search", method=RequestMethod.GET)
-//	public ModelAndView searchDocument() {
-//		System.out.println("value to search:"+request.getParameter("searchInput"));
-//		List<Group> groups=documentService.searchGroupsByNameDescription(request.getParameter("searchInput"));
-//		ModelAndView mav = new ModelAndView("group/search-document");
-//		mav.addObject("groups", groups);	
-//		return mav;
-//	}
-
 }
