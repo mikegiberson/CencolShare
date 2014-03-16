@@ -76,7 +76,6 @@ public class DiscussionController extends BaseController {
 		discussion.setDiscussionContent(request
 				.getParameter("discussionContents"));
 		discussion.setUser(getLoggedInUser());
-
 		final Discussion createdDiscussion = discussionService
 				.saveDiscussion(discussion);
 		if (createdDiscussion != null) {
