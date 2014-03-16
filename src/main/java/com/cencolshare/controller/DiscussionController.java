@@ -21,7 +21,7 @@ import com.cencolshare.service.UserService;
 @Controller
 @RequestMapping(value = "discussion")
 @Slf4j
-public class DiscussionController {
+public class DiscussionController extends BaseController {
 
 	@Autowired
 	DiscussionService discussionService;
@@ -55,11 +55,11 @@ public class DiscussionController {
 		String returnMessage = "";
 
 		Discussion discussion = new Discussion();
-		discussion.setDiscussionHeadline(request
+		discussion.setDiscussionTopic(request
 				.getParameter("discussionHeading"));
 		discussion.setDiscussionContent(request
 				.getParameter("discussionContents"));
-		discussion.setUser(userService.loadUserByEmail("sonnykr@gmail.com"));
+		discussion.setUser(getLoggedInUser());
 		// TODO: remove the above hardcoding with session
 
 		final Discussion createdDiscussion = discussionService

@@ -33,7 +33,7 @@ public class Discussion {
 	private User user;
 	
 	@Column(name="discussion_topic", nullable=false)
-	private String discussionHeadline;
+	private String discussionTopic;
 	
 	@Column(name="discussion_content", nullable=false)
 	private String discussionContent;
