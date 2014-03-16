@@ -4,10 +4,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.FetchMode;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,4 +35,8 @@ public class Comment {
 	
 	@Column(name="commentDate", nullable=false)
 	private Date commentDate;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="user_id", nullable=false)
+	private User user;
 }

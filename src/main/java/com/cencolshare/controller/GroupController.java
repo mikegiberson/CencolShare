@@ -26,8 +26,7 @@ public class GroupController extends BaseController {
 	@Autowired
 	GroupService groupService;
 	
-	@Autowired
-	HttpServletRequest request;
+	
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView listGroup() {
@@ -72,17 +71,12 @@ public class GroupController extends BaseController {
 		mav.addObject("group", grp);
 		return mav;
 	}
-	
-	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public ModelAndView searchGroup() {
-		System.out.println("value to search:"+request.getParameter("searchInput"));
-		List<Group> groups=groupService.searchGroupsByNameDescription(request.getParameter("searchInput"));
-		ModelAndView mav = new ModelAndView("group/search-group");
-		mav.addObject("groups", groups);	
-		return mav;
+		
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+	public ModelAndView deleteGroup(@PathVariable Long id) {
+		groupService.deleteGroupbyID(id);
+		return new ModelAndView(new RedirectView("/cencolshare/group/list"));
 	}
-	
-	
 	
 }
 

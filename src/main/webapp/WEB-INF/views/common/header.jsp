@@ -21,6 +21,16 @@
 	<link href="/cencolshare/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
     <link href="/cencolshare/resources/css/dashboard.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
+    
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/vendor/jquery.ui.widget.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.iframe-transport.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.fileupload.js"></script>    
+
   </head>
 
   <body>
@@ -36,6 +46,7 @@
           </button>
           <a class="navbar-brand" href="#">CENCOLSHARE</a>
         </div>
+        
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/cencolshare/dashboard">Dashboard</a></li>
@@ -49,8 +60,14 @@
 			</sec:authorize>
             </li>
           </ul>
-          <form class="navbar-form navbar-right" method="get" action="${pageContext.request.contextPath}/group/search">
+          <form class="navbar-form navbar-right" method="get" action="${pageContext.request.contextPath}/search">
+          <select class="form-control" name="searchType">
+	  	      <option value="group">Group</option>
+	 		  <option value="document">Document</option>
+			  <option value="discussion">Discussion</option>		 
+			</select>
             <input type="text" name ="searchInput" class="form-control" placeholder="Search...">
+            <button><i class="fa fa-search"></i> </button>
           </form>
         </div>
       </div>

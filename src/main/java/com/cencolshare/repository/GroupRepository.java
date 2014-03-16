@@ -16,4 +16,6 @@ public interface GroupRepository extends CrudRepository<Group, Long> {
 	List<Group> findByUser(User userID);
 	
 	List<Group> findByGroupName(String groupName);	
+	
+
 }
