@@ -17,10 +17,12 @@ import com.amazonaws.util.StringUtils;
 
 public class S3UploadUtil {
 
-  String accessKey = "addkey";
-  String secretKey = "addkey";
-  String bucketName = "addbucketname";
-  
+	String accessKey = "AKIAIWDTZCCJXL7VQRYQ";
+
+	String secretKey = "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";
+
+	String bucketName = "cencolshare";
+
   protected AWSCredentials credentials;
   protected AmazonS3 connection;
   private static S3UploadUtil instance;

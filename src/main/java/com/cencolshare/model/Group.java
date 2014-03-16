@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -35,4 +36,12 @@ public class Group {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
+	
+	@Column(name="group_image")
+	private String groupImage;
+	
+//	@OneToMany(fetch = FetchType.LAZY, targetEntity = Document.class)
+//	@JoinColumn(name = "document_id", nullable = false)
+//	private Document document;
+
 }

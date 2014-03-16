@@ -55,10 +55,10 @@ public class User {
     public Role role;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
-	@JoinTable(name = "User_to_Group", 
+	@JoinTable(name = "user_to_group", 
 	joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "user_id") }, 
 	inverseJoinColumns = { @JoinColumn(name = "group_id", referencedColumnName = "group_id") })
 	@Fetch(FetchMode.JOIN)
-	private List<Group> comments;
+	private List<Group> groups;
 	    
 }

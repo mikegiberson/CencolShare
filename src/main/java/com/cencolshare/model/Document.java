@@ -46,4 +46,8 @@ public class Document {
 	
 	@Column(name="format", nullable=false)
 	private String format;
+	
+	@Column(name="views", nullable=false)
+	private int views;
+	
 }

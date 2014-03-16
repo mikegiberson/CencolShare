@@ -6,6 +6,7 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
 	<sec:authorize access="isAuthenticated()"> 
+	<c:if test=""></c:if>
 	<a href="${pageContext.request.contextPath}/group/create"
 		class="btn btn-success pull-right"> <i class="fa fa-users"></i>
 		Create new Group
@@ -16,12 +17,7 @@
 	</h1>
 
 	<hr class="colorgraph" />
-	<c:forEach items="${requestScope.groups}" var="grp">
-		<!--checkUserInGroup(loggedInUser.groups, grp)
-		
-		
-		-->
-		<div class="row">
+	<div class="row">
 			<div class="col-sm-2 text-center">
 				<img class="pull-left " width="120px" height="120px" alt=""
 					src="${grp.groupImage}">
@@ -49,8 +45,9 @@
 
 		</div>
 		<hr>
-	</c:forEach>
+	
 	<!-- </table> -->
 </div>
 
 <%@ include file="..\common\footer.jsp"%>
+		

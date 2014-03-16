@@ -67,7 +67,7 @@
 			  <option value="discussion">Discussion</option>		 
 			</select>
             <input type="text" name ="searchInput" class="form-control" placeholder="Search...">
-            <button><i class="fa fa-search"></i> </button>
+            <button class="btn btn-danger"><i class="fa fa-search"></i> </button>
           </form>
         </div>
       </div>

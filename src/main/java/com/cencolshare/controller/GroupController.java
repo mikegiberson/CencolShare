@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
 import com.cencolshare.service.GroupService;
+import com.cencolshare.util.GroupUtil;
 
 @Controller
 @RequestMapping(value="/group")
@@ -51,6 +52,7 @@ public class GroupController extends BaseController {
 		Group grp = new Group();
 		grp.setGroupName(request.getParameter("groupName"));
 		grp.setGroupDescription(request.getParameter("groupDescription"));
+		grp.setGroupImage(request.getParameter("photo"));
 		grp.setUser(user);
 		
 		if(!request.getParameter("groupId").equals("")) {
@@ -78,6 +80,18 @@ public class GroupController extends BaseController {
 		return new ModelAndView(new RedirectView("/cencolshare/group/list"));
 	}
 	
+	@RequestMapping(value="/view/{id}", method=RequestMethod.GET)
+	public ModelAndView viewGroup(@PathVariable Long id) {
+		boolean check=false;
+		User user=getLoggedInUser();
+		List<Group> joinedgroups=groupService.getAllGroupsByUser(user);
+	
+		final Group grp = groupService.getGroupById(id);
+		ModelAndView mav = new ModelAndView("group/group-view");
+		mav.addObject("group", grp);
+		mav.addObject("joined",joinedgroups );
+		return mav;
+	}
 }
 
 
