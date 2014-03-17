@@ -33,7 +33,7 @@ public class Group {
 	@Column(name="group_description")
 	private String groupDescription;
 	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	

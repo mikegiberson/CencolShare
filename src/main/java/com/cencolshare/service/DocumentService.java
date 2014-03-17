@@ -14,4 +14,5 @@ public interface DocumentService {
 	
 	
 
+	public List<Document> searchDocumentByNameDescription(String search);
 }

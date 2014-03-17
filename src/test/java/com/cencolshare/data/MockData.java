@@ -8,6 +8,7 @@ import com.cencolshare.enums.Role;
 import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Document;
 import com.cencolshare.model.Upload;
+import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
 import com.github.javafaker.Faker;
 
@@ -22,11 +23,13 @@ public class MockData {
 		user.setLastName(faker.lastName());
 		user.setPassword(faker.firstName() + "password");
 		user.setEmail(faker.firstName() + "@gmail.com");
+		user.setRole(Role.USER);
 		user.setEnabled(true);
 		user.setRole(Role.USER);
 		return user;
 	}
 	
+
 	public Upload createUpload()
 	{
 		final Upload upload=new Upload();
@@ -40,6 +43,7 @@ public class MockData {
 		upload.setUploadDate(date);
 		return upload;
 	}
+
 	
 	public Discussion createDiscussion(User user) {
 		final Discussion discussion = new Discussion();
@@ -49,6 +53,7 @@ public class MockData {
 		return discussion;
 	}
 	
+
 	public Document createDocument() {
 		Date date = new Date();
 		
@@ -62,4 +67,12 @@ public class MockData {
 		return document;
 	}
 	
+	public Group createGroup() {
+		final Group group = new Group();
+		group.setGroupName(faker.name());
+		group.setGroupDescription(faker.paragraph(2));
+		group.setGroupImage("/cencolshare/resources/images/pdf.jpg");
+		return group;
+	}
+
 }
