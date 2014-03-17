@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cencolshare.exception.ShopNotFound;
 import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
+import com.cencolshare.model.User;
 import com.cencolshare.repository.DocumentRepository;
 import com.cencolshare.service.DocumentService;
 
@@ -22,16 +23,11 @@ public class DocumentServiceImpl implements DocumentService {
 	
 	@Override
 	@Transactional
-	public List<Document> findAll(){
-		return (List<Document>) documentRepository.findAll();
+	public List<Document> findAllDocumentByUser(final User user){
+		return (List<Document>) documentRepository.findByUser(user);
 	
 	}
 	
-	/*public Group saveGroup(Group grp) {
-		grp = groupRepository.save(grp);
-		log.debug("New Group saved by group service: {}", grp.getGroupName());
-		return grp;
-	}*/
 	public Document saveDocument (Document doc){
 		doc = documentRepository.save(doc);
 		return doc;

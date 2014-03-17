@@ -10,3 +10,15 @@ insert into tbl_discussion (discussion_id, discussion_content, discussion_date, 
 02-28 10:48:13 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Value too long for column "DISCUSSION_CONTENT VARCHAR(255) NOT NULL": "'Autem eligendi et nihil ea. Rerum sint ipsam eos fugiat est. Quasi placeat consequuntur consequatur velit fugiat sed amet. Ipsa... (4089)"; SQL statement:
 insert into tbl_discussion (discussion_id, discussion_content, discussion_date, discussion_topic, user_id) values (null, ?, ?, ?, ?) [22001-174]
+03-17 15:19:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "DISCUSSION_TO_COMMENT" not found; SQL statement:
+alter table discussion_to_comment drop constraint FK_fnvw67916dlg40lo9rnxq6br4 if exists [42102-174]
+03-17 15:19:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "DISCUSSION_TO_COMMENT" not found; SQL statement:
+alter table discussion_to_comment drop constraint FK_kw4swns8g7r8xc8m30kd1la1y if exists [42102-174]
+03-17 15:19:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_TO_GROUP" not found; SQL statement:
+alter table user_to_group drop constraint FK_s5udgqbinw70y0to0unmd1lib if exists [42102-174]
+03-17 15:19:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_TO_GROUP" not found; SQL statement:
+alter table user_to_group drop constraint FK_gq5jt1yb7xt4sxo16kfcnvqkj if exists [42102-174]
