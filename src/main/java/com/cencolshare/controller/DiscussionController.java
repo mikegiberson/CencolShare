@@ -117,5 +117,11 @@ public class DiscussionController extends BaseController {
 		result.put("result", "success");
 		return result;
 	}
+	
+	@RequestMapping(value="/deleteComment/{id}", method=RequestMethod.GET)
+	public ModelAndView deleteComment(@PathVariable int id) {
+		discussionService.deleteCommentById(id);
+		return new ModelAndView(new RedirectView("/cencolshare/discussion/list"));
+	}
 
 }

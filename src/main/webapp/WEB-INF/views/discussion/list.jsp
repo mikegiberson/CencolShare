@@ -3,10 +3,8 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
 <h1 class="page-header">Discussions</h1>
-<a href="${pageContext.request.contextPath}/discussion/create" class="btn btn-success"><i class="fa fa-users"></i> Create new Discussion</a>
-<br>
-<p>List of discussions</p>
 
+<br>
 <table class="table table-bordered">
 	<tr>
 		<th>Discussion Title</th>
@@ -31,4 +29,6 @@
   </tr>
 </c:forEach>
 </table>
+
+<a href="${pageContext.request.contextPath}/discussion/create" class="btn btn-success"><i class="fa fa-users"></i> Create new Discussion</a>
 <%@ include file="../common/footer.jsp"%>
