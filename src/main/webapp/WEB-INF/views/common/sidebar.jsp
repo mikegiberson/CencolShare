@@ -5,7 +5,7 @@
             <li><a href="/cencolshare/dashboard">Dashboard</a></li>
             <li><a href="/cencolshare/group/list">Groups</a></li>
             <li><a href="/cencolshare/discussion/list">Discussions</a></li>
-            <li><a href="/cencolshare/docs">My Docs</a></li>
+            <li><a href="/cencolshare/docs/list">My Docs</a></li>
             <li><a href="/cencolshare/profile">Profile</a></li>
             <li><a href="#">Logout</a></li>
           </ul>

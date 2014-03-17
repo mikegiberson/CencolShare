@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -41,9 +44,11 @@ public class Document {
 	@Column(name="tag", nullable=false)
 	private String tag;
 	
-	@Column(name="size", nullable=false)
-	private int size;
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 	
-	@Column(name="format", nullable=false)
-	private String format;
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@JoinColumn(name = "upload_id", nullable = false)
+	private Upload upload;
 }

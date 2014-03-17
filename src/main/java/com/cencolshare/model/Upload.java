@@ -42,4 +42,7 @@ public class Upload {
 
   @Column(name = "file_type", nullable = false)
   private String fileType;
+  
+  @Column(name = "file_size", nullable = false)
+  private String fileSize;
 }

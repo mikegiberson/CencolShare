@@ -25,7 +25,7 @@ public class MockData {
 	
 	public Discussion createDiscussion(User user) {
 		final Discussion discussion = new Discussion();
-		discussion.setDiscussionHeadline(faker.sentence(10));
+		//discussion.setDiscussionHeadline(faker.sentence(10));
 		discussion.setDiscussionContent(faker.paragraph(2));
 		discussion.setUser(user);
 		return discussion;
