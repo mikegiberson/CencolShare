@@ -84,12 +84,12 @@ public class GroupController extends BaseController {
 	public ModelAndView viewGroup(@PathVariable Long id) {
 		boolean check=false;
 		User user=getLoggedInUser();
-		List<Group> joinedgroups=groupService.getAllGroupsByUser(user);
+//		List<Group> joinedgroups=groupService.getAllGroupsByUser(user);
 	
 		final Group grp = groupService.getGroupById(id);
 		ModelAndView mav = new ModelAndView("group/group-view");
 		mav.addObject("group", grp);
-		mav.addObject("joined",joinedgroups );
+//		mav.addObject("joined",joinedgroups );
 		return mav;
 	}
 }

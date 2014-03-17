@@ -3,20 +3,22 @@ package com.cencolshare.service.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cencolshare.exception.ShopNotFound;
 import com.cencolshare.model.Document;
-import com.cencolshare.model.Group;
 import com.cencolshare.repository.DocumentRepository;
 import com.cencolshare.service.DocumentService;
 
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
-	
+	@PersistenceContext
+	 EntityManager em;
 	@Resource
 	private DocumentRepository documentRepository;
 	
@@ -27,15 +29,19 @@ public class DocumentServiceImpl implements DocumentService {
 	
 	}
 	
-	/*public Group saveGroup(Group grp) {
-		grp = groupRepository.save(grp);
-		log.debug("New Group saved by group service: {}", grp.getGroupName());
-		return grp;
-	}*/
 	public Document saveDocument (Document doc){
 		doc = documentRepository.save(doc);
 		return doc;
 	}
 
+	
+	@Override 
+	 public List<Document> searchDocumentByNameDescription(String search) {
+	  
+	  final String query = "SELECT * FROM tbl_document WHERE document_description LIKE '%"+search+"%' OR document_title LIKE '%"+search+"%'";
+	  final Query q = em.createNativeQuery(query, Document.class);
+	  return q.getResultList();
+	  
+	 }
 
 }
