@@ -40,7 +40,7 @@
 							<hr>
 						</c:forEach>
 						<span id="error"></span>
-						<textarea class="form-control" name="comment" id="comment"></textarea>
+						<textarea class="form-control" name="comment" id="comment" placeholder="Write a comment..."></textarea>
 						<br>
 						<button class="btn btn-primary pull-right" id="addComment">Add
 							Comment</button>
