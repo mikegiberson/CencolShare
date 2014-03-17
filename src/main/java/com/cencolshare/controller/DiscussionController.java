@@ -22,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.cencolshare.model.Comment;
 import com.cencolshare.model.Discussion;
+import com.cencolshare.model.Group;
 import com.cencolshare.service.DiscussionService;
 import com.cencolshare.service.UserService;
 
@@ -75,7 +76,6 @@ public class DiscussionController extends BaseController {
 		discussion.setDiscussionContent(request
 				.getParameter("discussionContents"));
 		discussion.setUser(getLoggedInUser());
-
 		final Discussion createdDiscussion = discussionService
 				.saveDiscussion(discussion);
 		if (createdDiscussion != null) {

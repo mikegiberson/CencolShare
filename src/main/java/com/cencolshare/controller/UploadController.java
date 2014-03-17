@@ -54,34 +54,10 @@ public class UploadController {
     upload.setFileName(fileName);
     upload.setOriginalFileName(multipartFile.getOriginalFilename().trim());
     upload.setFileType(ext);
-    upload.setFilePath("https://s3.amazonaws.com/crime-alert/" + fileName);
+    upload.setFilePath("https://s3.amazonaws.com/cencolshare/" + fileName);
     upload.setUploadDate(new Date());
     
     upload = uploadService.saveUpload(upload);
-    
-//    if (!fileName.equals("")) {
-//      File fileToCreate = new File("/Users/sarora/Desktop/temp/uploads/", fileName);
-//      
-//      if (!fileToCreate.exists()) {
-//        FileOutputStream fileOutStream = null;
-//        try {
-//          fileOutStream = new FileOutputStream(fileToCreate);
-//          fileOutStream.write(multipartFile.getBytes());
-//          fileOutStream.flush();
-//          fileOutStream.close();
-//          result.put("message", fileName);
-//
-//        } catch (FileNotFoundException e) {
-//          e.printStackTrace();
-//        } finally {
-//          fileOutStream.flush();
-//          fileOutStream.close();
-//        }
-//        
-//      }else{
-    	  //result.put("message", fileName);
-      //}
-   // }
     
     
     return upload;

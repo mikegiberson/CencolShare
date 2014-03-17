@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
 import com.cencolshare.service.GroupService;
+import com.cencolshare.util.GroupUtil;
 
 @Controller
 @RequestMapping(value="/group")
@@ -26,8 +27,7 @@ public class GroupController extends BaseController {
 	@Autowired
 	GroupService groupService;
 	
-	@Autowired
-	HttpServletRequest request;
+	
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView listGroup() {
@@ -52,6 +52,7 @@ public class GroupController extends BaseController {
 		Group grp = new Group();
 		grp.setGroupName(request.getParameter("groupName"));
 		grp.setGroupDescription(request.getParameter("groupDescription"));
+		grp.setGroupImage(request.getParameter("photo"));
 		grp.setUser(user);
 		
 		if(!request.getParameter("groupId").equals("")) {
@@ -72,18 +73,25 @@ public class GroupController extends BaseController {
 		mav.addObject("group", grp);
 		return mav;
 	}
-	
-	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public ModelAndView searchGroup() {
-		System.out.println("value to search:"+request.getParameter("searchInput"));
-		List<Group> groups=groupService.searchGroupsByNameDescription(request.getParameter("searchInput"));
-		ModelAndView mav = new ModelAndView("group/search-group");
-		mav.addObject("groups", groups);	
-		return mav;
+		
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+	public ModelAndView deleteGroup(@PathVariable Long id) {
+		groupService.deleteGroupbyID(id);
+		return new ModelAndView(new RedirectView("/cencolshare/group/list"));
 	}
 	
+	@RequestMapping(value="/view/{id}", method=RequestMethod.GET)
+	public ModelAndView viewGroup(@PathVariable Long id) {
+		boolean check=false;
+		User user=getLoggedInUser();
+		List<Group> joinedgroups=groupService.getAllGroupsByUser(user);
 	
-	
+		final Group grp = groupService.getGroupById(id);
+		ModelAndView mav = new ModelAndView("group/group-view");
+		mav.addObject("group", grp);
+		mav.addObject("joined",joinedgroups );
+		return mav;
+	}
 }
 
 

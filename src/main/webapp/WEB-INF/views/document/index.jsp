@@ -14,7 +14,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua</p>
                     <p class="text-muted">Size: 2.5MB Format: PDF</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
+                    <p><a href="/cencolshare/docs/preview">Preview</a> | <a href="#">Download</a></p>
                   </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua</p>
                     <p class="text-muted">Size: 2.5MB Format: DOCX</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
+                    <p><a href="/cencolshare/docs/preview">Preview</a> | <a href="#">Download</a></p>
                   </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua</p>
                     <p class="text-muted">Size: 1 MB Format: PPTX</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
+                    <p><a href="/cencolshare/docs/preview">Preview</a> | <a href="#">Download</a></p>
                   </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua</p>
                     <p class="text-muted">Size: 2.5MB Format: XLSX</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
+                    <p><a href="/cencolshare/docs/preview">Preview</a> | <a href="#">Download</a></p>
                   </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua</p>
                     <p class="text-muted">Size: 2.5MB Format: PPTX</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
+                    <p><a href="/cencolshare/docs/preview">Preview</a> | <a href="#">Download</a></p>
                   </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua</p>
                     <p class="text-muted">Size: 1 MB Format: PDF</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
+                    <p><a href="/cencolshare/docs/preview">Preview</a> | <a href="#">Download</a></p>
                   </div>
                 </div>
             </div>

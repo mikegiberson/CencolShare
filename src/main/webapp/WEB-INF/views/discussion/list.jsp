@@ -9,17 +9,19 @@
 
 <table class="table table-bordered">
 	<tr>
-		<th>Group Name</th>
-		<th>Group Description</th>
-		<th>Edit</th>
+		<th>Discussion Title</th>
+		<th>Discussion Content</th>
+		<th>Actions</th>
 	</tr>
 <c:forEach items="${requestScope.discussions}" var="d">
   <tr > 
-  	<td>${d.discussionDate }
-		${d.discussionTopic }
-		</td>
   	<td>
-  		<a href="${pageContext.request.contextPath}/group/edit/${grp.groupId}" class="btn btn-primary">
+  		<a href="${pageContext.request.contextPath}/discussion/view/${d.discussionId}">${d.discussionTopic }</a>
+		
+		</td>
+		<td>${d.discussionContent }</td>
+  	<td>
+  		<a href="${pageContext.request.contextPath}/discussion/view/${d.discussionId}" class="btn btn-primary">
   			<i class="fa fa-pencil-square-o"></i>
   		</a>
   		<a class="btn btn-danger">
