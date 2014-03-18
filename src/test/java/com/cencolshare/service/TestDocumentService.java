@@ -58,6 +58,11 @@ public class TestDocumentService extends BaseTestCase {
 		assertNotNull(docs);
 		assertEquals(docs.size() > 0, true);
 		assertEquals(doc.getDocumentId(), docs.get(0).getDocumentId());
+		assertEquals(doc.getDocumentTitle(), docs.get(0).getDocumentTitle());
+		assertEquals(doc.getDateUploaded(), docs.get(0).getDateUploaded());
+		assertEquals(doc.getDocumentDescription(), docs.get(0).getDocumentDescription());
+		assertEquals(doc.getTag(), docs.get(0).getTag());
+		
 		
 	}
 	

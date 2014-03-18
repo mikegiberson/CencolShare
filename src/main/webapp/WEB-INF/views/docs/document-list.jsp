@@ -1,26 +1,54 @@
 <%@ include file="../common/header.jsp"%>
-<%@ include file="../common/sidebar.jsp"%>    
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-          <h1 class="page-header">My Docs  <a href= "upload"> <button type="button" class="btn btn-success pull-right" >Upload</button></a></h1>
-           
-             <c:forEach var="document" items="${documents}">
-          <div class="row">
-            <div class="col-md-4">
-                  <div class="thumbnail">
-                  <br />
-                  <img src="/cencolshare/resources/images/pdf.jpg" class="media-object">
-                  <div class="caption">
-                 
-                    <h3>${document.documentTitle}</h3>
-                    <p>${document.documentDescription}</p>
-                    <p class="text-muted">Size: 2.5MB Format: PDF</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a> | <a href="#">Delete</a></p>
-                  </div>
-                </div>
-            </div>
-            </c:forEach>
-           
-      <!--      <div class="col-md-4">
+<%@ include file="../common/sidebar.jsp"%>
+<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
+	<h1 class="page-header">
+		My Docs <a href="upload">
+			<button type="button" class="btn btn-success pull-right">Upload</button>
+		</a>
+	</h1>
+
+	<c:forEach var="document" items="${documents}">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="thumbnail">
+					<br />
+					<c:choose>
+						<c:when test="${document.upload.fileType=='.docx'}">
+							<img src="/cencolshare/resources/images/word.jpg"
+								class="media-object">
+								</c:when>
+						<c:when test="${document.upload.fileType=='.pdf'}">
+						<img src="/cencolshare/resources/images/pdf.jpg"
+							class="media-object">
+							</c:when>
+							<c:when test="${document.upload.fileType=='.ppt'}">
+						<img src="/cencolshare/resources/images/ppt.png"
+							class="media-object">
+							</c:when>
+							<c:when test="${document.upload.fileType=='.xls'}">
+						<img src="/cencolshare/resources/images/excel.jpg"
+							class="media-object">
+							</c:when>
+						<c:otherwise>
+
+						</c:otherwise>
+					</c:choose>
+					<div class="caption">
+
+						<h3>${document.documentTitle}</h3>
+						<p>${document.documentDescription}</p>
+						<p class="text-muted">Size: ${document.upload.fileSize} KB
+							 Format: ${document.upload.fileType }</p>
+						<p>
+							<a href="#">Preview</a> | <a href="#">Download</a> | <a
+								href="${pageContext.request.contextPath}/docs/delete/${document.documentId}">Delete</a>
+						</p>
+					</div>
+				</div>
+			</div>
+	</c:forEach>
+
+	<!--      <div class="col-md-4">
                   <div class="thumbnail">
                   <br />
                   <img src="/cencolshare/resources/images/word.jpg" class="media-object">
@@ -88,9 +116,9 @@
                   </div>
                 </div>
             </div>
-             --> 
-          </div> 
-      
-      </div>
-    </div>
- <%@ include file="../common/footer.jsp"%>
+             -->
+</div>
+
+</div>
+</div>
+<%@ include file="../common/footer.jsp"%>

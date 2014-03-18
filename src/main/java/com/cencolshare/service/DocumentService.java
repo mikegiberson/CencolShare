@@ -15,4 +15,6 @@ public interface DocumentService {
 	
 
 	public List<Document> searchDocumentByNameDescription(String search);
+
+	boolean deleteDocumentbyID(Integer id);
 }

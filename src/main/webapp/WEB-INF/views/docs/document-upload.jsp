@@ -9,7 +9,9 @@
 
 <!-- Form Name -->
 
- <input type="hidden" name="groupId" value="${requestScope.document.documentId}">
+ <input type="hidden" name="documentId" value="${requestScope.document.documentId}">
+ <input type="hidden" name="uploadId" value="${requestScope.upload.uploadId }">
+ 
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="docNameTxt">Document Name</label>  
@@ -39,11 +41,11 @@
 
 <!-- Tag Cloud -->
 <div class = "form-group">
-<label class="col-md-4 control-label">Tags</label>
+  <label class="col-md-4 control-label">Tags</label>
 <div class="col-md-2"  >
 <div id="tag-success">
   <input class="form-control" type="text" value="${requestScope.document.tag}" >
-  <button   class="btn"  type="button">Add <i class="fa fa-plus"></i></button>
+ <!-- <button   class="btn"  type="button">Add <i class="fa fa-plus"></i></button>-->
 
 <ul id="tag-cloud">
 </ul>

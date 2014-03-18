@@ -48,7 +48,7 @@ public class Document {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Upload.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Upload.class)
 	@JoinColumn(name = "upload_id", nullable = false)
 	private Upload upload;
 	
