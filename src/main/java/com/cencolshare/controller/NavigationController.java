@@ -52,12 +52,11 @@ public class NavigationController extends BaseController {
 			log.debug("search count: {}", groups.size());
 			mav = new ModelAndView("group/search-group");
 			mav.addObject("groups", groups);	
-		/*} else if(searchType.toLowerCase().equals("document")) {
+		} else if(searchType.toLowerCase().equals("document")) {
 			List<Document> documents = documentService.searchDocumentByNameDescription(searchInput);
 			mav = new ModelAndView("document/search-document");
 			log.debug("search count: {}", documents.size());
 			mav.addObject("documents", documents);	
-			*/
 		} else if(searchType.toLowerCase().equals("discussion")) {
 			List<Discussion> discussions =discussionService.searchDiscussionByNameDescription(searchInput);
 			mav = new ModelAndView("discussion/search-discussion");

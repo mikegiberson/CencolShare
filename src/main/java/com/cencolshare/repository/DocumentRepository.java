@@ -8,7 +8,7 @@ import com.cencolshare.model.Document;
 import com.cencolshare.model.User;
 
 
-public interface DocumentRepository extends CrudRepository<Document, Integer>{
+public interface DocumentRepository extends CrudRepository<Document, Long>{
 
 	List<Document> findByUser (User user);
 }
