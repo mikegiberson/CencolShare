@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cencolshare.model.Upload;
+import com.cencolshare.model.User;
 import com.cencolshare.repository.UploadRepository;
 import com.cencolshare.service.UploadService;
 
@@ -26,6 +27,13 @@ public class UploadServiceImpl implements UploadService {
 	@Override
 	public Upload getUploadById(Long id) {
 		return uploadRepository.findOne(id);
+	}
+	
+	@Override
+	public Upload insertUpload(Upload upload) {
+
+		final Upload u = uploadRepository.save(upload);
+		return u;
 	}
 
 }
