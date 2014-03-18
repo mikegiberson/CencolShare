@@ -13,42 +13,44 @@
 		<div class="row">
 			<div class="panel panel-default widget">
 				<div class="panel-heading">
-					<h2 class="panel-title"><b>Comments</b></h2>
-					</div>
-					<div class="panel-body">
-						<c:forEach items="${discussion.comments}" var="c">
-							<div class="row">
-								<div class="col-xs-2 col-md-1">
-									<img src="http://placehold.it/80"
-										class="img-circle img-responsive" alt="" />
+					<h2 class="panel-title">
+						<b>Comments</b>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<c:forEach items="${discussion.comments}" var="c">
+						<div class="row">
+							<div class="col-xs-2 col-md-1">
+								<img src="http://placehold.it/80"
+									class="img-circle img-responsive" alt="" />
+							</div>
+							<div class="col-xs-10 col-md-11">
+								<div>
+									<div class="mic-info">
+										By: <a href="#">${c.user.firstName }</a> on ${c.commentDate}
+									</div>
 								</div>
-								<div class="col-xs-10 col-md-11">
-									<div>
-										<div class="mic-info">
-											By: <a href="#">${c.user.firstName }</a> on ${c.commentDate}
-										</div>
-									</div>
-									<div class="comment-text">${c.comment}</div>
-									<div class="action">
-										<button type="button" class="btn btn-danger btn-xs"
-											id="deleteComment" title="Delete">
-											<i class="fa fa-trash-o"></i>
-										</button>
-									</div>
+								<div class="comment-text">${c.comment}</div>
+								<div class="action">
+									<a href="${pageContext.request.contextPath}/discussion/deleteComment/${c.commentId}"
+										class="btn btn-danger"> <i class="fa fa-trash-o"></i>
+									</a>
 								</div>
 							</div>
-							<hr>
-						</c:forEach>
-						<span id="error"></span>
-						<textarea class="form-control" name="comment" id="comment" placeholder="Write a comment..."></textarea>
-						<br>
-						<button class="btn btn-primary pull-right" id="addComment">Add
-							Comment</button>
-					</div>
+						</div>
+						<hr>
+					</c:forEach>
+					<span id="error"></span>
+					<textarea class="form-control" name="comment" id="comment"
+						placeholder="Write a comment..."></textarea>
+					<br>
+					<button class="btn btn-primary pull-right" id="addComment">Add
+						Comment</button>
 				</div>
 			</div>
 		</div>
-	
+	</div>
+
 </div>
 
 

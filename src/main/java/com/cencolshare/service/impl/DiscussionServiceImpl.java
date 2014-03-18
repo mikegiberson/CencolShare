@@ -10,14 +10,15 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cencolshare.model.Discussion;
-import com.cencolshare.model.Group;
 import com.cencolshare.repository.DiscussionRepository;
 import com.cencolshare.service.DiscussionService;
 
 @Service
 @Slf4j
+@Transactional
 public class DiscussionServiceImpl implements DiscussionService {
 
 	@Autowired
@@ -52,5 +53,17 @@ public class DiscussionServiceImpl implements DiscussionService {
 		final String query = "SELECT * FROM tbl_discussion WHERE discussion_topic LIKE '%"+search+"f%' OR discussion_content LIKE '%"+search+"%'";
 		final Query q = em.createNativeQuery(query, Discussion.class);
 		return q.getResultList();
+	}
+
+	@Override
+	public boolean deleteCommentById(int commentId) {
+		final String query = "DELETE FROM discussion_to_comment WHERE comment_id = " + commentId;
+		final Query q = em.createNativeQuery(query);
+		q.executeUpdate();
+		
+		final String query2 = "DELETE FROM tbl_comment WHERE comment_id = " + commentId;
+		final Query q2 = em.createNativeQuery(query2);		
+		q2.executeUpdate();
+		return true;
 	}
 }
