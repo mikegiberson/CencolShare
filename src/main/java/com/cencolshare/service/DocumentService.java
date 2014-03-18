@@ -3,7 +3,6 @@ package com.cencolshare.service;
 import java.util.List;
 
 import com.cencolshare.model.Document;
-import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
 
 public interface DocumentService {
@@ -12,7 +11,7 @@ public interface DocumentService {
 	
 	public Document saveDocument( Document doc);
 	
-	
+	public Document getDocumentById(int documentId);
 
 	public List<Document> searchDocumentByNameDescription(String search);
 

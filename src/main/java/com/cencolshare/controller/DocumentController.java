@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,10 @@ import com.cencolshare.model.Document;
 import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
 import com.cencolshare.service.DocumentService;
-import com.cencolshare.util.GroupUtil;
 
 @Controller
 @RequestMapping("/docs")
+@Slf4j
 public class DocumentController extends BaseController {
 	
 	@Autowired
@@ -30,6 +31,9 @@ public class DocumentController extends BaseController {
 	
 	@Autowired
 	HttpServletRequest request;
+	
+	@Value("${domainPath}")
+	private String DOMAIN_PATH;
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView listDocument() {
@@ -41,9 +45,21 @@ public class DocumentController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/preview", method = RequestMethod.GET)
-	public ModelAndView discussionListPage() {
+	public ModelAndView documentPreviewTest() {
 		ModelAndView mav = new ModelAndView("document/document-preview");
 		mav.addObject("title", "hello");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/view/{docId}", method = RequestMethod.GET)
+	public ModelAndView documentPreview(@PathVariable int docId) {
+		
+		ModelAndView mav = new ModelAndView("document/document-preview");
+		final Document document = documentService.getDocumentById(docId);
+		long fileId = document.getUpload().getId();
+		String filePath = DOMAIN_PATH + "upload/fetch/" + fileId;
+		mav.addObject("docPath", filePath);
+		
 		return mav;
 	}
 
@@ -61,7 +77,6 @@ public class DocumentController extends BaseController {
 		User user = getLoggedInUser();
 		Upload upload = new Upload();
 		upload.setFileName("java");
-		upload.setFilePath("path");
 		upload.setFileSize("123");
 		upload.setFileType(".pdf");
 		upload.setOriginalFileName("Java for beginner");

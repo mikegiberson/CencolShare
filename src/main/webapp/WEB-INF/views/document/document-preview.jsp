@@ -6,7 +6,7 @@
 
 
 <iframe style="display:block; border:1px solid #86B404;" width="100%" height="500"
-	src="https://docs.google.com/viewer?embedded=true&url=http://research.google.com/archive/bigtable-osdi06.pdf"></iframe>
+	src="https://docs.google.com/viewer?embedded=true&url=${ docPath }"></iframe>
 	
 	  <br />
        <ul class="media-list">

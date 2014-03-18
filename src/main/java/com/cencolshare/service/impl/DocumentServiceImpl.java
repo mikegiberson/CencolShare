@@ -52,4 +52,10 @@ public class DocumentServiceImpl implements DocumentService {
 		return true;
 	}
 
+	@Override
+	public Document getDocumentById(int documentId) {
+		
+		return documentRepository.findOne(documentId);
+	}
+
 }
