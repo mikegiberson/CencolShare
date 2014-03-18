@@ -17,9 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.cencolshare.model.Document;
+import com.cencolshare.model.Group;
 import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
 import com.cencolshare.service.DocumentService;
+import com.cencolshare.service.UploadService;
+import com.cencolshare.util.GroupUtil;
 
 @Controller
 @RequestMapping("/docs")
@@ -35,24 +38,28 @@ public class DocumentController extends BaseController {
 	@Value("${domainPath}")
 	private String DOMAIN_PATH;
 	
+	@Autowired
+	UploadService uploadService;
+	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView listDocument() {
 		ModelAndView mav = new ModelAndView("docs/document-list");
 		User user=getLoggedInUser();
 		List<Document> documents = documentService.findAllDocumentByUser(user);
 		mav.addObject("documents",documents);
-		return mav;
+		return setSelectedMenu(mav);
 	}
 	
-	@RequestMapping(value = "/preview", method = RequestMethod.GET)
-	public ModelAndView documentPreviewTest() {
-		ModelAndView mav = new ModelAndView("document/document-preview");
-		mav.addObject("title", "hello");
-		return mav;
-	}
+//	@RequestMapping(value = "/preview", method = RequestMethod.GET)
+//	public ModelAndView documentPreviewTest() {
+//		ModelAndView mav = new ModelAndView("document/document-preview");
+//		mav.addObject("title", "hello");
+//		mav.addObject("docPath", "sample.doc");
+//		return setSelectedMenu(mav);
+//	}
 	
 	@RequestMapping(value = "/view/{docId}", method = RequestMethod.GET)
-	public ModelAndView documentPreview(@PathVariable int docId) {
+	public ModelAndView documentPreview(@PathVariable long docId) {
 		
 		ModelAndView mav = new ModelAndView("document/document-preview");
 		final Document document = documentService.getDocumentById(docId);
@@ -68,7 +75,7 @@ public class DocumentController extends BaseController {
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public ModelAndView uploadDocs() {
 		ModelAndView mav = new ModelAndView("document/document-upload");
-		return mav;
+		return setSelectedMenu(mav);
 	}
 	
 		
@@ -81,6 +88,7 @@ public class DocumentController extends BaseController {
 		upload.setFileType(".pdf");
 		upload.setOriginalFileName("Java for beginner");
 		upload.setUploadDate(new Date());
+		Long uploadId = upload.getId();
 		
 		Document doc= new Document();
 		doc.setDocumentTitle(request.getParameter("documentTitle"));
@@ -90,10 +98,11 @@ public class DocumentController extends BaseController {
 		doc.setDateUploaded(new Date());
 		doc.setFileUrl("htttp://www.");
 		doc.setUpload(upload);
+		
 	
 		
 		if(!request.getParameter("documentId").equals("")) {
-			doc.setDocumentId(Integer.parseInt(request.getParameter("documentId")));
+			doc.setDocumentId(Long.parseLong(request.getParameter("documentId")));
 		}
 		
 		doc = documentService.saveDocument(doc);
@@ -104,8 +113,22 @@ public class DocumentController extends BaseController {
 	}
 	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
-	public ModelAndView deleteDocument(@PathVariable Integer id) {
-		documentService.deleteDocumentbyID(id);
+	public ModelAndView deleteDocument(@PathVariable Long id) {
+		
+		User user = getLoggedInUser();
+		final Document doc = documentService.getDocumentById(id);
+		Long uploadId = doc.getUpload().getId();
+		int docUserId = doc.getUser().getUserId();
+		int userID =user.getUserId();
+		
+		
+		if (userID == docUserId){
+		
+			documentService.deleteDocumentbyID(id);
+			uploadService.deleteUpload(uploadId);
+		}
+		//documentService.deleteDocumentbyID(id);
+		//uploadService.deleteUpload(uploadId);
 		return new ModelAndView(new RedirectView("/cencolshare/docs/list"));
 	}
 

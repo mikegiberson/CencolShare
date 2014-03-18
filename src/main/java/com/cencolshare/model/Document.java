@@ -27,7 +27,7 @@ public class Document {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="document_id")
-	private int documentId;
+	private Long documentId;
 	
 	@Column(name="document_title", nullable=false)
 	private String documentTitle;
@@ -44,7 +44,7 @@ public class Document {
 	@Column(name="tag", nullable=false)
 	private String tag;
 	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	

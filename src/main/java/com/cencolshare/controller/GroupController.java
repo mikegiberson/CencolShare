@@ -20,78 +20,82 @@ import com.cencolshare.service.GroupService;
 import com.cencolshare.util.GroupUtil;
 
 @Controller
-@RequestMapping(value="/group")
+@RequestMapping(value = "/group")
 @Slf4j
 public class GroupController extends BaseController {
 
 	@Autowired
 	GroupService groupService;
-	
-	
-	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listGroup() {
-		User user=getLoggedInUser();
-		List<Group> groups=groupService.getAllGroupsByUser(user);
+		User user = getLoggedInUser();
+		List<Group> groups = groupService.getAllGroupsByUser(user);
 		ModelAndView mav = new ModelAndView("group/list-group");
 		mav.addObject("groups", groups);
-	
-		return mav;
+
+		return setSelectedMenu(mav);
 	}
-	
-	@RequestMapping(value="/create", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView createGroup() {
 		ModelAndView mav = new ModelAndView("group/create-group");
-		return mav;
+		return  setSelectedMenu(mav);
 	}
-	
-	@RequestMapping(value="/save", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveGroup() {
 		log.debug("Inside save group:");
-		User user=getLoggedInUser();
+		User user = getLoggedInUser();
 		Group grp = new Group();
 		grp.setGroupName(request.getParameter("groupName"));
 		grp.setGroupDescription(request.getParameter("groupDescription"));
 		grp.setGroupImage(request.getParameter("photo"));
 		grp.setUser(user);
-		
-		if(!request.getParameter("groupId").equals("")) {
+
+		if (!request.getParameter("groupId").equals("")) {
 			grp.setGroupId(Long.parseLong(request.getParameter("groupId")));
 		}
-		
+
 		grp = groupService.saveGroup(grp);
-		if(grp.getGroupId() > 0) {
+		if (grp.getGroupId() > 0) {
 			return new ModelAndView(new RedirectView("list"));
 		}
 		return null;
 	}
-	
-	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView editGroup(@PathVariable Long id) {
 		final Group grp = groupService.getGroupById(id);
 		ModelAndView mav = new ModelAndView("group/create-group");
 		mav.addObject("group", grp);
-		return mav;
+		return setSelectedMenu(mav);
 	}
-		
-	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView deleteGroup(@PathVariable Long id) {
-		groupService.deleteGroupbyID(id);
+		log.info("Delete group id: " + id);
+		final User loggedUser = getLoggedInUser();
+		int loggedUserId = loggedUser.getUserId();
+		Group thisGroup = groupService.getGroupById(id);
+		int groupUserId = thisGroup.getUser().getUserId();
+		if (groupUserId == loggedUserId) {
+			log.info("User is authenticated to delete grp");
+			groupService.deleteGroupbyID(id);
+		}
 		return new ModelAndView(new RedirectView("/cencolshare/group/list"));
 	}
-	
-	@RequestMapping(value="/view/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public ModelAndView viewGroup(@PathVariable Long id) {
-		boolean check=false;
-		User user=getLoggedInUser();
-//		List<Group> joinedgroups=groupService.getAllGroupsByUser(user);
-	
+		boolean check = false;
+		User user = getLoggedInUser();
+		// List<Group> joinedgroups=groupService.getAllGroupsByUser(user);
+
 		final Group grp = groupService.getGroupById(id);
 		ModelAndView mav = new ModelAndView("group/group-view");
 		mav.addObject("group", grp);
-//		mav.addObject("joined",joinedgroups );
-		return mav;
+		// mav.addObject("joined",joinedgroups );
+		return  setSelectedMenu(mav);
 	}
 }
-
-

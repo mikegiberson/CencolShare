@@ -10,10 +10,10 @@ public interface DocumentService {
 	public List<Document> findAllDocumentByUser(final User user);
 	
 	public Document saveDocument( Document doc);
-	
-	public Document getDocumentById(int documentId);
 
 	public List<Document> searchDocumentByNameDescription(String search);
 
-	boolean deleteDocumentbyID(Integer id);
+	boolean deleteDocumentbyID(Long id);
+	
+	public Document getDocumentById(long Id);
 }

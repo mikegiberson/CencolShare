@@ -26,7 +26,7 @@
 							class="media-object">
 							</c:when>
 							<c:when test="${document.upload.fileType=='.xls'}">
-						<img src="/cencolshare/resources/images/excel.jpg"
+						<img src="/cencolshare/resources/images/excel.png"
 							class="media-object">
 							</c:when>
 						<c:otherwise>
