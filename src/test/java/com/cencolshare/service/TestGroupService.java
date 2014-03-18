@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import javax.swing.text.EditorKit;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +13,7 @@ import com.cencolshare.init.BaseTestCase;
 import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
+import com.github.javafaker.Faker;
 
 public class TestGroupService extends BaseTestCase {
 
@@ -99,4 +102,37 @@ public class TestGroupService extends BaseTestCase {
 		assertNull(groupService.getGroupById(group.getGroupId()));
 		
 	}
+	
+	@Test
+	public void testEditGroup() {
+
+		final User user = userService.insertUser(mockData.createUser());
+		Group grp = mockData.createGroup();
+		grp.setUser(user);	
+		final Group group = groupService.saveGroup(grp);
+		assertNotNull("Create Group failed", group);
+		
+		final Group grpById = groupService.getGroupById(group.getGroupId());
+		assertNotNull(grpById);
+		
+		assertEquals(grpById.getGroupName(),group.getGroupName());
+		assertEquals(grpById.getGroupDescription(),group.getGroupDescription());
+		assertEquals(grpById.getGroupId(),group.getGroupId());
+		
+		final Group editGroup = grpById;
+		editGroup.setGroupDescription("description");
+		editGroup.setGroupName("group");
+		editGroup.setGroupImage("");
+		
+		final Group updatedGroup=groupService.saveGroup(editGroup);
+		assertNotNull(updatedGroup);
+		assertEquals(editGroup.getGroupName(), updatedGroup.getGroupName());
+		assertEquals(editGroup.getGroupDescription(), updatedGroup.getGroupDescription());
+		assertEquals(editGroup.getGroupImage(),updatedGroup.getGroupImage());
+		assertEquals(editGroup.getGroupId(), updatedGroup.getGroupId());
+		
+		
+		
+	}
+
 }

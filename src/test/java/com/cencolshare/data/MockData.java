@@ -1,8 +1,13 @@
 package com.cencolshare.data;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.cencolshare.enums.Role;
+import com.cencolshare.model.Comment;
 import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
@@ -24,12 +29,24 @@ public class MockData {
 		return user;
 	}
 	
+	public Comment createComment(User user)
+	{
+		
+		final Comment comment=new Comment();
+		comment.setComment(faker.name());
+		comment.setUser(user);
+		comment.setCommentDate(new Date());;
+		return comment;
+	}
 	
-	public Discussion createDiscussion(User user) {
+	public Discussion createDiscussion(User user, List<Comment> comment) {
 		final Discussion discussion = new Discussion();
 		//discussion.setDiscussionHeadline(faker.sentence(10));
+		discussion.setDiscussionTopic(faker.name());
 		discussion.setDiscussionContent(faker.paragraph(2));
+		discussion.setDiscussionDate(new Date());
 		discussion.setUser(user);
+		discussion.setComments(comment);
 		return discussion;
 	}
 	
