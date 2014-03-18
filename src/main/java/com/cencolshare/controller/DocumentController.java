@@ -26,15 +26,22 @@ public class DocumentController extends BaseController {
 	
 	@RequestMapping(value={"/list"}, method=RequestMethod.GET)
 	public ModelAndView listDocument() {
-		ModelAndView mav = new ModelAndView("docs/list");
+		ModelAndView mav = new ModelAndView("document/index");
 		
 		mav.addObject("documentList",documentService.findAll());
+		return mav;
+	}
+	
+	@RequestMapping(value = "/preview", method = RequestMethod.GET)
+	public ModelAndView discussionListPage() {
+		ModelAndView mav = new ModelAndView("document/document-preview");
+		mav.addObject("title", "hello");
 		return mav;
 	}
 		
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public ModelAndView uploadDocs() {
-		ModelAndView mav = new ModelAndView("docs/document-upload");
+		ModelAndView mav = new ModelAndView("document/document-upload");
 		return mav;
 	}
 	
