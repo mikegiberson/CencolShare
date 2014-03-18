@@ -7,12 +7,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/profile")
-public class ProfileController {
+public class ProfileController extends BaseController {
 
 	@RequestMapping(value={"", "index"}, method=RequestMethod.GET)
 	public ModelAndView showDashboard() {
 		ModelAndView mav = new ModelAndView("profile/index");
-		return mav;
+		return setSelectedMenu(mav);
 	}
 	
 }

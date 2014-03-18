@@ -34,13 +34,13 @@ public class GroupController extends BaseController {
 		ModelAndView mav = new ModelAndView("group/list-group");
 		mav.addObject("groups", groups);
 
-		return mav;
+		return setSelectedMenu(mav);
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView createGroup() {
 		ModelAndView mav = new ModelAndView("group/create-group");
-		return mav;
+		return  setSelectedMenu(mav);
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -69,7 +69,7 @@ public class GroupController extends BaseController {
 		final Group grp = groupService.getGroupById(id);
 		ModelAndView mav = new ModelAndView("group/create-group");
 		mav.addObject("group", grp);
-		return mav;
+		return setSelectedMenu(mav);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -96,6 +96,6 @@ public class GroupController extends BaseController {
 		ModelAndView mav = new ModelAndView("group/group-view");
 		mav.addObject("group", grp);
 		// mav.addObject("joined",joinedgroups );
-		return mav;
+		return  setSelectedMenu(mav);
 	}
 }

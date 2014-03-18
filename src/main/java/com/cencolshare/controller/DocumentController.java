@@ -42,14 +42,14 @@ public class DocumentController extends BaseController {
 		User user=getLoggedInUser();
 		List<Document> documents = documentService.findAllDocumentByUser(user);
 		mav.addObject("documents",documents);
-		return mav;
+		return setSelectedMenu(mav);
 	}
 	
 	@RequestMapping(value = "/preview", method = RequestMethod.GET)
 	public ModelAndView discussionListPage() {
 		ModelAndView mav = new ModelAndView("document/document-preview");
 		mav.addObject("title", "hello");
-		return mav;
+		return setSelectedMenu(mav);
 	}
 
 		
@@ -57,7 +57,7 @@ public class DocumentController extends BaseController {
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public ModelAndView uploadDocs() {
 		ModelAndView mav = new ModelAndView("document/document-upload");
-		return mav;
+		return setSelectedMenu(mav);
 	}
 	
 		
@@ -66,7 +66,7 @@ public class DocumentController extends BaseController {
 		User user = getLoggedInUser();
 		Upload upload = new Upload();
 		upload.setFileName("java");
-		upload.setFilePath("path");
+		//upload.setFilePath("path");
 		upload.setFileSize("123");
 		upload.setFileType(".pdf");
 		upload.setOriginalFileName("Java for beginner");
