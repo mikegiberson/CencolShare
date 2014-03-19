@@ -40,8 +40,6 @@ public class Group {
 	@Column(name="group_image")
 	private String groupImage;
 	
-//	@OneToMany(fetch = FetchType.LAZY, targetEntity = Document.class)
-//	@JoinColumn(name = "document_id", nullable = false)
-//	private Document document;
+	
 
 }

@@ -18,4 +18,7 @@ public interface GroupService {
 	
 	boolean deleteGroupbyID(Long groupId);
 	
+	boolean removeUserFromGroup(long userId , long groupId);
+	
+	public Boolean addUserToGroup(long userId, long groupId);
 }

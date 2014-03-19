@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
+import com.cencolshare.model.User;
 import com.cencolshare.service.DiscussionService;
 import com.cencolshare.service.DocumentService;
 import com.cencolshare.service.GroupService;
@@ -48,6 +49,9 @@ public class NavigationController extends BaseController {
 		
 		ModelAndView mav = null;
 		if(searchType.toLowerCase().equals("group")) {
+//			User user = getLoggedInUser();
+//			List<Group> joinedgroups=groupService.getAllGroupsByUser(user);
+		
 			List<Group> groups=groupService.searchGroupsByNameDescription(searchInput);
 			log.debug("search count: {}", groups.size());
 			mav = new ModelAndView("group/search-group");

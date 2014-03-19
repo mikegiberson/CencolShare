@@ -2,6 +2,7 @@ package com.cencolshare.controller;
 
 import java.util.List;
 
+import javax.persistence.criteria.Join;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +20,16 @@ import com.cencolshare.model.User;
 import com.cencolshare.service.GroupService;
 import com.cencolshare.util.GroupUtil;
 
+
 @Controller
 @RequestMapping(value = "/group")
 @Slf4j
 public class GroupController extends BaseController {
 
+	@Autowired
+	GroupUtil groupUtil;
+	
+	
 	@Autowired
 	GroupService groupService;
 
@@ -88,14 +94,42 @@ public class GroupController extends BaseController {
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public ModelAndView viewGroup(@PathVariable Long id) {
-		boolean check = false;
-		User user = getLoggedInUser();
-		// List<Group> joinedgroups=groupService.getAllGroupsByUser(user);
-
+		int a=0;
+		
 		final Group grp = groupService.getGroupById(id);
 		ModelAndView mav = new ModelAndView("group/group-view");
+		
+		boolean check= groupUtil.checkUserInGroup(getLoggedInUser().getGroups(), grp);
+		
 		mav.addObject("group", grp);
+		mav.addObject("loggedInUser", getLoggedInUser());
+		if(check)
+		{
+		mav.addObject("check", 0);
+		}else
+		{
+			mav.addObject("check", 1);	
+		}
 		// mav.addObject("joined",joinedgroups );
-		return  setSelectedMenu(mav);
+		return  mav;
 	}
+	
+	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+	public ModelAndView removeUserFromGroup(@PathVariable Long id) {
+		
+		final User loggedUser = getLoggedInUser();
+		int loggedUserId = loggedUser.getUserId();
+		groupService.removeUserFromGroup(loggedUserId, id);
+		return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
+	}
+	
+	@RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
+	public ModelAndView addUserFromGroup(@PathVariable Long id) {
+		
+		final User loggedUser = getLoggedInUser();
+		int loggedUserId = loggedUser.getUserId();
+		groupService.addUserToGroup(loggedUserId, id);
+		return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
+	}
+	
 }
