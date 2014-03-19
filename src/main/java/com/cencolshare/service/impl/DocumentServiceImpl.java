@@ -51,11 +51,11 @@ public class DocumentServiceImpl implements DocumentService {
 		documentRepository.delete(documentId);
 		return true;
 	}
-	
+
 	@Override
-	public Document getDocumentById(Long documentId){
-		final Document doc = documentRepository.findOne(documentId);
-		return doc;
+	public Document getDocumentById(long documentId) {
+		
+		return documentRepository.findOne(documentId);
 	}
 
 }
