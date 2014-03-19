@@ -21,4 +21,6 @@ public interface GroupService {
 	boolean removeUserFromGroup(long userId , long groupId);
 	
 	public Boolean addUserToGroup(long userId, long groupId);
+	
+	public long getMemberCountbyGroupId(long groupId);
 }

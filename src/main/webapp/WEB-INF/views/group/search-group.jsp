@@ -36,18 +36,19 @@
 					class="label label-warning">Members:1222</span>
 			
 <span class="pull-right">
-<sec:authorize access="isAuthenticated()"> 
-	
-	<c:if test="${not (group.user.userId ==loggedInUser.userId)}">
-    <c:if test="${check=='1'}">
-	<a href="${pageContext.request.contextPath}/group/add/${group.groupId}" class="btn btn-success">
-  			<i class="fa fa-thumbs-up"> Join</i></a>
-  			</c:if>
-  			<c:if test="${check=='0'}">
-  			<a href="${pageContext.request.contextPath}/group/remove/${group.groupId}" class="btn btn-danger">
-  		<i class="fa fa-thumbs-down"> Leave</i>
-  		</a></c:if>
-  		</c:if>
+<sec:authorize access="isAuthenticated()">
+	<c:if test="${not (grp.user.userId ==loggedInUser.userId)}"> 
+	    <c:if test="${grp.isJoined=='0'}">
+			<a href="${pageContext.request.contextPath}/group/add/${grp.groupId}?fromSearch=true" class="btn btn-success">
+	  			<i class="fa fa-thumbs-up"> Join</i>
+	  		</a>
+	  	</c:if>
+	  	<c:if test="${grp.isJoined=='1'}">
+	  		<a href="${pageContext.request.contextPath}/group/remove/${grp.groupId}?fromSearch=true" class="btn btn-danger">
+	  			<i class="fa fa-thumbs-down"> Leave</i>
+	  		</a>
+	  	</c:if>
+	  </c:if>  	
 </sec:authorize>
 				
   		<a href="${pageContext.request.contextPath}/group/view/${grp.groupId}" class="btn btn-primary">

@@ -2,6 +2,7 @@ package com.cencolshare.controller;
 
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.Join;
 import javax.servlet.http.HttpServletRequest;
 
@@ -97,6 +98,7 @@ public class GroupController extends BaseController {
 		int a=0;
 		
 		final Group grp = groupService.getGroupById(id);
+		long members=groupService.getMemberCountbyGroupId(id);
 		ModelAndView mav = new ModelAndView("group/group-view");
 		
 		boolean check= groupUtil.checkUserInGroup(getLoggedInUser().getGroups(), grp);
@@ -110,6 +112,7 @@ public class GroupController extends BaseController {
 		{
 			mav.addObject("check", 1);	
 		}
+		mav.addObject("members", members);
 		// mav.addObject("joined",joinedgroups );
 		return  mav;
 	}
@@ -120,7 +123,11 @@ public class GroupController extends BaseController {
 		final User loggedUser = getLoggedInUser();
 		int loggedUserId = loggedUser.getUserId();
 		groupService.removeUserFromGroup(loggedUserId, id);
-		return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
+		if(request.getParameter("fromSearch") != null) {
+			return new ModelAndView(new RedirectView("/cencolshare/search?searchType=group&searchInput="));
+		} else {
+			return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
+		}
 	}
 	
 	@RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
@@ -129,7 +136,13 @@ public class GroupController extends BaseController {
 		final User loggedUser = getLoggedInUser();
 		int loggedUserId = loggedUser.getUserId();
 		groupService.addUserToGroup(loggedUserId, id);
-		return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
+		
+		if(request.getParameter("fromSearch") != null) {
+			return new ModelAndView(new RedirectView("/cencolshare/search?searchType=group&searchInput="));
+		} else {
+			return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
+		}
+		
 	}
 	
 }

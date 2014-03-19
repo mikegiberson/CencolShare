@@ -59,7 +59,6 @@ public class BaseController {
 			loggedinUser = userService.loadUserByEmail(user.getUsername());
 
 		}
-		System.out.println("CURRENT LOGGED IN USER IS: "+ loggedinUser.getFirstName());
 		return loggedinUser;
 	}
 

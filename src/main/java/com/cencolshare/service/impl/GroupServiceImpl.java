@@ -82,6 +82,15 @@ public class GroupServiceImpl implements GroupService {
 		q.executeUpdate();
 		return true;
 		}
+
+	@Override
+	public long getMemberCountbyGroupId(long groupId) {
+		final String query = "SELECT COUNT(*) FROM user_to_group WHERE group_id="+ groupId;
+		final Query q = em.createNativeQuery(query);
+		Object[] temp  = (Object [])q.getSingleResult();
+		Long rank = (Long) temp[0];
+		return rank;
+	}
 	
 	
 }
