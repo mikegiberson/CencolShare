@@ -74,13 +74,13 @@ public class DocumentController extends BaseController {
 			
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public ModelAndView uploadDocs() {
-<<<<<<< .merge_file_a07800
+
 		ModelAndView mav = new ModelAndView("docs/document-upload");
 		return mav;
-=======
-		ModelAndView mav = new ModelAndView("document/document-upload");
-		return setSelectedMenu(mav);
->>>>>>> .merge_file_a02616
+
+		//ModelAndView mav = new ModelAndView("document/document-upload");
+	//	return setSelectedMenu(mav);
+
 	}
 	
 		

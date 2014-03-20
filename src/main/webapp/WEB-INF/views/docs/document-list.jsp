@@ -38,7 +38,7 @@
 
 						<h3>${document.documentTitle}</h3>
 						<p>${document.documentDescription}</p>
-						<p class="text-muted">Size: ${document.upload.fileSize} KB
+						<p class="text-muted">Size: ${document.upload.fileSize} 
 							Format: ${document.upload.fileType }</p>
 						<p>
 							<a href="#">Preview</a> | <a href="#">Download</a> | <a

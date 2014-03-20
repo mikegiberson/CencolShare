@@ -20,10 +20,10 @@ public class UploadServiceImpl implements UploadService {
 
 	@Autowired
 	UploadRepository uploadRepository;
-	
+
 	@PersistenceContext
 	EntityManager em;
-	
+
 	@Override
 	public Upload saveUpload(Upload upload) {
 		return uploadRepository.save(upload);
@@ -38,22 +38,20 @@ public class UploadServiceImpl implements UploadService {
 	public Upload getUploadById(Long id) {
 		return uploadRepository.findOne(id);
 	}
-	
+
 	@Override
 	public Upload insertUpload(Upload upload) {
 
 		final Upload u = uploadRepository.save(upload);
 		return u;
 	}
-	
+
 	@Override
-	public Long getTheMostRecentUploadId(){
+	public Long getTheMostRecentUploadId() {
 		final String query = "SELECT upload_id FROM tbl_upload ORDER BY upload_id DESC LIMIT 1";
-		final Query q = em.createNativeQuery(query, Upload.class);
+		final Query q = em.createNativeQuery(query);
 		return Long.parseLong(q.getResultList().get(0).toString());
-		
+
 	}
 
 }
-
-
