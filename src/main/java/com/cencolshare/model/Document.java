@@ -27,7 +27,7 @@ public class Document {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="document_id")
-	private int documentId;
+	private Long documentId;
 	
 	@Column(name="document_title", nullable=false)
 	private String documentTitle;
@@ -35,21 +35,21 @@ public class Document {
 	@Column(name="document_description")
 	private String documentDescription;
 	
-	@Column(name="file_url", nullable=false)// k null
+	@Column(name="file_url", nullable=false)
 	private String fileUrl;
 	
-	@Column(name="date_uploaded", nullable=false)// k null
+	@Column(name="date_uploaded", nullable=false)
 	private Date dateUploaded;
 	
 	@Column(name="tag", nullable=false)
 	private String tag;
 	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Upload.class)
-	@JoinColumn(name = "upload_id", nullable = false)
+	@JoinColumn(name = "upload_id", nullable = true)
 	private Upload upload;
 	
 }

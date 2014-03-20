@@ -47,9 +47,15 @@ public class DocumentServiceImpl implements DocumentService {
 	 }
 	
 	@Override
-	public boolean deleteDocumentbyID(Integer documentId) {
+	public boolean deleteDocumentbyID(Long documentId) {
 		documentRepository.delete(documentId);
 		return true;
+	}
+
+	@Override
+	public Document getDocumentById(long documentId) {
+		
+		return documentRepository.findOne(documentId);
 	}
 
 }

@@ -13,35 +13,37 @@
 				<div class="thumbnail">
 					<br />
 					<c:choose>
-						<c:when test="${document.upload.fileType=='.docx'}">
+						<c:when test="${document.upload.fileType=='.doc'}">
 							<img src="/cencolshare/resources/images/word.jpg"
 								class="media-object">
-								</c:when>
+						</c:when>
 						<c:when test="${document.upload.fileType=='.pdf'}">
-						<img src="/cencolshare/resources/images/pdf.jpg"
-							class="media-object">
-							</c:when>
-							<c:when test="${document.upload.fileType=='.ppt'}">
-						<img src="/cencolshare/resources/images/ppt.png"
-							class="media-object">
-							</c:when>
-							<c:when test="${document.upload.fileType=='.xls'}">
-						<img src="/cencolshare/resources/images/excel.jpg"
-							class="media-object">
-							</c:when>
+							<img src="/cencolshare/resources/images/pdf.jpg"
+								class="media-object">
+						</c:when>
+						<c:when test="${document.upload.fileType=='.ppt'}">
+							<img src="/cencolshare/resources/images/ppt.png"
+								class="media-object">
+						</c:when>
+						<c:when test="${document.upload.fileType=='.xls'}">
+							<img src="/cencolshare/resources/images/excel.png"
+								class="media-object">
+						</c:when>
 						<c:otherwise>
-
+							<img src="/cencolshare/resources/images/doc.jpg"
+								class="media-object">
 						</c:otherwise>
 					</c:choose>
 					<div class="caption">
 
 						<h3>${document.documentTitle}</h3>
 						<p>${document.documentDescription}</p>
-						<p class="text-muted">Size: ${document.upload.fileSize} KB
-							 Format: ${document.upload.fileType }</p>
+						<p class="text-muted">Size: ${document.upload.fileSize} 
+							Format: ${document.upload.fileType }</p>
 						<p>
 							<a href="#">Preview</a> | <a href="#">Download</a> | <a
 								href="${pageContext.request.contextPath}/docs/delete/${document.documentId}">Delete</a>
+								 | <a href="${pageContext.request.contextPath}/docs/edit/${document.documentId}"> Edit</a>
 						</p>
 					</div>
 				</div>

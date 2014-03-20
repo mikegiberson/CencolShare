@@ -14,12 +14,12 @@
 	<c:forEach items="${requestScope.groups}" var="grp">
 		<div class="row">
 			<div class="col-sm-2 text-center">
-				<img class="pull-left " width="120px" height="120px" alt=""
-					src="${grp.groupImage}">
+				<a href="${pageContext.request.contextPath}/group/view/${grp.groupId}"><img class="pull-left " width="120px" height="120px" alt=""
+					src="${grp.groupImage}"></a>
 			</div>
 			<div class="col-sm-10">
 
-				<h2 class="text-primary">${grp.groupName}</h2>
+				<h2 class="text-primary"><a href="${pageContext.request.contextPath}/group/view/${grp.groupId}">${grp.groupName}</a></h2>
 				<p class="text-info">${grp.groupDescription} </p>
 				<span
 					class="label label-warning">Members:1222</span>

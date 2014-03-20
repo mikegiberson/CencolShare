@@ -134,5 +134,66 @@ public class TestGroupService extends BaseTestCase {
 		
 		
 	}
+	
+	@Test
+	public void testaddUserToGroup()
+	{
+		final User user1 = userService.insertUser(mockData.createUser());
+		final User user2 = userService.insertUser(mockData.createUser());
+		final User user3 = userService.insertUser(mockData.createUser());
+		Group grp = mockData.createGroup();
+		grp.setUser(user1);	
+		final Group group = groupService.saveGroup(grp);
+		assertNotNull("Create Group failed", group);
+		final Group grpById = groupService.getGroupById(group.getGroupId());
+		assertNotNull(grpById);
+		
+		groupService.addUserToGroup(user2.getUserId(), grpById.getGroupId());
+		final User testAddedUser=userService.loadUserByEmail(user2.getEmail());
+		List<Group> joinedGroups = testAddedUser.getGroups();
+		for(int i=0;i<joinedGroups.size();i++)
+		{
+			assertEquals(joinedGroups.get(i).getGroupId(),group.getGroupId());
+		}
+	}
+	
+	@Test
+	public void testremoveUserFromGroup()
+	{
+		final User user1 = userService.insertUser(mockData.createUser());
+		final User user2 = userService.insertUser(mockData.createUser());
+		
+		Group grp = mockData.createGroup();
+		grp.setUser(user1);	
+		final Group group = groupService.saveGroup(grp);
+		assertNotNull("Create Group failed", group);
+		
+		groupService.addUserToGroup(user2.getUserId(), grp.getGroupId());
+		
+		final User fetchedUser = userService.loadUserByEmail(user2.getEmail());
+		List<Group> joinedGroups = fetchedUser.getGroups();
+		for(int i=0;i<joinedGroups.size();i++)
+		{
+			assertEquals(joinedGroups.get(i).getGroupId(),grp.getGroupId());
+		}
+		
+		groupService.removeUserFromGroup(user2.getUserId(), grp.getGroupId());
+		
+		
+		final User fetchedUser2 = userService.loadUserByEmail(user2.getEmail());
+		Boolean isDeleted=false;
+		List<Group> joinedGroupsafterDelete = fetchedUser2.getGroups();
+		assertNotEquals(joinedGroups.size(), joinedGroupsafterDelete.size());
+		for(int i=0;i<joinedGroupsafterDelete.size();i++)
+		{
+			if(joinedGroupsafterDelete.get(i).getGroupId() == group.getGroupId()) {
+				isDeleted = true;
+			}
+			
+		}
+		
+		assertEquals(isDeleted,false);
+		
+	}
 
 }

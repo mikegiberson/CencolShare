@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,9 @@ import com.cencolshare.service.UserService;
 
 @Service
 @Slf4j
+@Transactional
 public class GroupServiceImpl implements GroupService {
+
 
 	@Autowired
 	GroupRepository groupRepository;
@@ -60,7 +64,33 @@ public class GroupServiceImpl implements GroupService {
 		groupRepository.delete(groupId);
 		return true;
 	}
+
+	@Override
+	public boolean removeUserFromGroup(long userId, long groupId) {
+		final String query = "DELETE FROM user_to_group WHERE user_id= "+userId+" AND group_id =" + groupId;
+		final Query q = em.createNativeQuery(query);
+		q.executeUpdate();
+
+		return true;
+		
+	}
 	
+	@Override
+	public Boolean addUserToGroup(long userId, long groupId) {
+		final String query = "INSERT INTO user_to_group VALUES ('"+ userId +"','"+groupId+"')";
+		final Query q = em.createNativeQuery(query);
+		q.executeUpdate();
+		return true;
+		}
+
+	@Override
+	public long getMemberCountbyGroupId(long groupId) {
+		final String query = "SELECT COUNT(*) FROM user_to_group WHERE group_id="+ groupId;
+		final Query q = em.createNativeQuery(query);
+		Object[] temp  = (Object [])q.getSingleResult();
+		Long rank = (Long) temp[0];
+		return rank;
+	}
 	
 	
 }

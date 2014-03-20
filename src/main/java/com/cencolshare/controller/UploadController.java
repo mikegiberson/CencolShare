@@ -1,13 +1,21 @@
 package com.cencolshare.controller;
 
-import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cencolshare.model.Upload;
 import com.cencolshare.service.UploadService;
-import com.cencolshare.util.S3UploadUtil;
 
 @Controller
 @RequestMapping("/upload")
@@ -28,7 +35,13 @@ public class UploadController {
 	
   @Autowired
   UploadService uploadService;
-
+  
+  @Autowired
+ 	HttpServletRequest request;
+  
+  @Value("${uploadPath}")
+  private String UPLOAD_PATH;
+  
   @RequestMapping(value="/do", method = RequestMethod.POST)
   @ResponseBody
   public Upload upload(@RequestParam ("file") final MultipartFile multipartFile, ModelMap model) throws IOException {
@@ -37,30 +50,62 @@ public class UploadController {
     String fileName = multipartFile.getOriginalFilename().trim();
     String ext=fileName.substring(fileName.lastIndexOf("."));
     fileName=fileName.substring(0,fileName.lastIndexOf("."));
-    byte[] fileData = null;
-
-    int len = fileName.length();
-    fileName = System.currentTimeMillis() + ext;
-    try {
-     fileData  = multipartFile.getBytes();
-     ByteArrayInputStream input = new ByteArrayInputStream(multipartFile.getBytes());
-     S3UploadUtil.getInstance().uploadFile(input,fileName);
-
-    } catch (IOException e) {
-      e.printStackTrace();
+   
+    fileName = System.currentTimeMillis() + ext;    
+    
+    if (!fileName.equals("")) {
+      File fileToCreate = new File(UPLOAD_PATH, fileName);
+      
+      if (!fileToCreate.exists()) {
+        FileOutputStream fileOutStream = null;
+       
+          fileOutStream = new FileOutputStream(fileToCreate);
+          fileOutStream.write(multipartFile.getBytes());
+          fileOutStream.flush();
+          fileOutStream.close();
+          
+          final Upload upload = new Upload();
+          upload.setContentType(contentType);
+          upload.setFileName(fileName);
+          upload.setFileType(ext);
+          upload.setFileSize(fileToCreate.length() /1024 + " kb");
+          upload.setOriginalFileName(multipartFile.getOriginalFilename().trim());
+          upload.setUploadDate(new Date(new Date().getTime()));
+          upload.setFilePath(UPLOAD_PATH + "\\" + fileName);
+          
+          uploadService.saveUpload(upload); 
+          return upload;
+        
+      }
     }
-    
-    Upload upload = new Upload();
-    upload.setFileName(fileName);
-    upload.setOriginalFileName(multipartFile.getOriginalFilename().trim());
-    upload.setFileType(ext);
-    upload.setFilePath("https://s3.amazonaws.com/cencolshare/" + fileName);
-    upload.setUploadDate(new Date());
-    
-    upload = uploadService.saveUpload(upload);
-    
-    
-    return upload;
+    return null;
+  }
+  
+  @RequestMapping(value="/fetch/{fileId}", method = RequestMethod.GET)
+  public String displayFile(@PathVariable Long fileId, HttpServletResponse response) throws IOException {
+
+	  final Upload upload = uploadService.getUploadById(fileId);
+
+	  if(upload == null) {
+		  return null;
+	  }
+      response.setContentType(upload.getContentType());
+      response.setHeader("Content-disposition","attachment; filename=" + upload.getOriginalFileName());
+      File my_file = new File(UPLOAD_PATH+ upload.getFileName());
+      
+      
+
+      OutputStream out = response.getOutputStream();
+      FileInputStream in = new FileInputStream(my_file);
+      byte[] buffer = new byte[4096];
+      int length;
+      while ((length = in.read(buffer)) > 0){
+         out.write(buffer, 0, length);
+      }
+      in.close();
+      out.flush();	  
+	  
+    return null;
   }
 
   @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
