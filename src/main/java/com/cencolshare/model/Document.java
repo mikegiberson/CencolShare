@@ -49,7 +49,7 @@ public class Document {
 	private User user;
 	
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Upload.class)
-	@JoinColumn(name = "upload_id", nullable = true)
+	@JoinColumn(name = "upload_id", nullable = false)
 	private Upload upload;
 	
 }

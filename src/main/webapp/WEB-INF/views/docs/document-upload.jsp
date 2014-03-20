@@ -28,7 +28,7 @@
 				<label class="col-md-4 control-label" for="docNameTxt">Document
 					Name</label>
 				<div class="col-md-4">
-					<input id="docNameTxt" name="docNameTxt" type="text"
+					<input required="true" id="docNameTxt" name="docNameTxt" type="text"
 						placeholder="name" class="form-control input-md"
 						value="${requestScope.document.documentTitle}">
 
