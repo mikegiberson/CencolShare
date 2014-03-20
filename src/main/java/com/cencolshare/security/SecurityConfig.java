@@ -58,13 +58,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             	.antMatchers("/docs/**").permitAll()
             	.antMatchers("/profile/**").permitAll()*/
         		.antMatchers("/search").permitAll()
+        		.antMatchers("/group/view/**").permitAll()
+        		.antMatchers("/docs/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .logout()
             	.logoutSuccessUrl("/login")
             	.and()
             .formLogin()
-                .loginPage("/login") 
+                .loginPage("/login")
                 .defaultSuccessUrl("/dashboard")
                 .permitAll();
         

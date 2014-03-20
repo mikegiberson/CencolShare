@@ -1,9 +1,7 @@
 package com.cencolshare.data;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 
 import org.springframework.stereotype.Component;
 
@@ -11,8 +9,8 @@ import com.cencolshare.enums.Role;
 import com.cencolshare.model.Comment;
 import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Document;
-import com.cencolshare.model.Upload;
 import com.cencolshare.model.Group;
+import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
 import com.github.javafaker.Faker;
 

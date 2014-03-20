@@ -45,7 +45,7 @@ public class DiscussionController extends BaseController {
 		ModelAndView mav = new ModelAndView("discussion/view");
 		final Discussion discussion = discussionService.getDiscussionById(id);
 		mav.addObject("discussion", discussion);
-		return mav;
+		return setSelectedMenu(mav);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -53,7 +53,7 @@ public class DiscussionController extends BaseController {
 		ModelAndView mav = new ModelAndView("discussion/list");
 		List<Discussion> discussions = discussionService.getAllDiscussions();
 		mav.addObject("discussions", discussions);
-		return mav;
+		return setSelectedMenu(mav);
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -62,7 +62,7 @@ public class DiscussionController extends BaseController {
 		log.info("Indide create discsussion");
 
 		ModelAndView mav = new ModelAndView("discussion/create");
-		return mav;
+		return setSelectedMenu(mav);
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
