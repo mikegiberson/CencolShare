@@ -20,9 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.cencolshare.enums.Role;
 import com.cencolshare.model.Comment;
 import com.cencolshare.model.Discussion;
-import com.cencolshare.model.Group;
+import com.cencolshare.service.CommentService;
 import com.cencolshare.service.DiscussionService;
 import com.cencolshare.service.UserService;
 
@@ -36,6 +37,9 @@ public class DiscussionController extends BaseController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	CommentService commentService;
 
 	@Autowired
 	HttpServletRequest request;
@@ -120,8 +124,18 @@ public class DiscussionController extends BaseController {
 	
 	@RequestMapping(value="/deleteComment/{id}", method=RequestMethod.GET)
 	public ModelAndView deleteComment(@PathVariable int id) {
-		discussionService.deleteCommentById(id);
-		return new ModelAndView(new RedirectView("/cencolshare/discussion/list"));
+		final Comment comment = commentService.getCommentById(id);
+		int discussionId = commentService.getDiscussionIdByCommentId(id);
+		
+		if(!(getLoggedInUser().getRole().equals(Role.ADMIN) || (getLoggedInUser().getRole().equals(Role.MANAGER))) && comment.getUser().getUserId()!=getLoggedInUser().getUserId()){
+			ModelAndView mav = new ModelAndView("discussion/view");
+			mav.addObject("error", "You cannot delete this comment");
+			return new ModelAndView(new RedirectView("/cencolshare/discussion/view/" + discussionId));
+		}
+		
+		discussionService.deleteCommentById(id);		
+		log.debug("getting discussion id from comment: {}", discussionId);
+		return new ModelAndView(new RedirectView("/cencolshare/discussion/view/" + discussionId));
 	}
 
 }

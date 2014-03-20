@@ -2,12 +2,11 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	<input id="fileupload" type="file" name="file"
-		data-url="${pageContext.request.contextPath}/upload/do" single>
-
+	
 	<h1>${discussion.discussionTopic }</h1>
 	${discussion.discussionContent }
 
+	${error }
 	<hr>
 	<div class="container" style="width: 100%">
 		<div class="row">
@@ -33,7 +32,7 @@
 								<div class="comment-text">${c.comment}</div>
 								<div class="action">
 									<a href="${pageContext.request.contextPath}/discussion/deleteComment/${c.commentId}"
-										class="btn btn-danger"> <i class="fa fa-trash-o"></i>
+										class="btn btn-danger pull-right"> <i class="fa fa-trash-o"></i>
 									</a>
 								</div>
 							</div>
@@ -60,14 +59,6 @@
 	$(document).ready(function() {
 		$("#addComment").click(addComment);
 
-		$('#fileupload').fileupload({
-			dataType : 'json',
-			done : function(e, data) {
-				console.log(data.result);
-				$("#profilepic").attr("src", data.result.filePath);
-				$("#photo").val(data.result.filePath);
-			}
-		});
 
 	});
 
@@ -91,7 +82,7 @@
 		if (result.result === "fail") {
 			$("#error").html(result.message);
 		} else if (result.result === "success") {
-			window.location.reload();
+			//window.location.reload();
 		}
 	}
 </script>
