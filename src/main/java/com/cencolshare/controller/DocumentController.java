@@ -56,7 +56,7 @@ public class DocumentController extends BaseController {
 			
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public ModelAndView uploadDocs() {
-		ModelAndView mav = new ModelAndView("document/document-upload");
+		ModelAndView mav = new ModelAndView("docs/document-upload");
 		return mav;
 	}
 	
@@ -64,26 +64,26 @@ public class DocumentController extends BaseController {
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public ModelAndView saveDoc() {
 		User user = getLoggedInUser();
-		Upload upload = new Upload();
+		/*Upload upload = new Upload();
 		upload.setFileName("java");
-		upload.setFilePath("path");
 		upload.setFileSize("123");
 		upload.setFileType(".pdf");
 		upload.setOriginalFileName("Java for beginner");
 		upload.setUploadDate(new Date());
-		Long uploadId = upload.getId();
+		upload.setContentType("unknown");
+		*/
+		Long ID = uploadService.getTheMostRecentUploadId();
+		Upload upload = uploadService.getUploadById(ID);
 		
 		Document doc= new Document();
-		doc.setDocumentTitle(request.getParameter("documentTitle"));
-		doc.setDocumentDescription(request.getParameter("documentDescription"));
+		doc.setDocumentTitle(request.getParameter("docNameTxt"));
+		doc.setDocumentDescription(request.getParameter("docDesTxt"));
 		doc.setTag(request.getParameter("tag"));
-		doc.setUser(user);
 		doc.setDateUploaded(new Date());
-		doc.setFileUrl("htttp://www.");
+		doc.setFileUrl(upload.getFilePath());
+		doc.setUser(user);
 		doc.setUpload(upload);
-		
-	
-		
+						
 		if(!request.getParameter("documentId").equals("")) {
 			doc.setDocumentId(Long.parseLong(request.getParameter("documentId")));
 		}

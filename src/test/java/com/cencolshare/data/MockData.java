@@ -49,7 +49,6 @@ public class MockData {
 		Date date = new Date();
 		
 		upload.setFileName(faker.name());
-		upload.setFilePath("");
 		upload.setFileSize("123");
 		upload.setFileType(".pdf");
 		upload.setOriginalFileName("tram's doc");

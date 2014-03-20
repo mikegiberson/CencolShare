@@ -33,6 +33,9 @@ public class Upload {
   
   @Column(name = "file_name", nullable = false)
   private String fileName;
+  
+  @Column(name = "file_path", nullable = false)
+  private String filePath;
 
   @Column(name = "upload_date", nullable = false)
   private Date uploadDate;

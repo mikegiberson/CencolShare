@@ -35,10 +35,10 @@ public class Document {
 	@Column(name="document_description")
 	private String documentDescription;
 	
-	@Column(name="file_url", nullable=false)// k null
+	@Column(name="file_url", nullable=false)
 	private String fileUrl;
 	
-	@Column(name="date_uploaded", nullable=false)// k null
+	@Column(name="date_uploaded", nullable=false)
 	private Date dateUploaded;
 	
 	@Column(name="tag", nullable=false)
@@ -49,7 +49,7 @@ public class Document {
 	private User user;
 	
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Upload.class)
-	@JoinColumn(name = "upload_id", nullable = false)
+	@JoinColumn(name = "upload_id", nullable = true)
 	private Upload upload;
 	
 }
