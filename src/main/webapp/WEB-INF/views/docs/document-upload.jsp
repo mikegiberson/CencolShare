@@ -2,7 +2,15 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	<h1 class="page-header">Upload Document</h1>
+	
+	<c:choose>
+			<c:when test="${requestScope.document.documentId > 0}">
+				<h1 class="page-header">Edit Document</h1>
+			</c:when>
+			<c:otherwise>
+				<h1 class="page-header">Upload Document</h1>
+			</c:otherwise>
+		</c:choose>
 
 	<form class="form-horizontal" role="form" method="post"
 		action="${pageContext.request.contextPath}/docs/save">
@@ -72,7 +80,15 @@
 				<label class="col-md-4 control-label" for="uploadBtn"></label>
 				<div class="col-md-8">
 					<button id="uploadBtn" class="btn btn-success" type="submit">
-						Upload <i class="fa fa-cloud-upload"></i>
+					<c:choose>
+					<c:when test="${requestScope.document.documentId > 0}">
+				Save
+			</c:when>
+			<c:otherwise>
+				Upload
+			</c:otherwise>
+		</c:choose>
+						 <i class="fa fa-cloud-upload"></i>
 					</button>
 
 					<a href="${pageContext.request.contextPath}/docs/list"

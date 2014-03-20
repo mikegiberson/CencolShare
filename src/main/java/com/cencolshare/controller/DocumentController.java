@@ -87,14 +87,6 @@ public class DocumentController extends BaseController {
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public ModelAndView saveDoc() {
 		User user = getLoggedInUser();
-		/*Upload upload = new Upload();
-		upload.setFileName("java");
-		upload.setFileSize("123");
-		upload.setFileType(".pdf");
-		upload.setOriginalFileName("Java for beginner");
-		upload.setUploadDate(new Date());
-		upload.setContentType("unknown");
-		*/
 		Long ID = uploadService.getTheMostRecentUploadId();
 		Upload upload = uploadService.getUploadById(ID);
 		
@@ -133,9 +125,16 @@ public class DocumentController extends BaseController {
 			documentService.deleteDocumentbyID(id);
 			uploadService.deleteUpload(uploadId);
 		}
-		//documentService.deleteDocumentbyID(id);
-		//uploadService.deleteUpload(uploadId);
+	
 		return new ModelAndView(new RedirectView("/cencolshare/docs/list"));
+	}
+	
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public ModelAndView editDocument(@PathVariable Long id) {
+		final Document doc = documentService.getDocumentById(id);
+		ModelAndView mav = new ModelAndView("docs/document-upload");
+		mav.addObject("document", doc);
+		return setSelectedMenu(mav);
 	}
 
 }
