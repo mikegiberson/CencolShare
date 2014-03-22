@@ -1,5 +1,6 @@
 package com.cencolshare.service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import com.cencolshare.model.Group;
@@ -22,5 +23,5 @@ public interface GroupService {
 	
 	public Boolean addUserToGroup(long userId, long groupId);
 	
-	public long getMemberCountbyGroupId(long groupId);
+	public BigInteger getMemberCountbyGroupId(long groupId);
 }

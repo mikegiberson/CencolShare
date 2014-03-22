@@ -1,5 +1,6 @@
 package com.cencolshare.controller;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -98,12 +99,13 @@ public class GroupController extends BaseController {
 		int a=0;
 		
 		final Group grp = groupService.getGroupById(id);
-		long members=groupService.getMemberCountbyGroupId(id);
+		BigInteger members=groupService.getMemberCountbyGroupId(id);
 		ModelAndView mav = new ModelAndView("group/group-view");
-		
+		if(getLoggedInUser()!=null)
+		{
 		boolean check= groupUtil.checkUserInGroup(getLoggedInUser().getGroups(), grp);
 		
-		mav.addObject("group", grp);
+		
 		mav.addObject("loggedInUser", getLoggedInUser());
 		if(check)
 		{
@@ -111,8 +113,9 @@ public class GroupController extends BaseController {
 		}else
 		{
 			mav.addObject("check", 1);	
-		}
-		//mav.addObject("members", members);
+		}}
+		mav.addObject("group", grp);
+		mav.addObject("members", members);
 		// mav.addObject("joined",joinedgroups );
 		return  mav;
 	}
