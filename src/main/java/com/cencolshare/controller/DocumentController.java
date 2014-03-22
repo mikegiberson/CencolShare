@@ -74,7 +74,7 @@ public class DocumentController extends BaseController {
 			
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public ModelAndView uploadDocs() {
-		ModelAndView mav = new ModelAndView("document/document-upload");
+		ModelAndView mav = new ModelAndView("docs/document-upload");
 		return setSelectedMenu(mav);
 	}
 	

@@ -112,7 +112,7 @@ public class GroupController extends BaseController {
 		{
 			mav.addObject("check", 1);	
 		}
-		mav.addObject("members", members);
+		//mav.addObject("members", members);
 		// mav.addObject("joined",joinedgroups );
 		return  mav;
 	}

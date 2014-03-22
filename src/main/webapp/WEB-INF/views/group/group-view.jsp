@@ -16,7 +16,7 @@
 				<h2 class="text-primary">${group.groupName}</h2>
 				<p class="text-info">${group.groupDescription} </p>
 				<span
-					class="label label-warning">Members:${members }</span>
+					class="label label-warning">Members:</span>
 			
 <span class="pull-right">
 <sec:authorize access="isAuthenticated()"> 
