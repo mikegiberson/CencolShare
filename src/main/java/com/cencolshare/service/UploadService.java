@@ -1,5 +1,9 @@
 package com.cencolshare.service;
 
+
+
+import java.util.List;
+
 import com.cencolshare.model.Upload;
 
 public interface UploadService {
@@ -8,5 +12,6 @@ public interface UploadService {
 	void deleteUpload(Long id);
 	Upload getUploadById(Long id);
 	Upload insertUpload(Upload upload);
+	Long getTheMostRecentUploadId ();
 
 }

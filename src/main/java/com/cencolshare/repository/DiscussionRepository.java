@@ -6,4 +6,5 @@ import com.cencolshare.model.Discussion;
 
 public interface DiscussionRepository extends CrudRepository<Discussion, Integer>{
 
+	
 }

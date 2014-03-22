@@ -76,31 +76,25 @@ public class DocumentController extends BaseController {
 	public ModelAndView uploadDocs() {
 		ModelAndView mav = new ModelAndView("docs/document-upload");
 		return setSelectedMenu(mav);
+
 	}
 	
 		
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public ModelAndView saveDoc() {
 		User user = getLoggedInUser();
-		Upload upload = new Upload();
-		upload.setFileName("java");
-		upload.setFileSize("123");
-		upload.setFileType(".pdf");
-		upload.setOriginalFileName("Java for beginner");
-		upload.setUploadDate(new Date());
-		Long uploadId = upload.getId();
+		Long ID = uploadService.getTheMostRecentUploadId();
+		Upload upload = uploadService.getUploadById(ID);
 		
 		Document doc= new Document();
-		doc.setDocumentTitle(request.getParameter("documentTitle"));
-		doc.setDocumentDescription(request.getParameter("documentDescription"));
+		doc.setDocumentTitle(request.getParameter("docNameTxt"));
+		doc.setDocumentDescription(request.getParameter("docDesTxt"));
 		doc.setTag(request.getParameter("tag"));
-		doc.setUser(user);
 		doc.setDateUploaded(new Date());
-		doc.setFileUrl("htttp://www.");
+		doc.setFileUrl(upload.getFilePath());
+		doc.setUser(user);
 		doc.setUpload(upload);
-		
-	
-		
+						
 		if(!request.getParameter("documentId").equals("")) {
 			doc.setDocumentId(Long.parseLong(request.getParameter("documentId")));
 		}
@@ -127,9 +121,16 @@ public class DocumentController extends BaseController {
 			documentService.deleteDocumentbyID(id);
 			uploadService.deleteUpload(uploadId);
 		}
-		//documentService.deleteDocumentbyID(id);
-		//uploadService.deleteUpload(uploadId);
+	
 		return new ModelAndView(new RedirectView("/cencolshare/docs/list"));
+	}
+	
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public ModelAndView editDocument(@PathVariable Long id) {
+		final Document doc = documentService.getDocumentById(id);
+		ModelAndView mav = new ModelAndView("docs/document-upload");
+		mav.addObject("document", doc);
+		return setSelectedMenu(mav);
 	}
 
 }

@@ -8,10 +8,12 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,9 @@ public class UploadController {
   @Autowired
   UploadService uploadService;
   
+  @Autowired
+ 	HttpServletRequest request;
+  
   @Value("${uploadPath}")
   private String UPLOAD_PATH;
   
@@ -45,7 +50,7 @@ public class UploadController {
     String fileName = multipartFile.getOriginalFilename().trim();
     String ext=fileName.substring(fileName.lastIndexOf("."));
     fileName=fileName.substring(0,fileName.lastIndexOf("."));
-
+   
     fileName = System.currentTimeMillis() + ext;    
     
     if (!fileName.equals("")) {
@@ -66,8 +71,9 @@ public class UploadController {
           upload.setFileSize(fileToCreate.length() /1024 + " kb");
           upload.setOriginalFileName(multipartFile.getOriginalFilename().trim());
           upload.setUploadDate(new Date(new Date().getTime()));
+          upload.setFilePath(UPLOAD_PATH + "\\" + fileName);
           
-          uploadService.saveUpload(upload);
+          uploadService.saveUpload(upload); 
           return upload;
         
       }
