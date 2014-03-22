@@ -1,5 +1,7 @@
 package com.cencolshare.model;
 
+import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,5 +45,8 @@ public class Group {
 	
 	@Transient
 	private String isJoined = "0";
+	
+	@Transient
+	private BigInteger member=BigInteger.ZERO;
 
 }
