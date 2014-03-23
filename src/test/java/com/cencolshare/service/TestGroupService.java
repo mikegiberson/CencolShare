@@ -240,4 +240,29 @@ public class TestGroupService extends BaseTestCase {
 		assertEquals(BigInteger.ZERO, countAfterDelete);
 		
 	}
+	
+	@Test
+	public void testgetAllMembersOfGroup()
+	{
+		final User user1 = userService.insertUser(mockData.createUser());
+		final User user2 = userService.insertUser(mockData.createUser());
+		final User user3 = userService.insertUser(mockData.createUser());
+		final User user4 = userService.insertUser(mockData.createUser());
+		
+		Group grp = mockData.createGroup();
+		grp.setUser(user1);	
+		final Group group = groupService.saveGroup(grp);
+		assertNotNull("Create Group failed", group);
+		
+		groupService.addUserToGroup(user2.getUserId(), grp.getGroupId());
+		groupService.addUserToGroup(user3.getUserId(), grp.getGroupId());
+		groupService.addUserToGroup(user4.getUserId(), grp.getGroupId());
+		
+		List<User> joinedMembers=groupService.getAllMembersOfGroup(grp.getGroupId());
+		assertNotNull(joinedMembers);
+		
+		assertEquals(joinedMembers.get(0).getUserId(),user2.getUserId());
+		assertEquals(joinedMembers.get(1).getUserId(),user3.getUserId());
+		assertEquals(joinedMembers.get(2).getUserId(),user4.getUserId());
+	}
 }
