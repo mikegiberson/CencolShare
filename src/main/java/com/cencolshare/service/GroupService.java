@@ -24,4 +24,6 @@ public interface GroupService {
 	public Boolean addUserToGroup(long userId, long groupId);
 	
 	public BigInteger getMemberCountbyGroupId(long groupId);
+	
+	public List<User> getAllMembersOfGroup(long groupId);
 }

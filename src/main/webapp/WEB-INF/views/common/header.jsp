@@ -49,9 +49,9 @@
         
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/cencolshare/dashboard">Dashboard</a></li>
+            <!-- li><a href="/cencolshare/dashboard">Dashboard</a></li>
             <li><a href="/cencolshare/profile">My Profile</a></li>
-            <li><a href="#">Notifications</a></li>
+            <li><a href="#">Notifications</a></li-->
             <sec:authorize access="isAnonymous()">
 		    	<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
 			</sec:authorize>
@@ -68,6 +68,10 @@
 			</select>
             <input type="text" name ="searchInput" class="form-control" placeholder="Search...">
             <button class="btn btn-danger"><i class="fa fa-search"></i> </button>
+           <a href="/cencolshare/profile">
+           	<img  width="22px" height="22px" alt="" src="http://localhost:8080/cencolshare/resources/images/user.png">
+           	${loggedInUser.firstName}&nbsp;${loggedInUser.lastName}
+           </a>
           </form>
         </div>
       </div>

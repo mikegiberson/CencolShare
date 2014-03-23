@@ -9,7 +9,8 @@ public interface UserService {
   public User insertUser(User user);
   
   public User loadUserByEmail(String email);
-  
+
+  public User loadUserById(long userId);
   
   
 }

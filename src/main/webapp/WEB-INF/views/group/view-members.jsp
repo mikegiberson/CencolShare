@@ -32,26 +32,42 @@
   		</a></c:if>
   		</c:if>
 </sec:authorize>
-<a href="${pageContext.request.contextPath}/group/members/${group.groupId}" class="btn btn-info">
-  		<i class="fa fa-list-ul"></i> View Members</i>
-  		</a>
+
 			</div>
 
 		</div>
 		<hr class="colorgraph" />
-		
-	<div>
-	<sec:authorize access="isAuthenticated()"> 
-<a href="#" class="btn btn-success">
-  		<i class="fa fa-plus-square"> Start Discussion</i>
-  		</a>
-  		
-  	<a href="#" class="btn btn-success">
-  		<i class="fa fa-arrow-up"> Upload Document</i>
+		<h2 class="text-warning">Member List</h2>	
+		<hr/>
+</div>
+<c:forEach items="${requestScope.allMembers}" var="allMembers">
+<div class="col-sm-8 col-sm-offset-4 col-md-7 col-md-offset-3 main thumbnail">
+    <section class="col-xs-12 col-sm-6 col-md-12">
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a title="Lorem ipsum" class="thumbnail"><img height="100px" width="100px" src="http://www.dotnetcodesg.com/Register/UserImage/Default.png" alt="Lorem ipsum" /></a>
+			</div>
+			
+			<div class="col-xs-12 col-sm-12 col-md-3 thumnail">
+				
+					
+					<span class="pull-right">
+					<h3 class="text-info">${ allMembers.firstName} ${ allMembers.lastName}</h3>
+					<sec:authorize access="isAuthenticated()"> 
+					<a href="${pageContext.request.contextPath}/group/member/group/${allMembers.userId}" class="btn btn-info">
+  		<i class="fa fa-list-ul"> List Owned Groups</i>
   		</a>
   		</sec:authorize>
+  		</span>
+			
+			</div>
+			
+			<span class="clearfix borda"></span>
+		</article>	
+		
+	</section>
 </div>
-</div>
+</c:forEach>
 
 
 <%@ include file="..\common\footer.jsp"%>
