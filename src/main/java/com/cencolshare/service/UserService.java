@@ -10,6 +10,6 @@ public interface UserService {
   
   public User loadUserByEmail(String email);
   
-  
+  public User verifyEmail(String token);
   
 }
