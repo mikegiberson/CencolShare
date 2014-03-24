@@ -31,8 +31,8 @@ public class BaseController {
 		mav.addObject("discussionActive", "");
 		mav.addObject("docsActive", "");
 		mav.addObject("profileActive", "");
+		mav.addObject("userActive", "");
 		
-
 		if(request.getRequestURI().contains("dashboard")) {
 			mav.addObject("dashboardActive", "active");
 		} else if(request.getRequestURI().contains("group")) {
@@ -43,6 +43,8 @@ public class BaseController {
 			mav.addObject("docsActive", "active");
 		} else if(request.getRequestURI().contains("profile")) {
 			mav.addObject("profileActive", "active");
+		} else if(request.getRequestURI().contains("user")) {
+			mav.addObject("userActive", "active");
 		}		
 		mav.addObject("loggedInUser", getLoggedInUser());
 		return mav;

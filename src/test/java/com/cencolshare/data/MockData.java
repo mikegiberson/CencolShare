@@ -25,6 +25,8 @@ public class MockData {
 		user.setLastName(faker.lastName());
 		user.setPassword(faker.firstName() + "password");
 		user.setEmail(faker.firstName() + "@gmail.com");
+		user.setOccupation("Associate of " + faker.name());
+		user.setOrganization("University of " + faker.country());
 		user.setRole(Role.USER);
 		user.setEnabled(true);
 		user.setRole(Role.USER);
