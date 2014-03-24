@@ -91,16 +91,16 @@
 </div>
 
 <script>
-$(function () {
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-        	console.log(data.result);
-            $("#profilepic").attr("src", data.result.filePath);
-            $("#photo").val(data.result.filePath);
-        }
-    });
-});
+	$(function() {
+		$('#fileupload').fileupload({
+			dataType : 'json',
+			done : function(e, data) {
+				console.log(data.result);
+				$("#profilepic").attr("src", '${pageContext.request.contextPath}/upload/fetch/' + data.result.id);
+				$("#photo").val('http://localhost:8080${pageContext.request.contextPath}/upload/fetch/'+data.result.id);
+			}
+		});
+	});
 </script>
 
 <%@ include file="../common/footer.jsp"%>
