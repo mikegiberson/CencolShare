@@ -57,6 +57,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User insertUser(User user) {
 		
+		if(user.getUserId() > 0) {
+			// exisitng user
+			return userRepository.save(user);
+		}
+		
+		user.setDateJoined(utils.getCurrentTimeStamp());
 		user.setEnabled(false);
 		user.setRole(Role.USER);
 		user.setVerifyToken(utils.generateToken());

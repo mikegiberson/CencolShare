@@ -21,53 +21,58 @@ import com.cencolshare.service.UserService;
 @Controller
 @Slf4j
 public class SecurityController {
-	
-	@Autowired(required=true)
+
+	@Autowired(required = true)
 	UserService userService;
-	
+
 	@Autowired
 	HttpServletRequest request;
 
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login() {
 		log.debug("inside login");
 		return new ModelAndView("login");
 	}
 
-	@RequestMapping(value="/accessdenied", method=RequestMethod.GET)
+	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
 	public ModelAndView accessdenied() {
 		log.debug("inside accessdenied");
 		return new ModelAndView("common/accessdenied");
 	}
 
-   @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-	   SecurityContextHolder.clearContext();	   
-	   return "redirect:/login";
-    }
-	   
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(ModelMap model, HttpServletRequest request,
+			HttpServletResponse response) {
+		SecurityContextHolder.clearContext();
+		return "redirect:/login";
+	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView createAccount() {
+	public ModelAndView createAccount() {
 		String firstName = request.getParameter("first_name");
 		String lastName = request.getParameter("last_name");
-		String displayName = request.getParameter("display_name");
+		String occupation = request.getParameter("occupation");
+		String organization = request.getParameter("organization");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("password_confirmation");
 		log.debug("creating user with email {} ", email);
-		
+
 		final User userExists = userService.loadUserByEmail(email);
-		if(userExists != null) {
+		if (userExists != null) {
 			ModelAndView mav = new ModelAndView("register");
-			mav.addObject("errors", "User exists with the same email. Please login");
+			mav.addObject("errors",
+					"User exists with the same email. Please login");
 			return mav;
 		}
-		
-		if(firstName.equals("") || lastName.equals("") || email.equals("") || password.equals("")) {
+
+		if (firstName.equals("") || lastName.equals("") || email.equals("")
+				|| password.equals("") || organization.equals("")
+				|| occupation.equals("")) {
 			ModelAndView mav = new ModelAndView("register");
 			mav.addObject("errors", "All fields are mandatory");
 			return mav;
-		} else if (! password.equals(confirmPassword)) {
+		} else if (!password.equals(confirmPassword)) {
 			ModelAndView mav = new ModelAndView("register");
 			mav.addObject("errors", "Confirm password didnt match");
 			return mav;
@@ -75,34 +80,36 @@ public class SecurityController {
 			final User user = new User();
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
-			user.setDisplayName(displayName);
+			user.setOccupation(occupation);
+			user.setOrganization(organization);
 			user.setEmail(email);
 			user.setPassword(password);
 			userService.insertUser(user);
 			return new ModelAndView("register_success");
 		}
-		
-    }
-	
+
+	}
+
 	@RequestMapping(value = "/verify/{token}", method = RequestMethod.GET)
-    public ModelAndView verifyEmail(ModelMap model, @PathVariable String token) {
-	    
+	public ModelAndView verifyEmail(ModelMap model, @PathVariable String token) {
+
 		ModelAndView mav = new ModelAndView("verify_email");
 		final User verifiedUser = userService.verifyEmail(token);
-		
-		if(verifiedUser == null) {
+
+		if (verifiedUser == null) {
 			mav.addObject("message", "Oops! Invalid token. Failed to verify");
 		} else {
-			mav.addObject("message", "Successfully verified your email address. Please procced to login");
+			mav.addObject("message",
+					"Successfully verified your email address. Please procced to login");
 		}
-		
+
 		return mav;
-    }
-	
+	}
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-    public ModelAndView showRegisterPage() {
+	public ModelAndView showRegisterPage() {
 		log.debug("Register page");
 		return new ModelAndView("register");
-    }
-	
+	}
+
 }

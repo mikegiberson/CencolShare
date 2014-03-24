@@ -42,8 +42,11 @@ public class User {
 	@Column(name="last_name", nullable=false)
 	private String lastName;
 	
-	@Column(name="display_name", nullable=true)
-	private String displayName;
+	@Column(name="occupation", nullable=true)
+	private String occupation;
+	
+	@Column(name="organization", nullable=true)
+	private String organization;
 	
 	@Column(name="email", nullable=false, unique=true)
 	private String email;
@@ -56,6 +59,9 @@ public class User {
 	
 	@Column(name="verification_token", nullable=true)
 	private String verifyToken;
+	
+	@Column(name="date_joined", nullable=true)
+	private String dateJoined;
 	
 	@Column(name="role", nullable=false)
     public Role role;
