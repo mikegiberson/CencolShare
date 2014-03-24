@@ -64,7 +64,8 @@ public class DocumentController extends BaseController {
 		ModelAndView mav = new ModelAndView("document/document-preview");
 		final Document document = documentService.getDocumentById(docId);
 		long fileId = document.getUpload().getId();
-		String filePath = DOMAIN_PATH + "upload/fetch/" + fileId;
+	    String filePath = DOMAIN_PATH + "upload/fetch/" + fileId;
+	
 		mav.addObject("docPath", filePath);
 		
 		return mav;
