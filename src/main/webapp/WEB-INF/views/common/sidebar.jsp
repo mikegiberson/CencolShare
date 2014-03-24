@@ -7,6 +7,9 @@
             <li class="${discussionActive }"><a href="${pageContext.request.contextPath}/discussion/list">Discussions</a></li>
             <li class="${docsActive }"><a href="${pageContext.request.contextPath}/docs/list">My Docs</a></li>
             <li class="${profileActive }"><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
+			<c:if test="${loggedInUser.role.toString().equals(\"ADMIN\")}">
+	  			<li class="${userActive}"><a id="btnUsers" href="${pageContext.request.contextPath}/user">Users</a></li>
+	  		</c:if>            
             <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
           </ul>
         </div>

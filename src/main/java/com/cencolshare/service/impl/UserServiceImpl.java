@@ -107,6 +107,16 @@ public class UserServiceImpl implements UserService {
 		return matchedUser;
 	}
 
-	
+	@Override
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public List<User> searchUsers(String criteria) {
+		String query = "select * from tbl_user u where u.first_name like '%"+criteria+"%' or u.last_name like '%"+criteria+"%' or u.email like '%"+criteria+"%'";
+	    final Query q = em.createNativeQuery(query, User.class);
+	    return q.getResultList();		
+	}	
 
 }

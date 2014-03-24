@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.cencolshare.enums.Role;
 import com.cencolshare.model.User;
@@ -20,7 +22,7 @@ import com.cencolshare.service.UserService;
 
 @Controller
 @Slf4j
-public class SecurityController {
+public class SecurityController extends BaseController {
 
 	@Autowired(required = true)
 	UserService userService;
@@ -112,4 +114,46 @@ public class SecurityController {
 		return new ModelAndView("register");
 	}
 
+	@RequestMapping(value = "/userprofile/save", method = RequestMethod.POST)
+    public ModelAndView saveProfile(final @ModelAttribute User user) {
+		log.debug("updating user: {}", user.getUserId());
+		log.debug("from admin: {}", user.getFromAdmin());
+
+		if(!(user.getPhoto() != null && !user.getPhoto().equals(""))) {
+			user.setPhoto("https://s3.amazonaws.com/crime-alert/1394710047317.png");
+			log.debug("setting default pic");
+		}
+
+		if(user.getFromAdmin() != null && user.getFromAdmin()) {
+			User userToUpdate = userService.loadUserById(user.getUserId());
+			user.setPassword(userToUpdate.getPassword());
+			user.setUserId(userToUpdate.getUserId());
+
+			if(request.getParameter("userenabled") != null && request.getParameter("userenabled").equals("Y")) {
+				user.setEnabled(true);
+			} else {
+				user.setEnabled(false);
+			}
+
+			if(!userToUpdate.getRole().equals(Role.ADMIN)) {
+				if(request.getParameter("userrole") != null && request.getParameter("userrole").equals("0")) {
+					user.setRole(Role.USER);
+				} else if(request.getParameter("userrole") != null && request.getParameter("userrole").equals("2")) {
+					user.setRole(Role.MANAGER);
+				} else {
+					user.setRole(Role.USER);
+				}				
+			}
+			userService.insertUser(user);			
+			return new ModelAndView(new RedirectView("/cencolshare/user"));
+		}
+
+		user.setEnabled(getLoggedInUser().getEnabled());
+		user.setPassword(getLoggedInUser().getPassword());
+		user.setUserId(getLoggedInUser().getUserId());
+		user.setRole(getLoggedInUser().getRole());
+		userService.insertUser(user);
+
+		return new ModelAndView(new RedirectView(""));
+    }	
 }

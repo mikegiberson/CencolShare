@@ -41,8 +41,6 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery.fileupload.js"></script>
 
 </head>
-
-
 <body>
 
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -85,7 +83,6 @@
 					</sec:authorize>
 					</li>
 				</ul>
-
 			</div>
 		</div>
 	</div>
