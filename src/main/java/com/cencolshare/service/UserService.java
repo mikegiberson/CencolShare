@@ -9,7 +9,9 @@ public interface UserService {
   public User insertUser(User user);
   
   public User loadUserByEmail(String email);
-  
+
   public User verifyEmail(String token);
-  
+
+  public User loadUserById(long userId);
+
 }

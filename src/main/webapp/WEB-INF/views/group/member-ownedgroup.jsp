@@ -2,12 +2,9 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	<a href="${pageContext.request.contextPath}/group/create"
-		class="btn btn-success pull-right"> <i class="fa fa-users"></i>
-		Create new Group
-	</a>
+	
 	<h1>
-		<b>Group</b>
+		<b>Groups</b>
 	</h1>
 
 	<hr class="colorgraph" />
@@ -25,12 +22,9 @@
 				<span
 					class="label label-warning">Members: ${grp.member}</span>
 				<span class="pull-right"> <a
-					href="${pageContext.request.contextPath}/group/edit/${grp.groupId}"
-					class="btn btn-primary"> <i class="fa fa-pencil-square-o"></i>
-				</a> <a
-					href="${pageContext.request.contextPath}/group/delete/${grp.groupId}"
-					class="btn btn-danger"> <i class="fa fa-trash-o"></i>
-				</a>
+					 href="${pageContext.request.contextPath}/group/view/${grp.groupId}"
+					class="btn btn-primary">View <i class="fa fa-arrow-circle-right"></i></a>
+				
 			</div>
 
 		</div>

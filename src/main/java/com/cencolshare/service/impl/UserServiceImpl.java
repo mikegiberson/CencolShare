@@ -1,8 +1,13 @@
 package com.cencolshare.service.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import org.springframework.transaction.annotation.Transactional;
+import org.omg.PortableInterceptor.USER_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -80,5 +85,22 @@ public class UserServiceImpl implements UserService {
 			return user;
 		}
 	}
+
+	@Override
+	public User loadUserById(long userId) {
+		final List<User> user= userRepository.findAll();
+		 User matchedUser=new User();
+		for(int i=0;i<user.size();i++)
+		{
+			if(user.get(i).getUserId()==userId)
+			{
+				matchedUser=user.get(i);
+				break;
+			}
+		}
+		return matchedUser;
+	}
+
+	
 
 }
