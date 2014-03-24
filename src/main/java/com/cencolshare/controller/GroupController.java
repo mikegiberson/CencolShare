@@ -1,5 +1,6 @@
 package com.cencolshare.controller;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -38,6 +39,12 @@ public class GroupController extends BaseController {
 	public ModelAndView listGroup() {
 		User user = getLoggedInUser();
 		List<Group> groups = groupService.getAllGroupsByUser(user);
+		for (int i=0; i<groups.size();i++)
+		{
+			BigInteger members=groupService.getMemberCountbyGroupId(groups.get(i).getGroupId());
+			groups.get(i).setMember(members);
+		}
+		
 		ModelAndView mav = new ModelAndView("group/list-group");
 		mav.addObject("groups", groups);
 
@@ -57,7 +64,15 @@ public class GroupController extends BaseController {
 		Group grp = new Group();
 		grp.setGroupName(request.getParameter("groupName"));
 		grp.setGroupDescription(request.getParameter("groupDescription"));
-		grp.setGroupImage(request.getParameter("photo"));
+		if(request.getParameter("photo")==null || request.getParameter("photo").equals(""))
+		{
+			grp.setGroupImage("http://localhost:8080/cencolshare/resources/images/groupDefault.png");
+		}
+		else
+		{
+			grp.setGroupImage(request.getParameter("photo"));
+		}
+		
 		grp.setUser(user);
 
 		if (!request.getParameter("groupId").equals("")) {
@@ -98,12 +113,13 @@ public class GroupController extends BaseController {
 		int a=0;
 		
 		final Group grp = groupService.getGroupById(id);
-		long members=groupService.getMemberCountbyGroupId(id);
+		BigInteger members=groupService.getMemberCountbyGroupId(id);
 		ModelAndView mav = new ModelAndView("group/group-view");
-		
+		if(getLoggedInUser()!=null)
+		{
 		boolean check= groupUtil.checkUserInGroup(getLoggedInUser().getGroups(), grp);
 		
-		mav.addObject("group", grp);
+		
 		mav.addObject("loggedInUser", getLoggedInUser());
 		if(check)
 		{
@@ -111,7 +127,8 @@ public class GroupController extends BaseController {
 		}else
 		{
 			mav.addObject("check", 1);	
-		}
+		}}
+		mav.addObject("group", grp);
 		mav.addObject("members", members);
 		// mav.addObject("joined",joinedgroups );
 		return  mav;
@@ -143,6 +160,48 @@ public class GroupController extends BaseController {
 			return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
 		}
 		
+	}
+	
+	@RequestMapping(value="/members/{id}", method =RequestMethod.GET)
+	public ModelAndView viewGroupMembers(@PathVariable Long id)
+	{
+		ModelAndView mav=new ModelAndView("group/view-members");
+		List<User> groupMembers = groupService.getAllMembersOfGroup(id);
+		Group group = groupService.getGroupById(id);
+		BigInteger members=groupService.getMemberCountbyGroupId(id);
+		if(getLoggedInUser()!=null)
+		{
+		boolean check= groupUtil.checkUserInGroup(getLoggedInUser().getGroups(), group);
+		
+		
+		mav.addObject("loggedInUser", getLoggedInUser());
+		if(check)
+		{
+		mav.addObject("check", 0);
+		}else
+		{
+			mav.addObject("check", 1);	
+		}}
+		mav.addObject("members", members);
+		mav.addObject("allMembers", groupMembers);
+		mav.addObject("group",group);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/group/{id}", method = RequestMethod.GET)
+	public ModelAndView memberListOfGroups(@PathVariable long id) {
+		
+		List<Group> groups = groupService.getAllGroupsByUser(userService.loadUserById(id));
+		for (int i=0; i<groups.size();i++)
+		{
+			BigInteger members=groupService.getMemberCountbyGroupId(groups.get(i).getGroupId());
+			groups.get(i).setMember(members);
+		}
+		
+		ModelAndView mav = new ModelAndView("group/member-ownedgroup");
+		mav.addObject("groups", groups);
+
+		return setSelectedMenu(mav);
 	}
 	
 }

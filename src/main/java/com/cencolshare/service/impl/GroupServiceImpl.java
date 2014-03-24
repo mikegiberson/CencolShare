@@ -1,5 +1,6 @@
 package com.cencolshare.service.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -84,12 +85,18 @@ public class GroupServiceImpl implements GroupService {
 		}
 
 	@Override
-	public long getMemberCountbyGroupId(long groupId) {
+	public BigInteger getMemberCountbyGroupId(long groupId) {
 		final String query = "SELECT COUNT(*) FROM user_to_group WHERE group_id="+ groupId;
 		final Query q = em.createNativeQuery(query);
-		Object[] temp  = (Object [])q.getSingleResult();
-		Long rank = (Long) temp[0];
-		return rank;
+		BigInteger member = (BigInteger) q.getSingleResult();
+		return member;
+	}
+
+	@Override
+	public List<User> getAllMembersOfGroup(long groupId) {
+		final String query = "SELECT u.* FROM user_to_group ug, tbl_user u WHERE u.user_id=ug.user_id AND ug.group_id="+groupId;
+		final Query q=em.createNativeQuery(query,User.class);
+		return q.getResultList();
 	}
 	
 	

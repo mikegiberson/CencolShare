@@ -17,12 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.cencolshare.model.Document;
-import com.cencolshare.model.Group;
 import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
 import com.cencolshare.service.DocumentService;
 import com.cencolshare.service.UploadService;
-import com.cencolshare.util.GroupUtil;
 
 @Controller
 @RequestMapping("/docs")
@@ -75,12 +73,8 @@ public class DocumentController extends BaseController {
 			
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public ModelAndView uploadDocs() {
-
 		ModelAndView mav = new ModelAndView("docs/document-upload");
-		return mav;
-
-		//ModelAndView mav = new ModelAndView("document/document-upload");
-	//	return setSelectedMenu(mav);
+		return setSelectedMenu(mav);
 
 	}
 	

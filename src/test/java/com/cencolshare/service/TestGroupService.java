@@ -2,6 +2,7 @@ package com.cencolshare.service;
 
 import static org.junit.Assert.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.swing.text.EditorKit;
@@ -196,4 +197,72 @@ public class TestGroupService extends BaseTestCase {
 		
 	}
 
+	@Test
+	public void testgetMemberCountbyGroupId()
+	{
+		final User user1 = userService.insertUser(mockData.createUser());
+		final User user2 = userService.insertUser(mockData.createUser());
+		
+		Group grp = mockData.createGroup();
+		grp.setUser(user1);	
+		final Group group = groupService.saveGroup(grp);
+		assertNotNull("Create Group failed", group);
+		
+		groupService.addUserToGroup(user2.getUserId(), grp.getGroupId());
+		
+		final User fetchedUser = userService.loadUserByEmail(user2.getEmail());
+		List<Group> joinedGroups = fetchedUser.getGroups();
+		for(int i=0;i<joinedGroups.size();i++)
+		{
+			assertEquals(joinedGroups.get(i).getGroupId(),grp.getGroupId());
+		}
+		
+		BigInteger count=groupService.getMemberCountbyGroupId(group.getGroupId());
+		assertEquals(BigInteger.ONE, count);
+		
+		groupService.removeUserFromGroup(user2.getUserId(), grp.getGroupId());
+		
+		
+		final User fetchedUser2 = userService.loadUserByEmail(user2.getEmail());
+		Boolean isDeleted=false;
+		List<Group> joinedGroupsafterDelete = fetchedUser2.getGroups();
+		assertNotEquals(joinedGroups.size(), joinedGroupsafterDelete.size());
+		for(int i=0;i<joinedGroupsafterDelete.size();i++)
+		{
+			if(joinedGroupsafterDelete.get(i).getGroupId() == group.getGroupId()) {
+				isDeleted = true;
+			}
+			
+		}
+		
+		assertEquals(isDeleted,false);
+		BigInteger countAfterDelete=groupService.getMemberCountbyGroupId(group.getGroupId());
+		assertEquals(BigInteger.ZERO, countAfterDelete);
+		
+	}
+	
+	@Test
+	public void testgetAllMembersOfGroup()
+	{
+		final User user1 = userService.insertUser(mockData.createUser());
+		final User user2 = userService.insertUser(mockData.createUser());
+		final User user3 = userService.insertUser(mockData.createUser());
+		final User user4 = userService.insertUser(mockData.createUser());
+		
+		Group grp = mockData.createGroup();
+		grp.setUser(user1);	
+		final Group group = groupService.saveGroup(grp);
+		assertNotNull("Create Group failed", group);
+		
+		groupService.addUserToGroup(user2.getUserId(), grp.getGroupId());
+		groupService.addUserToGroup(user3.getUserId(), grp.getGroupId());
+		groupService.addUserToGroup(user4.getUserId(), grp.getGroupId());
+		
+		List<User> joinedMembers=groupService.getAllMembersOfGroup(grp.getGroupId());
+		assertNotNull(joinedMembers);
+		
+		assertEquals(joinedMembers.get(0).getUserId(),user2.getUserId());
+		assertEquals(joinedMembers.get(1).getUserId(),user3.getUserId());
+		assertEquals(joinedMembers.get(2).getUserId(),user4.getUserId());
+	}
 }

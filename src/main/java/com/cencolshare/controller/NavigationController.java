@@ -1,5 +1,6 @@
 package com.cencolshare.controller;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
@@ -55,16 +56,18 @@ public class NavigationController extends BaseController {
 		if(searchType.toLowerCase().equals("group")) {     		
 			List<Group> searchedGroups=groupService.searchGroupsByNameDescription(searchInput);
 			User user = getLoggedInUser();
+			
 			if(user != null && searchedGroups.size() > 0) {
 				
 				for (Group group : searchedGroups) {
+					BigInteger members=groupService.getMemberCountbyGroupId(group.getGroupId());
 					final Boolean isJoined = groupUtil.checkUserInGroup(user.getGroups(), group);
 					
 					if(isJoined)
 					{
 						group.setIsJoined("1");
 					}
-
+					group.setMember(members);
 					log.debug("group {} id joined {}", group.getGroupName(), isJoined);
 				}
 			}

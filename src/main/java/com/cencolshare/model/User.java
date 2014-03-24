@@ -42,7 +42,10 @@ public class User {
 	@Column(name="last_name", nullable=false)
 	private String lastName;
 	
-	@Column(name="email", nullable=false)
+	@Column(name="display_name", nullable=true)
+	private String displayName;
+	
+	@Column(name="email", nullable=false, unique=true)
 	private String email;
 	
 	@Column(name="password", nullable=false)
@@ -50,6 +53,9 @@ public class User {
 
 	@Column(name="enabled", nullable=false)
     public Boolean enabled;
+	
+	@Column(name="verification_token", nullable=true)
+	private String verifyToken;
 	
 	@Column(name="role", nullable=false)
     public Role role;

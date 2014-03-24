@@ -33,7 +33,7 @@
 				</a>
 				<p class="text-info">${grp.groupDescription} </p>
 				<span
-					class="label label-warning">Members:1222</span>
+					class="label label-warning">Members: ${grp.member }</span>
 			
 <span class="pull-right">
 <sec:authorize access="isAuthenticated()">

@@ -63,8 +63,8 @@
 			dataType : 'json',
 			done : function(e, data) {
 				console.log(data.result);
-				$("#profilepic").attr("src", data.result.filePath);
-				$("#photo").val(data.result.filePath);
+				$("#profilepic").attr("src", '${pageContext.request.contextPath}/upload/fetch/' + data.result.id);
+				$("#photo").val('http://localhost:8080${pageContext.request.contextPath}/upload/fetch/'+data.result.id);
 			}
 		});
 	});
