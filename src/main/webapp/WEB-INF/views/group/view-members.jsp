@@ -45,7 +45,12 @@
     <section class="col-xs-12 col-sm-6 col-md-12">
 		<article class="search-result row">
 			<div class="col-xs-12 col-sm-12 col-md-3">
-				<a title="Lorem ipsum" class="thumbnail"><img height="100px" width="100px" src="http://www.dotnetcodesg.com/Register/UserImage/Default.png" alt="Lorem ipsum" /></a>
+			<c:if test="${empty allMembers.photo }">
+			<a title="Lorem ipsum" class="thumbnail"><img height="100px" width="100px" src="http://healthcarelighthouse.com/wp-content/themes/lighthouse/img/default_user.jpg" /></a>
+			</c:if>
+			<c:if test="${not empty allMembers.photo }">
+				<a title="Lorem ipsum" class="thumbnail"><img height="100px" width="100px" src="${allMembers.photo}" /></a>
+			</c:if>
 			</div>
 			
 			<div class="col-xs-12 col-sm-12 col-md-3 thumnail">
