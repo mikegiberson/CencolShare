@@ -9,10 +9,11 @@
 			<div class="col-sm-offset-2 col-sm-4 col-md-4 user-details">
 				<div class="user-image">
 					<img
-						src="${pageContext.request.contextPath}/resources/images/default.png"
-						width="100" height="100" alt="${user.firstName} ${user.lastName}"
-						title="${user.firstName} ${user.lastName}" class="img-circle">
+						src="${user.photo}"
+						width="150" alt="${user.firstName} ${user.lastName}"
+						title="${user.firstName} ${user.lastName}" class="img-responsive">
 				</div>
+				
 				<div class="user-info-block">
 					<div class="user-heading">
 						<h3>${user.firstName}${user.lastName}</h3>

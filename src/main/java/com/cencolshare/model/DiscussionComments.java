@@ -8,8 +8,9 @@ import lombok.Data;
 public class DiscussionComments {
 	private int commentId;
 	private int userId;
-	private Date commentDate;
+	private String commentDate;
 	private String comment;
 	private String firstName;
 	private String lastName;
+	private String photo;
 }
