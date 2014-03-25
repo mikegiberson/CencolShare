@@ -7,7 +7,7 @@
 	<h2 class="form-signin-heading">Please sign in</h2>      
     <c:if test="${param.error != null}">        
         <p>
-            Invalid username and password.
+            Invalid username and password, or your account is disabled.
         </p>
     </c:if>
     <c:if test="${param.logout != null}">       

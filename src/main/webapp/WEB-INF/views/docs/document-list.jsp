@@ -1,16 +1,24 @@
 <%@ include file="../common/header.jsp"%>
 <%@ include file="../common/sidebar.jsp"%>
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	<h1 class="page-header">
-		My Docs <a href="upload">
+<!--<ul class="nav nav-pills">
+  <li class="active"><a href="list">My Documents</a></li>
+  <li><a href="#">My Favorites</a></li>
+  <li><a href="upload">Upload</a></li>
+</ul>-->
+	  <h1 class="page-header">
+		My Docs <a href="favorite">
+			<button type="button" class="btn btn-success pull-right">My Favorite</button>
+		</a> &nbsp
+		<a href="upload">
 			<button type="button" class="btn btn-success pull-right">Upload</button>
 		</a>
 	</h1>
-
+<br>
 	<c:forEach var="document" items="${documents}">
-		<div class="row">
+		
 			<div class="col-md-4">
-				<div class="thumbnail">
+				<div class="thumbnail" >
 					<br />
 					<c:choose>
 						<c:when test="${document.upload.fileType=='.doc'}">
@@ -25,7 +33,7 @@
 							<img src="/cencolshare/resources/images/ppt.png"
 								class="media-object">
 						</c:when>
-						<c:when test="${document.upload.fileType=='.xls'}">
+						<c:when test="${document.upload.fileType=='.xls' || '.xlsx'}">
 							<img src="/cencolshare/resources/images/excel.png"
 								class="media-object">
 						</c:when>
@@ -42,7 +50,7 @@
 							Format: ${document.upload.fileType }</p>
 						<p>
 							<a href="${pageContext.request.contextPath}/docs/view/${document.documentId}">Preview</a> | 
-							<a href="#">Download</a> | 
+							<a href="${document.fileUrl}">Download</a> | 
 							<a href="${pageContext.request.contextPath}/docs/delete/${document.documentId}">Delete</a> |
 							<a href="${pageContext.request.contextPath}/docs/edit/${document.documentId}"> Edit</a>
 						</p>
@@ -51,77 +59,25 @@
 			</div>
 	</c:forEach>
 
-	<!--      <div class="col-md-4">
-                  <div class="thumbnail">
-                  <br />
-                  <img src="/cencolshare/resources/images/word.jpg" class="media-object">
-                  <div class="caption">
-                    <h3>Project Plan</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua</p>
-                    <p class="text-muted">Size: 2.5MB Format: DOCX</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                  <div class="thumbnail">
-                  <br />
-                  <img src="/cencolshare/resources/images/ppt.png" class="media-object">
-                  <div class="caption">
-                    <h3>Kick off Presentation</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua</p>
-                    <p class="text-muted">Size: 1 MB Format: PPTX</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
-                  </div>
-                </div>
-            </div>
-          </div> 
+	
 
-           <div class="row">
-            <div class="col-md-4">
-                  <div class="thumbnail">
-                  <br />
-                  <img src="/cencolshare/resources/images/excel.png" class="media-object">
-                  <div class="caption">
-                    <h3>Project Cost Sheet</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua</p>
-                    <p class="text-muted">Size: 2.5MB Format: XLSX</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                  <div class="thumbnail">
-                  <br />
-                  <img src="/cencolshare/resources/images/ppt.png" class="media-object">
-                  <div class="caption">
-                    <h3>Java Presentation</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua</p>
-                    <p class="text-muted">Size: 2.5MB Format: PPTX</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                  <div class="thumbnail">
-                  <br />
-                  <img src="/cencolshare/resources/images/pdf.jpg" class="media-object">
-                  <div class="caption">
-                    <h3>Kick off Presentation</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua</p>
-                    <p class="text-muted">Size: 1 MB Format: PDF</p>
-                    <p><a href="#">Preview</a> | <a href="#">Download</a></p>
-                  </div>
-                </div>
-            </div>
-             -->
-</div>
 
 </div>
 </div>
+<script type="text/javascript">
+function equalHeight(group) {    
+    tallest = 0;    
+    group.each(function() {       
+        thisHeight = $(this).height();       
+        if(thisHeight > tallest) {          
+            tallest = thisHeight;       
+        }    
+    });    
+    group.each(function() { $(this).height(tallest); });
+} 
+
+$(document).ready(function() {   
+    equalHeight($(".thumbnail")); 
+});
+</script>
 <%@ include file="../common/footer.jsp"%>

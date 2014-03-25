@@ -2,7 +2,6 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	
 	<c:choose>
 			<c:when test="${requestScope.document.documentId > 0}">
 				<h1 class="page-header">Edit Document</h1>
@@ -14,34 +13,37 @@
 
 	<form class="form-horizontal" role="form" method="post"
 		action="${pageContext.request.contextPath}/docs/save">
+		
+		<input type="hidden" id="fileUrl" name="fileUrl" value="${requestScope.document.fileUrl}">
+		
 		<fieldset>
 
 			<!-- Form Name -->
 
 			<input type="hidden" name="documentId"
-				value="${requestScope.document.documentId}"> <input
-				type="hidden" name="uploadId"
-				value="${requestScope.upload.uploadId }">
+				value="${requestScope.document.documentId}">
+				 <input	type="hidden" id="uploadId" name="uploadId"
+				value="${requestScope.document.upload.id }">
 
 			<!-- Text input-->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="docNameTxt">Document
 					Name</label>
 				<div class="col-md-4">
-					<input required="true" id="docNameTxt" name="docNameTxt" type="text"
+					<input required="true" id="documentTitle" name="documentTitle" type="text"
 						placeholder="name" class="form-control input-md"
 						value="${requestScope.document.documentTitle}">
 
 				</div>
 			</div>
 
-			<!-- Textarea -->
+			
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="docDesTxt">Document
 					Description</label>
 				<div class="col-md-4">
-					<textarea class="form-control" id="docDesTxt" name="docDesTxt"
-						value="${requestScope.document.documentDescription}"></textarea>
+					<textarea class="form-control" id="documentDescription" name="documentDescription"
+						>${requestScope.document.documentDescription}</textarea>
 				</div>
 			</div>
 
@@ -50,10 +52,7 @@
 				<label class="col-md-4 control-label" for="fileBtn">File
 					Upload</label>
 				<div class="col-md-4">
-					<!--    <input id="fileBtn" name="fileBtn" class="input-file" type="file" 
-					   data-url="${pageContext.request.contextPath}/upload/do" single> 
-			 		<input type="file" id="fileupload"  name="file" class="input-file"
-						data-url="${pageContext.request.contextPath}/upload/do" single>-->
+					
 						 <input id="fileupload" name="file" class="input-file" type="file" 
 						 data-url="${pageContext.request.contextPath}/upload/do" single>
 				</div>
@@ -95,8 +94,8 @@
 						class="btn btn-danger">Cancel <i class="fa fa-times-circle"></i>
 					</a>
 
-					<!--   <a href="${pageContext.request.contextPath}/docs/list"><button id="cancelBtn" name="cancelBtn" class="btn btn-danger">Cancel 
-    <i class="fa fa-times-circle"></i></button></a></div>-->
+					
+
 				</div>
 			</div>
 
@@ -110,8 +109,10 @@
 				dataType : 'json',
 				done : function(e, data) {
 					console.log(data.result);
-					$("#profilepic").attr("src", data.result.filePath);
-					$("#photo").val(data.result.filePath);
+					//$("#fileupload").attr("src", '${pageContext.request.contextPath}/upload/fetch/' + data.result.id);
+					$("#fileUrl").val('http://localhost:8080${pageContext.request.contextPath}/upload/fetch/'+data.result.id);
+					$("#uploadId").val(data.result.id);
+					
 				}
 			});
 		});

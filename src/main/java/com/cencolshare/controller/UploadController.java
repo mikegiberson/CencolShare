@@ -70,7 +70,7 @@ public class UploadController {
           upload.setFileSize(fileToCreate.length() /1024 + " kb");
           upload.setOriginalFileName(multipartFile.getOriginalFilename().trim());
           upload.setUploadDate(new Date(new Date().getTime()));
-          upload.setFilePath(UPLOAD_PATH + "\\" + fileName);
+          upload.setFilePath(UPLOAD_PATH +"\\"+ fileName);
           
           uploadService.saveUpload(upload); 
           return upload;
@@ -90,7 +90,7 @@ public class UploadController {
 	  }
       response.setContentType(upload.getContentType());
       response.setHeader("Content-disposition","attachment; filename=" + upload.getOriginalFileName());
-      File my_file = new File(UPLOAD_PATH+ upload.getFileName());
+      File my_file = new File(UPLOAD_PATH+"\\"+ upload.getFileName());
       
       
 

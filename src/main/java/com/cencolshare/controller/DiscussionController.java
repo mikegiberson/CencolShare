@@ -23,6 +23,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.cencolshare.enums.Role;
 import com.cencolshare.model.Comment;
 import com.cencolshare.model.Discussion;
+import com.cencolshare.model.DiscussionComments;
 import com.cencolshare.service.CommentService;
 import com.cencolshare.service.DiscussionService;
 import com.cencolshare.service.UserService;
@@ -49,6 +50,8 @@ public class DiscussionController extends BaseController {
 		ModelAndView mav = new ModelAndView("discussion/view");
 		final Discussion discussion = discussionService.getDiscussionById(id);
 		mav.addObject("discussion", discussion);
+		List<DiscussionComments> comments = commentService.getCommentsByDiscussionId(id);
+		mav.addObject("comments", comments);
 		return setSelectedMenu(mav);
 	}
 
