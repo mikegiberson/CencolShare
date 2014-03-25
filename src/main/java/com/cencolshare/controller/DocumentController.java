@@ -26,104 +26,109 @@ import com.cencolshare.service.UploadService;
 @RequestMapping("/docs")
 @Slf4j
 public class DocumentController extends BaseController {
-	
+
 	@Autowired
 	DocumentService documentService;
-	
+
 	@Autowired
 	HttpServletRequest request;
-	
+
 	@Value("${domainPath}")
 	private String DOMAIN_PATH;
-	
+
 	@Autowired
 	UploadService uploadService;
-	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listDocument() {
 		ModelAndView mav = new ModelAndView("docs/document-list");
-		User user=getLoggedInUser();
+		User user = getLoggedInUser();
 		List<Document> documents = documentService.findAllDocumentByUser(user);
-		mav.addObject("documents",documents);
+		mav.addObject("documents", documents);
 		return setSelectedMenu(mav);
 	}
-	
-//	@RequestMapping(value = "/preview", method = RequestMethod.GET)
-//	public ModelAndView documentPreviewTest() {
-//		ModelAndView mav = new ModelAndView("document/document-preview");
-//		mav.addObject("title", "hello");
-//		mav.addObject("docPath", "sample.doc");
-//		return setSelectedMenu(mav);
-//	}
-	
+
+	// @RequestMapping(value = "/preview", method = RequestMethod.GET)
+	// public ModelAndView documentPreviewTest() {
+	// ModelAndView mav = new ModelAndView("document/document-preview");
+	// mav.addObject("title", "hello");
+	// mav.addObject("docPath", "sample.doc");
+	// return setSelectedMenu(mav);
+	// }
+
 	@RequestMapping(value = "/view/{docId}", method = RequestMethod.GET)
 	public ModelAndView documentPreview(@PathVariable long docId) {
-		
+
 		ModelAndView mav = new ModelAndView("document/document-preview");
 		final Document document = documentService.getDocumentById(docId);
 		long fileId = document.getUpload().getId();
-	    String filePath = DOMAIN_PATH + "upload/fetch/" + fileId;
-	
+		String filePath = DOMAIN_PATH + "upload/fetch/" + fileId;
+
 		mav.addObject("docPath", filePath);
-		
+
 		return mav;
 	}
 
-		
-			
-	@RequestMapping(value="/upload", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public ModelAndView uploadDocs() {
 		ModelAndView mav = new ModelAndView("docs/document-upload");
 		return setSelectedMenu(mav);
 
 	}
-	
-		
-	@RequestMapping(value="/save", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/favorite", method = RequestMethod.GET)
+	public ModelAndView favDocs() {
+		ModelAndView mav = new ModelAndView("docs/document-favorite");
+		return setSelectedMenu(mav);
+
+	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveDoc() {
 		User user = getLoggedInUser();
-		Long ID = uploadService.getTheMostRecentUploadId();
-		Upload upload = uploadService.getUploadById(ID);
-		
-		Document doc= new Document();
-		doc.setDocumentTitle(request.getParameter("docNameTxt"));
-		doc.setDocumentDescription(request.getParameter("docDesTxt"));
+		Upload upload = uploadService.getUploadById(Long.parseLong(request
+				.getParameter("uploadId")));
+
+		Document doc = new Document();
+		doc.setDocumentTitle(request.getParameter("documentTitle"));
+		doc.setDocumentDescription(request.getParameter("documentDescription"));
 		doc.setTag(request.getParameter("tag"));
 		doc.setDateUploaded(new Date());
-		doc.setFileUrl(upload.getFilePath());
+		doc.setFileUrl(request.getParameter("fileUrl"));
+
 		doc.setUser(user);
 		doc.setUpload(upload);
-						
-		if(!request.getParameter("documentId").equals("")) {
+
+		if (!request.getParameter("documentId").equals("")) {
 			doc.setDocumentId(Long.parseLong(request.getParameter("documentId")));
 		}
-		
+
 		doc = documentService.saveDocument(doc);
-		if(doc.getDocumentId() > 0) {
+		if (doc.getDocumentId() > 0) {
 			return new ModelAndView(new RedirectView("list"));
 		}
 		return null;
 	}
-	
-	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView deleteDocument(@PathVariable Long id) {
-		
+
 		User user = getLoggedInUser();
 		final Document doc = documentService.getDocumentById(id);
 		Long uploadId = doc.getUpload().getId();
 		int docUserId = doc.getUser().getUserId();
-		int userID =user.getUserId();
-		
-		
-		if (userID == docUserId){
-		
+		int userID = user.getUserId();
+
+		if (userID == docUserId) {
+
 			documentService.deleteDocumentbyID(id);
 			uploadService.deleteUpload(uploadId);
 		}
-	
+
 		return new ModelAndView(new RedirectView("/cencolshare/docs/list"));
 	}
-	
+
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView editDocument(@PathVariable Long id) {
 		final Document doc = documentService.getDocumentById(id);
