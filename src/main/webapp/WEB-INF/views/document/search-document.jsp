@@ -36,7 +36,7 @@
 				<h2 class="text-primary">${document.documentTitle}</h2>
 				<p class="text-info">${document.documentDescription} </p>
 				<span
-					class="label label-warning">Size: ${document.upload.fileSize} </span>
+					class="label label-warning">Size: ${document.upload.fileSize} Kb </span>
 					
 		<span class="pull-right">		
   		<a href="${pageContext.request.contextPath}/document/view/${document.documentId}" class="btn btn-primary">
