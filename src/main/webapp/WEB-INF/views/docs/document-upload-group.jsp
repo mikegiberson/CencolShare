@@ -12,7 +12,7 @@
 	</c:choose>
 
 	<form class="form-horizontal" role="form" method="post"
-		action="${pageContext.request.contextPath}/docs/save">
+		action="${pageContext.request.contextPath}/group/view/${groupId}/upload/save">
 
 		<input type="hidden" id="fileUrl" name="fileUrl"
 			value="${requestScope.document.fileUrl}">
@@ -25,7 +25,8 @@
 				value="${requestScope.document.documentId}"> <input
 				type="hidden" id="uploadId" name="uploadId"
 				value="${requestScope.document.upload.id }">
-
+				<input type="hidden" name="groupId"
+				value="${groupId}">
 			<!-- Text input-->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="docNameTxt">Document
@@ -91,7 +92,7 @@
 						<i class="fa fa-cloud-upload"></i>
 					</button>
 
-					<a href="${pageContext.request.contextPath}/docs/list"
+					<a href="${pageContext.request.contextPath}/group/view/${groupId}"
 						class="btn btn-danger">Cancel <i class="fa fa-times-circle"></i>
 					</a>
 

@@ -8,11 +8,11 @@
 </ul>-->
 	  <h1 class="page-header">
 		My Docs <a href="favorite">
-			<button type="button" class="btn btn-success pull-right">My Favorite</button>
-		</a> &nbsp
-		<a href="upload">
+			<span><button type="button" class="btn btn-success pull-right">My Favorite</button>
+		</a></span> &nbsp
+		<span><a href="upload">
 			<button type="button" class="btn btn-success pull-right">Upload</button>
-		</a>
+		</a></span>
 	</h1>
 <br>
 	<c:forEach var="document" items="${documents}">
@@ -33,7 +33,7 @@
 							<img src="/cencolshare/resources/images/ppt.png"
 								class="media-object">
 						</c:when>
-						<c:when test="${document.upload.fileType=='.xls' || '.xlsx'}">
+						<c:when test="${document.upload.fileType=='.xlsx'}">
 							<img src="/cencolshare/resources/images/excel.png"
 								class="media-object">
 						</c:when>

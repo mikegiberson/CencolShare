@@ -69,7 +69,6 @@ public class DocumentController extends BaseController {
 		return mav;
 	}
 
-
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public ModelAndView uploadDocs() {
 		ModelAndView mav = new ModelAndView("docs/document-upload");

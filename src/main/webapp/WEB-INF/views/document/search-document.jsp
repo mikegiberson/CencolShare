@@ -46,7 +46,7 @@
 					${document.upload.fileSize} </span> &nbsp <span
 					class="label label-warning"> Format:
 					${document.upload.fileType} </span> <span class="pull-right"> <a
-					href="${pageContext.request.contextPath}/document/view/${document.documentId}"
+					href="${pageContext.request.contextPath}/docs/view/${document.documentId}"
 					class="btn btn-primary"> <i class="fa fa-arrow-circle-right">
 							Open</i>
 				</a>
