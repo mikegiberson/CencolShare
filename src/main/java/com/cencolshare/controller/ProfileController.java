@@ -38,7 +38,7 @@ public class ProfileController extends BaseController {
 	
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
 	public ModelAndView editProfile() {
-		ModelAndView mav = new ModelAndView("profile/edit_profile");
+		ModelAndView mav = new ModelAndView("profile/profile");
 		mav.addObject("user", getLoggedInUser());
 		return setSelectedMenu(mav);
 	}
