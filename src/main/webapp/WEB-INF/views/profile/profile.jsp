@@ -28,6 +28,19 @@
     </div>
   </div>
   
+   <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Occupation</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" value="${user.occupation}" name="occupation" placeholder="Enter occupation">
+              </div>
+            </div>  
+             <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Organization</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" value="${user.organization}" name="organization" placeholder="Enter organization">
+              </div>
+            </div>
+  
   <c:if test="${loggedInUser.role.toString().equals(\"ADMIN\")}">
 	  <div class="form-group">
 	    <label for="description" class="col-sm-2 control-label">Enabled</label>

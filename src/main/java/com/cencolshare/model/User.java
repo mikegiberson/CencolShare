@@ -55,7 +55,7 @@ public class User {
 	@Column(name="about", nullable=true)
 	private String about;
 
-	@Column(name="photo", nullable=false)
+	@Column(name="photo", nullable=true)
 	private String photo;
 
 	@Column(name="address", nullable=true)

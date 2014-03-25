@@ -144,6 +144,10 @@ public class SecurityController extends BaseController {
 					user.setRole(Role.USER);
 				}				
 			}
+			
+			else{
+				user.setRole(Role.ADMIN);
+			}
 			userService.insertUser(user);			
 			return new ModelAndView(new RedirectView("/cencolshare/user"));
 		}

@@ -36,6 +36,8 @@
 							<a href="${pageContext.request.contextPath}/profile/edit">Edit
 								profile</a>
 						</p>
+						
+						<a href="${pageContext.request.contextPath}/profile/changepassword">Change password</a>
 					</div>
 				</div>
 
