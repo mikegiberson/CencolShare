@@ -6,6 +6,7 @@
 	<input type="hidden" name="userId" value="${user.userId}">
 	<input type="hidden" name="fromAdmin" value="${fromAdmin}">
 	<input type="hidden" id="photo" name="photo" value="${user.photo}">
+  	<input type="hidden" name="email" value="${user.email}">
   <div class="form-group">
     <h1>Update Profile</h1>
     <hr>	
@@ -24,9 +25,22 @@
   <div class="form-group">
     <label for="location_name" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-4">
-      <input type="email" class="form-control" id="email" placeholder="Email" value="${user.email}" name="email" required="true">
+      <input type="email" disabled class="form-control" id="email" placeholder="Email" value="${user.email}" name="email" required="true">
     </div>
   </div>
+  
+   <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Occupation</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" value="${user.occupation}" name="occupation" placeholder="Enter occupation">
+              </div>
+            </div>  
+             <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Organization</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" value="${user.organization}" name="organization" placeholder="Enter organization">
+              </div>
+            </div>
   
   <c:if test="${loggedInUser.role.toString().equals(\"ADMIN\")}">
 	  <div class="form-group">
@@ -102,6 +116,12 @@
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-6">
       <button class="btn btn-success" id="btnSuccess"><i class="fa fa-floppy-o"></i> Save</button>
+      <c:if test="${fromAdmin }">
+      <a href="${pageContext.request.contextPath}/user" class="btn btn-default">Cancel</a>
+      </c:if>
+      <c:if test="${!fromAdmin}">
+      <a href="${pageContext.request.contextPath}/profile" class="btn btn-default">Cancel</a>
+      </c:if>
     </div>
   </div>
 </form>

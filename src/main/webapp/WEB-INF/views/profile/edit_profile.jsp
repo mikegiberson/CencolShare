@@ -51,12 +51,12 @@
               <span class="col-sm-4 control-label"></span>
               <div class="col-sm-6">
                 <button type="submit" class="btn btn-success">Save Changes</button>
-                <a href="${pageContext.request.contextPath}/profile" class="btn btn-default">Cancel</a>
+                <a href="${pageContext.request.contextPath}/profile" class="btn btn-default">Cancel</a> 
               </div>
             </div>
           </form>
 
       </div>
-    </div>
+ 
     
  <%@ include file="../common/footer.jsp"%>

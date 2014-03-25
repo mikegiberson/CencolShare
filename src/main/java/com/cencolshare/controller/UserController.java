@@ -1,5 +1,8 @@
 package com.cencolshare.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +50,11 @@ public class UserController extends BaseController {
 			user.setRole(Role.USER);
 		}
 		
-		user.setPassword("123456");
-		
+		if(user.getUserId() == 0) {
+			SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
+			user.setDateJoined(format.format(new Date()));
+		}
+				
 		if(!(user.getPhoto() != null && !user.getPhoto().equals(""))) {
 			user.setPhoto("https://s3.amazonaws.com/crime-alert/1394710047317.png");
 		}		

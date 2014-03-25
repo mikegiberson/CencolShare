@@ -4,18 +4,22 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.cencolshare.model.Document;
 import com.cencolshare.model.User;
 import com.cencolshare.service.UserService;
 
 @Controller
+@Slf4j
 @RequestMapping("/profile")
 public class ProfileController extends BaseController {
 
@@ -34,7 +38,7 @@ public class ProfileController extends BaseController {
 	
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
 	public ModelAndView editProfile() {
-		ModelAndView mav = new ModelAndView("profile/edit_profile");
+		ModelAndView mav = new ModelAndView("profile/profile");
 		mav.addObject("user", getLoggedInUser());
 		return setSelectedMenu(mav);
 	}
@@ -58,5 +62,25 @@ public class ProfileController extends BaseController {
 		return "redirect:/profile";
 	}
 	
+	@RequestMapping(value="/changepassword", method=RequestMethod.GET)
+	public ModelAndView changePassword(){
+		ModelAndView mav = new ModelAndView("profile/change-password");
+		return setSelectedMenu(mav);
+	}
 	
+	@RequestMapping(value="/resetpassword", method=RequestMethod.POST)
+	public ModelAndView updatePassword(){
+		String oldPassword = request.getParameter("oldPassword");
+		String newPassword = request.getParameter("newPassword");
+		
+		if(!getLoggedInUser().getPassword().equals(oldPassword)){
+			request.setAttribute("error", "Old Password did not match");
+			return new ModelAndView(new RedirectView("changepassword"));
+		}
+		User u = getLoggedInUser();
+		u.setPassword(newPassword);
+		userService.insertUser(u);
+		log.debug(oldPassword + newPassword);
+		return new ModelAndView(new RedirectView(""));
+	}
 }

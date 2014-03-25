@@ -1,5 +1,6 @@
 package com.cencolshare.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public List<DiscussionComments> getCommentsByDiscussionId(int discussionId) {
-		final String query = "SELECT tc.*, u.first_name, u.last_name FROM tbl_comment tc, discussion_to_comment dc, tbl_user u WHERE " +
+		final String query = "SELECT tc.*, u.first_name, u.last_name, u.photo FROM tbl_comment tc, discussion_to_comment dc, tbl_user u WHERE " +
 				"tc.comment_id = dc.comment_id AND dc.discussion_id =" + discussionId + " AND u.user_id = tc.user_id " +
 				"ORDER BY tc.comment_id DESC";
 		  final Query q = em.createNativeQuery(query);
@@ -58,14 +59,16 @@ public class CommentServiceImpl implements CommentService {
 		final List<DiscussionComments> results = new ArrayList<DiscussionComments>();
 		for (int i = 0; i < result.size(); i++) {
 			final DiscussionComments dc = new DiscussionComments();
+			SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
+			
 			Object[] r = (Object[]) result.get(0);
 			dc.setCommentId((Integer)r[0]);
 			dc.setComment((String)r[1]);
-			dc.setCommentDate((Date)r[2]);
+			dc.setCommentDate(format.format((Date)r[2]));
 			dc.setUserId((Integer)r[3]);
 			dc.setFirstName((String)r[4]);
-			dc.setLastName((String)r[4]);
-			
+			dc.setLastName((String)r[5]);
+			dc.setPhoto((String)r[6]);
 			results.add(dc);
 			
 			System.out.println(r[0]);

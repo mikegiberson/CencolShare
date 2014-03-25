@@ -20,13 +20,13 @@
 					<c:forEach items="${comments}" var="c">
 						<div class="row">
 							<div class="col-xs-2 col-md-1">
-								<img src="http://placehold.it/80"
-									class="img-circle img-responsive" alt="" />
+								<img src="${c.photo}"
+									class="img-responsive" alt="" />
 							</div>
 							<div class="col-xs-10 col-md-11">
 								<div>
 									<div class="mic-info">
-										By: <a href="#">${c.firstName }</a> on ${c.commentDate}
+										By: <a href="#">${c.firstName } ${c.lastName}</a> on ${c.commentDate}
 									</div>
 								</div>
 								<div class="comment-text">${c.comment}</div>
