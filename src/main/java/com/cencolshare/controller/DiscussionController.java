@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import com.cencolshare.model.Discussion;
 import com.cencolshare.model.DiscussionComments;
 import com.cencolshare.service.CommentService;
 import com.cencolshare.service.DiscussionService;
+import com.cencolshare.service.GroupService;
 import com.cencolshare.service.UserService;
 
 @Controller
@@ -41,9 +43,15 @@ public class DiscussionController extends BaseController {
 	
 	@Autowired
 	CommentService commentService;
+	
+	@Autowired
+	GroupService groupService;
 
 	@Autowired
 	HttpServletRequest request;
+	
+	  @Value("${domainPath}")
+	  private String DOMAIN_PATH;
 	
 	@RequestMapping(value="/view/{id}", method = RequestMethod.GET)
 	public ModelAndView viewDiscussion(@PathVariable int id){
@@ -63,12 +71,15 @@ public class DiscussionController extends BaseController {
 		return setSelectedMenu(mav);
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView createNewDiscussion() {
+	@RequestMapping(value = "/create/{groupId}", method = RequestMethod.GET)
+	public ModelAndView createNewDiscussion(@PathVariable Long groupId) {
 
 		log.info("Indide create discsussion");
-
+		
+		// TODO check if getLoggedIn user has access to the group
+		
 		ModelAndView mav = new ModelAndView("discussion/create");
+		mav.addObject("groupId", groupId);
 		return setSelectedMenu(mav);
 	}
 
@@ -76,13 +87,14 @@ public class DiscussionController extends BaseController {
 	public RedirectView saveNewDiscussion(RedirectAttributes redirectAttrs) {
 		log.info("Inside save discussion function");
 		String returnMessage = "";
+		String groupId = request.getParameter("group_id");
 
 		Discussion discussion = new Discussion();
-		discussion.setDiscussionTopic(request
-				.getParameter("discussionHeading"));
-		discussion.setDiscussionContent(request
-				.getParameter("discussionContents"));
+		discussion.setDiscussionTopic(request.getParameter("discussionHeading"));
+		discussion.setDiscussionContent(request.getParameter("discussionContents"));
 		discussion.setUser(getLoggedInUser());
+		discussion.setGroup(groupService.getGroupById(Long.parseLong(groupId)));
+		
 		final Discussion createdDiscussion = discussionService
 				.saveDiscussion(discussion);
 		if (createdDiscussion != null) {
@@ -92,7 +104,7 @@ public class DiscussionController extends BaseController {
 		}
 
 		redirectAttrs.addFlashAttribute("message", returnMessage);
-		return new RedirectView("create", true);
+		return new RedirectView(DOMAIN_PATH + "/group/view/" + groupId, true);
 	}
 	
 	@RequestMapping(value="/comment", method=RequestMethod.POST)

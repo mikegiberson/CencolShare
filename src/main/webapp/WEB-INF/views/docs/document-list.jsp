@@ -9,8 +9,8 @@
 	  <h1 class="page-header">
 		My Docs <a href="favorite">
 			<button type="button" class="btn btn-success pull-right">My Favorite</button>
-		</a> &nbsp
-		<a href="upload">
+		</a> &nbsp;
+		<a href="upload">	
 			<button type="button" class="btn btn-success pull-right">Upload</button>
 		</a>
 	</h1>

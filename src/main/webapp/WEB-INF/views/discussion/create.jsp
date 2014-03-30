@@ -2,9 +2,10 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	<h1 class="page-header">Discussions</h1>
+	<h1 class="page-header">Create New Discussion</h1>
 	<div class="tab-pane" id="signup">
-		<form class="form-horizontal" action="save" method="POST" >
+		<form class="form-horizontal" action="${pageContext.request.contextPath}/discussion/save" method="POST" >
+			<input type="hidden" name="group_id" value="${groupId}" />
 			<fieldset>
 				<!-- Sign Up Form -->
 				<!-- Text input-->
@@ -28,7 +29,7 @@
 					<label class="control-label" for="publish"></label>
 					<div class="controls">
 						<button id="publish" name="publish"
-							class="btn btn-success">Publish</button>
+							class="btn btn-success">Post Discussion</button>
 					</div>
 				</div>
 			</fieldset>

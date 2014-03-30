@@ -42,7 +42,7 @@
 		
 	<div>
 	<sec:authorize access="isAuthenticated()"> 
-<a href="#" class="btn btn-success">
+<a href="${pageContext.request.contextPath}/discussion/create/${group.groupId}" class="btn btn-success">
   		<i class="fa fa-plus-square"> Start Discussion</i>
   		</a>
   		

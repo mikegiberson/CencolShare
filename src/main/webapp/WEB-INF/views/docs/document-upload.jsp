@@ -55,6 +55,7 @@
 					
 						 <input id="fileupload" name="file" class="input-file" type="file" 
 						 data-url="${pageContext.request.contextPath}/upload/do" single>
+						 <span id="fileName"></span>
 				</div>
 			</div>
 
@@ -112,6 +113,7 @@
 					//$("#fileupload").attr("src", '${pageContext.request.contextPath}/upload/fetch/' + data.result.id);
 					$("#fileUrl").val('http://localhost:8080${pageContext.request.contextPath}/upload/fetch/'+data.result.id);
 					$("#uploadId").val(data.result.id);
+					$("#fileName").html(data.result.fileName);
 					
 				}
 			});
