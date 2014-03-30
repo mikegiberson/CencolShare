@@ -3,16 +3,16 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
 	<c:choose>
-			<c:when test="${requestScope.document.documentId > 0}">
-				<h1 class="page-header">Edit Document</h1>
-			</c:when>
-			<c:otherwise>
-				<h1 class="page-header">Upload Document</h1>
-			</c:otherwise>
-		</c:choose>
+		<c:when test="${requestScope.document.documentId > 0}">
+			<h1 class="page-header">Edit Document</h1>
+		</c:when>
+		<c:otherwise>
+			<h1 class="page-header">Upload Document</h1>
+		</c:otherwise>
+	</c:choose>
 
 	<form class="form-horizontal" role="form" method="post"
-		action="${pageContext.request.contextPath}/docs/save">
+		action="${pageContext.request.contextPath}/group/view/${groupId}/upload/save">
 
 		<input type="hidden" id="fileUrl" name="fileUrl"
 			value="${requestScope.document.fileUrl}">
@@ -25,7 +25,8 @@
 				value="${requestScope.document.documentId}"> <input
 				type="hidden" id="uploadId" name="uploadId"
 				value="${requestScope.document.upload.id }">
-
+				<input type="hidden" name="groupId"
+				value="${groupId}">
 			<!-- Text input-->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="docNameTxt">Document
@@ -53,10 +54,10 @@
 				<label class="col-md-4 control-label" for="fileBtn">File
 					Upload</label>
 				<div class="col-md-4">
-					
-						 <input id="fileupload" name="file" class="input-file" type="file" 
-						 data-url="${pageContext.request.contextPath}/upload/do" single>
-						 <span id="fileName"></span>
+
+					<input id="fileupload" type="file" name="file" data-input="true"
+						data-url="${pageContext.request.contextPath}/upload/do" single>
+					<div id="uploadId"></div>
 				</div>
 			</div>
 
@@ -81,18 +82,18 @@
 				<label class="col-md-4 control-label" for="uploadBtn"></label>
 				<div class="col-md-8">
 					<button id="uploadBtn" class="btn btn-success" type="submit">
-					<c:choose>
-					<c:when test="${requestScope.document.documentId > 0}">
+						<c:choose>
+							<c:when test="${requestScope.document.documentId > 0}">
 				Save
 			</c:when>
-			<c:otherwise>
+							<c:otherwise>
 				Upload
 			</c:otherwise>
 						</c:choose>
 						<i class="fa fa-cloud-upload"></i>
 					</button>
 
-					<a href="${pageContext.request.contextPath}/docs/list"
+					<a href="${pageContext.request.contextPath}/group/view/${groupId}"
 						class="btn btn-danger">Cancel <i class="fa fa-times-circle"></i>
 					</a>
 
@@ -107,19 +108,18 @@
 	</form>
 	<script>
 		$(function() {
+			$('#fileupload').fileupload(
+					{
+						
+						dataType : 'json',
+						done : function(e, data) {
+							console.log(data.result);
+							$("div#uploadId").html("<br /><span class='label label-success'>Added " + data.result.fileName + "</span>");
+							
 
-			$('#fileupload').fileupload({
-				dataType : 'json',
-				done : function(e, data) {
-					console.log(data.result);
-					//$("#fileupload").attr("src", '${pageContext.request.contextPath}/upload/fetch/' + data.result.id);
-					$("#fileUrl").val('http://localhost:8080${pageContext.request.contextPath}/upload/fetch/'+data.result.id);
-					$("#uploadId").val(data.result.id);
-					$("#fileName").html(data.result.fileName);
-					
-				}
-			});
-		$('#fileupload').filestyle({input: true});
+						}
+					});
+			//$('#fileupload').filestyle({input: true});
 		});
 	</script>
 

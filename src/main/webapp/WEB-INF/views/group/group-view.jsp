@@ -46,7 +46,7 @@
   		<i class="fa fa-plus-square"> Start Discussion</i>
   		</a>
   		
-  	<a href="#" class="btn btn-success">
+  	<a href="${pageContext.request.contextPath}/group/view/${group.groupId}/upload" class="btn btn-success">
   		<i class="fa fa-arrow-up"> Upload Document</i>
   		</a>
   		</sec:authorize>

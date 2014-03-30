@@ -52,4 +52,8 @@ public class Document {
 	@JoinColumn(name = "upload_id", nullable = false)
 	private Upload upload;
 	
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Group.class)
+	@JoinColumn(name = "group_id", nullable = true)
+	private Group group;
+	
 }

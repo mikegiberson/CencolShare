@@ -1,6 +1,7 @@
 package com.cencolshare.controller;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -17,9 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
+import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
+import com.cencolshare.service.DocumentService;
 import com.cencolshare.service.GroupService;
+import com.cencolshare.service.UploadService;
 import com.cencolshare.util.GroupUtil;
 
 
@@ -34,6 +39,12 @@ public class GroupController extends BaseController {
 	
 	@Autowired
 	GroupService groupService;
+	
+	@Autowired
+	UploadService uploadService;
+	
+	@Autowired 
+	DocumentService documentService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listGroup() {
@@ -56,6 +67,8 @@ public class GroupController extends BaseController {
 		ModelAndView mav = new ModelAndView("group/create-group");
 		return  setSelectedMenu(mav);
 	}
+	
+	
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveGroup() {
@@ -132,6 +145,50 @@ public class GroupController extends BaseController {
 		mav.addObject("members", members);
 		// mav.addObject("joined",joinedgroups );
 		return  mav;
+	}
+	
+	@RequestMapping(value = "/view/{id}/upload", method = RequestMethod.GET)
+	public ModelAndView uploadDocs(@PathVariable Long id) {
+		ModelAndView mav = new ModelAndView("docs/document-upload-group");
+		mav.addObject("groupId", id);
+		return  setSelectedMenu(mav);
+	}
+	
+	@RequestMapping(value = "/view/{id}/upload/list", method = RequestMethod.GET)
+	public ModelAndView listDocs(@PathVariable Long id) {
+		ModelAndView mav = new ModelAndView("docs/document-list-group");
+		mav.addObject("groupId", id);
+		return  setSelectedMenu(mav);
+	}
+	
+	@RequestMapping(value = "/view/{id}/upload/save", method = RequestMethod.POST)
+	public ModelAndView saveDoc(@PathVariable Long id) {
+		User user = getLoggedInUser();
+		Upload upload = uploadService.getUploadById(Long.parseLong(request
+				.getParameter("uploadId")));
+
+		Group group = groupService.getGroupById(id);
+		
+		Document doc = new Document();
+		doc.setDocumentTitle(request.getParameter("documentTitle"));
+		doc.setDocumentDescription(request.getParameter("documentDescription"));
+		doc.setTag(request.getParameter("tag"));
+		doc.setDateUploaded(new Date());
+		doc.setFileUrl(request.getParameter("fileUrl"));
+
+		doc.setUser(user);
+		doc.setUpload(upload);
+		doc.setGroup(group);
+
+		if (!request.getParameter("documentId").equals("")) {
+			doc.setDocumentId(Long.parseLong(request.getParameter("documentId")));
+		}
+
+		doc = documentService.saveDocument(doc);
+		if (doc.getDocumentId() > 0) {
+			return new ModelAndView(new RedirectView("list"));
+		}
+		return null;
 	}
 	
 	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)

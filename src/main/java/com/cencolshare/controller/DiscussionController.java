@@ -148,7 +148,7 @@ public class DiscussionController extends BaseController {
 			return new ModelAndView(new RedirectView("/cencolshare/discussion/view/" + discussionId));
 		}
 		
-		discussionService.deleteCommentById(id);		
+		discussionService.deleteCommentById(id);	
 		log.debug("getting discussion id from comment: {}", discussionId);
 		return new ModelAndView(new RedirectView("/cencolshare/discussion/view/" + discussionId));
 	}

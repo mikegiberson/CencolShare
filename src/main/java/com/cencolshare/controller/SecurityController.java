@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -159,5 +161,22 @@ public class SecurityController extends BaseController {
 		userService.insertUser(user);
 
 		return new ModelAndView(new RedirectView("/cencolshare/profile"));
-    }	
+    }
+	
+	@RequestMapping(value="/resetpassword", method=RequestMethod.POST)
+	@ResponseBody
+	public String resetPassword(){
+		String email = request.getParameter("email");
+		if(email == null || email.equals("")){
+			return "Please enter an email";
+		}
+		User user = userService.loadUserByEmail(email);
+		if(user == null){
+			return "User does not exist";
+		}
+		if(userService.resetPassword(user)) {
+			return "Password reset successful";
+		}
+		return "Unable to send email";
+	}
 }

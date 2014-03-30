@@ -6,7 +6,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-offset-2 col-sm-4 col-md-4 user-details">
+			<div class="col-sm-offset-2 col-sm-4 col-md-4 user-details thumbnail">
 				<div class="user-image">
 					<img
 						src="${user.photo}"
