@@ -57,6 +57,7 @@
 
 					<input id="fileupload" type="file" name="file" data-input="true"
 						data-url="${pageContext.request.contextPath}/upload/do" single>
+					<div id="uploadId"></div>
 				</div>
 			</div>
 
@@ -113,16 +114,12 @@
 						dataType : 'json',
 						done : function(e, data) {
 							console.log(data.result);
-							
-							$("#fileUrl").val(
-									'http://localhost:8080${pageContext.request.contextPath}/upload/fetch/'
-											+ data.result.id);
-							$("#uploadId").val(data.result.id);
+							$("div#uploadId").html("<br /><span class='label label-success'>Added " + data.result.fileName + "</span>");
 							
 
 						}
 					});
-			$('#fileupload').filestyle({input: true});
+			//$('#fileupload').filestyle({input: true});
 		});
 	</script>
 

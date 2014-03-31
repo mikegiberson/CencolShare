@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -35,14 +36,18 @@ public class Discussion {
 	@Column(name="discussion_id")
 	private int discussionId;
 	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity=User.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity=User.class)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
+	
+	@OneToOne(fetch = FetchType.LAZY, targetEntity=Group.class)
+	@JoinColumn(name = "group_id", nullable = false)
+	private Group group;
 	
 	@Column(name="discussion_topic", nullable=false)
 	private String discussionTopic;
 	
-	@Column(name="discussion_content", nullable=false)
+	@Column(name="discussion_content", nullable=false, length=2000)
 	private String discussionContent;
 	
 	@Column(name="discussion_date", nullable=false)

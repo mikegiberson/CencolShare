@@ -6,11 +6,8 @@
 		class="btn btn-success pull-right"> <i class="fa fa-users"></i>
 		Create new Group
 	</a>
-	<h1>
-		<b>Group</b>
-	</h1>
+	<h1 class="page-header">My Groups</h1>
 
-	<hr class="colorgraph" />
 	<c:forEach items="${requestScope.groups}" var="grp">
 		<div class="row ">
 			

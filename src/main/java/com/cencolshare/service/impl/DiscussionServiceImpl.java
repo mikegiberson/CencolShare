@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cencolshare.model.Discussion;
+import com.cencolshare.model.Group;
 import com.cencolshare.repository.DiscussionRepository;
 import com.cencolshare.service.DiscussionService;
 
@@ -65,5 +66,11 @@ public class DiscussionServiceImpl implements DiscussionService {
 		final Query q2 = em.createNativeQuery(query2);		
 		q2.executeUpdate();
 		return true;
+	}
+
+	@Override
+	public List<Discussion> getDiscussionsByGroup(Group group) {
+		// TODO Auto-generated method stub
+		return discussionRepository.findByGroup(group);
 	}
 }

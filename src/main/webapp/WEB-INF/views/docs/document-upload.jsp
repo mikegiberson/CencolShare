@@ -3,13 +3,13 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
 	<c:choose>
-		<c:when test="${requestScope.document.documentId > 0}">
-			<h1 class="page-header">Edit Document</h1>
-		</c:when>
-		<c:otherwise>
-			<h1 class="page-header">Upload Document</h1>
-		</c:otherwise>
-	</c:choose>
+			<c:when test="${requestScope.document.documentId > 0}">
+				<h1 class="page-header">Edit Document</h1>
+			</c:when>
+			<c:otherwise>
+				<h1 class="page-header">Upload Document</h1>
+			</c:otherwise>
+		</c:choose>
 
 	<form class="form-horizontal" role="form" method="post"
 		action="${pageContext.request.contextPath}/docs/save">
@@ -53,9 +53,10 @@
 				<label class="col-md-4 control-label" for="fileBtn">File
 					Upload</label>
 				<div class="col-md-4">
-
-					<input id="fileupload" type="file" name="file" data-input="true"
-						data-url="${pageContext.request.contextPath}/upload/do" single>
+					
+						 <input id="fileupload" name="file" class="input-file" type="file" 
+						 data-url="${pageContext.request.contextPath}/upload/do" single>
+						 <span id="fileName"></span>
 				</div>
 			</div>
 
@@ -80,11 +81,11 @@
 				<label class="col-md-4 control-label" for="uploadBtn"></label>
 				<div class="col-md-8">
 					<button id="uploadBtn" class="btn btn-success" type="submit">
-						<c:choose>
-							<c:when test="${requestScope.document.documentId > 0}">
+					<c:choose>
+					<c:when test="${requestScope.document.documentId > 0}">
 				Save
 			</c:when>
-							<c:otherwise>
+			<c:otherwise>
 				Upload
 			</c:otherwise>
 						</c:choose>
@@ -106,22 +107,19 @@
 	</form>
 	<script>
 		$(function() {
-			$('#fileupload').fileupload(
-					{
-						
-						dataType : 'json',
-						done : function(e, data) {
-							console.log(data.result);
-							
-							$("#fileUrl").val(
-									'http://localhost:8080${pageContext.request.contextPath}/upload/fetch/'
-											+ data.result.id);
-							$("#uploadId").val(data.result.id);
-							
 
-						}
-					});
-			$('#fileupload').filestyle({input: true});
+			$('#fileupload').fileupload({
+				dataType : 'json',
+				done : function(e, data) {
+					console.log(data.result);
+					//$("#fileupload").attr("src", '${pageContext.request.contextPath}/upload/fetch/' + data.result.id);
+					$("#fileUrl").val('http://localhost:8080${pageContext.request.contextPath}/upload/fetch/'+data.result.id);
+					$("#uploadId").val(data.result.id);
+					$("#fileName").html(data.result.fileName);
+					
+				}
+			});
+		$('#fileupload').filestyle({input: true});
 		});
 	</script>
 

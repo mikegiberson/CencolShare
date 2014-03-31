@@ -2,37 +2,56 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	<h1 class="page-header">Discussions</h1>
-	<div class="tab-pane" id="signup">
-		<form class="form-horizontal" action="save" method="POST" >
-			<fieldset>
-				<!-- Sign Up Form -->
-				<!-- Text input-->
-				<div class="control-group">
-					<label class="control-label" for="discussionHeading">Heading:</label>
-					<div class="controls">
-						<input id="heading" name="discussionHeading" class="form-control" type="text"
-							placeholder="Please enter a discussion topic" class="input-large" required>
+	<h1 class="page-header">Create New Discussion</h1>
+	<div class="row">
+		<div class="col-sm-8">
+			<form class="form-horizontal"
+				action="${pageContext.request.contextPath}/discussion/save"
+				method="POST">
+				<input type="hidden" name="group_id" value="${groupId}" />
+				<fieldset>
+					<!-- Sign Up Form -->
+					<!-- Text input-->
+					<div class="control-group">
+						<label class="control-label" for="discussionHeading">Heading:</label>
+						<div class="controls">
+							<input id="heading" name="discussionHeading" class="form-control"
+								type="text" placeholder="Please enter a discussion topic"
+								class="input-large" required>
+						</div>
 					</div>
-				</div>
 
-				<!-- Text input-->
-				<div class="control-group">
-					<label class="control-label" for="userid">Content:</label>
-					<div class="controls">
-						<textarea class="form-control" name="discussionContents" rows="3"></textarea>
+					<!-- Text input-->
+					<div class="control-group">
+						<label class="control-label" for="userid">Content:</label>
+						<div class="controls">
+							<textarea class="form-control" name="discussionContents" rows="5"></textarea>
+						</div>
 					</div>
-				</div>
 
-				<div class="control-group">
-					<label class="control-label" for="publish"></label>
-					<div class="controls">
-						<button id="publish" name="publish"
-							class="btn btn-success">Publish</button>
+					<div class="control-group">
+						<label class="control-label" for="publish"></label>
+						<div class="controls">
+							<button id="publish" name="publish" class="btn btn-success">Create
+								Discussion</button>
+							<a style="padding: 9px" onclick="window.history.back()">Cancel</a>
+						</div>
 					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="col-sm-4">
+			<div class="panel panel-info">
+				  <div class="panel-heading">You should know..</div>
+				  <div class="panel-body">
+				    <ul>
+				    	<li>This content will be visible to anyone who is a member of the group</li>
+				    	<li>Content you are posting should be individual work or findings, and shouldnot be plagarized</li>
+				    	<li>By clicking <span class="label label-success">Create Discussion</span> button, you agree our terms and conditions</li>
+				    </ul>
+				  </div>
 				</div>
-			</fieldset>
-		</form>
+		</div>
 	</div>
 
 </div>

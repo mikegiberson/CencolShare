@@ -5,8 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.ws.rs.core.Response.StatusType;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.apache.commons.lang.RandomStringUtils;
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +22,7 @@ import com.cencolshare.repository.UserRepository;
 import com.cencolshare.service.UserService;
 import com.cencolshare.util.GeneralUtils;
 import com.cencolshare.util.MailgunEmail;
+import com.sun.jersey.api.client.ClientResponse;
 
 @Transactional
 @Service
@@ -117,6 +120,23 @@ public class UserServiceImpl implements UserService {
 		String query = "select * from tbl_user u where u.first_name like '%"+criteria+"%' or u.last_name like '%"+criteria+"%' or u.email like '%"+criteria+"%'";
 	    final Query q = em.createNativeQuery(query, User.class);
 	    return q.getResultList();		
+	}
+
+	@Override
+	public Boolean resetPassword(User user) {
+		String password = RandomStringUtils.randomAlphanumeric(8);
+		user.setPassword(password);
+		insertUser(user);
+		
+		Email email = new Email();
+		email.setTo(user.getEmail());
+		email.setSubject("CencolShare - Password Reset success");
+		email.setContent("Your new password is: " + user.getPassword() + "<br /><br />Thanks,<br />CencolShare Team");
+		ClientResponse cr = mailgunEmail.sendEmail(email);
+		if(cr.getStatusInfo().getStatusCode() == 200) {
+			return true;
+		}
+		return false;
 	}	
 
 }

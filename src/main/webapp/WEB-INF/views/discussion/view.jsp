@@ -43,8 +43,9 @@
 					<textarea class="form-control" name="comment" id="comment"
 						placeholder="Write a comment..."></textarea>
 					<br>
-					<button class="btn btn-primary pull-right" id="addComment">Add
-						Comment</button>
+					<a class="btn btn-primary pull-right" id="addComment">Add
+						Comment</a>
+					<a class="pull-right" style="padding:9px" onclick="window.history.back()">Cancel</a>
 				</div>
 			</div>
 		</div>

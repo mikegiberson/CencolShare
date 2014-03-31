@@ -2,7 +2,7 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-<h1 class="page-header">Discussions</h1>
+<h1 class="page-header">My Discussions</h1>
 
 <br>
 <table class="table table-bordered">
@@ -30,5 +30,4 @@
 </c:forEach>
 </table>
 
-<a href="${pageContext.request.contextPath}/discussion/create" class="btn btn-success"><i class="fa fa-users"></i> Create new Discussion</a>
 <%@ include file="../common/footer.jsp"%>

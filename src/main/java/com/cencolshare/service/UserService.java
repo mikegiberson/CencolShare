@@ -19,5 +19,7 @@ public interface UserService {
   public List<User> getAllUsers();
   
   public List<User> searchUsers(String criteria);
+  
+  public Boolean resetPassword(User user);
 
 }
