@@ -7,18 +7,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
 import com.cencolshare.repository.GroupRepository;
 import com.cencolshare.service.GroupService;
-import com.cencolshare.service.UserService;
+import com.cencolshare.util.GeneralUtils;
 
 @Service
 @Slf4j
@@ -29,10 +28,14 @@ public class GroupServiceImpl implements GroupService {
 	@Autowired
 	GroupRepository groupRepository;
 	
+	@Autowired
+	GeneralUtils generalUtils;
+	
 	@PersistenceContext
 	EntityManager em;
 	
 	public Group saveGroup(Group grp) {
+		grp.setCreatedDate(generalUtils.getCurrentTimeStamp());
 		grp = groupRepository.save(grp);
 		log.debug("New Group saved by group service: {}", grp.getGroupName());
 		return grp;

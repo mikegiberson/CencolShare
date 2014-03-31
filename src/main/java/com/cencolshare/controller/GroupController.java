@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
+import com.cencolshare.service.DiscussionService;
 import com.cencolshare.service.DocumentService;
 import com.cencolshare.service.GroupService;
 import com.cencolshare.service.UploadService;
@@ -45,6 +47,9 @@ public class GroupController extends BaseController {
 	
 	@Autowired 
 	DocumentService documentService;
+	
+	@Autowired
+	DiscussionService discussionService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listGroup() {
@@ -127,6 +132,10 @@ public class GroupController extends BaseController {
 		
 		final Group grp = groupService.getGroupById(id);
 		BigInteger members=groupService.getMemberCountbyGroupId(id);
+		
+		// get discussions in a group
+		List<Discussion> discussions = discussionService.getDiscussionsByGroup(grp);
+		
 		ModelAndView mav = new ModelAndView("group/group-view");
 		if(getLoggedInUser()!=null)
 		{
@@ -143,6 +152,7 @@ public class GroupController extends BaseController {
 		}}
 		mav.addObject("group", grp);
 		mav.addObject("members", members);
+		mav.addObject("discussions", discussions);
 		// mav.addObject("joined",joinedgroups );
 		return  mav;
 	}

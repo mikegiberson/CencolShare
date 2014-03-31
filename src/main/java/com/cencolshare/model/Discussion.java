@@ -36,7 +36,7 @@ public class Discussion {
 	@Column(name="discussion_id")
 	private int discussionId;
 	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity=User.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity=User.class)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
@@ -47,7 +47,7 @@ public class Discussion {
 	@Column(name="discussion_topic", nullable=false)
 	private String discussionTopic;
 	
-	@Column(name="discussion_content", nullable=false)
+	@Column(name="discussion_content", nullable=false, length=2000)
 	private String discussionContent;
 	
 	@Column(name="discussion_date", nullable=false)

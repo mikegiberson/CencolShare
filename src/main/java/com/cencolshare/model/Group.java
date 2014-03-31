@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -42,6 +41,9 @@ public class Group {
 	
 	@Column(name="group_image")
 	private String groupImage;
+	
+	@Column(name="created_date")
+	private String createdDate;
 	
 	@Transient
 	private String isJoined = "0";

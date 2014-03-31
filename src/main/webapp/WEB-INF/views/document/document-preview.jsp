@@ -4,17 +4,17 @@
 <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	<h1>Document Preview</h1>
 
-	<!-- 
+	 
 	<iframe style="display: block; border: 1px solid #86B404;" width="100%"
 		height="500"
 		src="https://docs.google.com/viewer?embedded=true&url=${ docPath }"></iframe>
 		></iframe>
-	 -->
+	 <!--
 	<iframe style="display: block; border: 1px solid #86B404;" width="100%"
 		height="500"
 		src="https://docs.google.com/viewer?embedded=true&url=http://www.cl.cam.ac.uk/~lp15/papers/Notes/SE-I.pdf"></iframe>
 		</iframe>
-
+	-->
 	<hr>
 	<div class="container" style="width: 100%">
 		<div class="row">
