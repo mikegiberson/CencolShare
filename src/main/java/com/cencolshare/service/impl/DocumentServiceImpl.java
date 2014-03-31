@@ -24,6 +24,15 @@ public class DocumentServiceImpl implements DocumentService {
 	@Resource
 	private DocumentRepository documentRepository;
 	
+	/*@Override
+	@Transactional
+	public List<Document> findAllDocumentByUser(final int userId){
+	  
+	  final String query = "SELECT * FROM tbl_document WHERE user_id = userId && group_id = null";
+	  final Query q = em.createNativeQuery(query, Document.class);
+	  return q.getResultList();
+	
+	}*/
 	@Override
 	@Transactional
 	public List<Document> findAllDocumentByUser(final User user){
