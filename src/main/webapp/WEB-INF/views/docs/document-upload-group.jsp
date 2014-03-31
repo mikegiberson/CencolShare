@@ -115,7 +115,7 @@
 						done : function(e, data) {
 							console.log(data.result);
 							$("div#uploadId").html("<br /><span class='label label-success'>Added " + data.result.fileName + "</span>");
-							
+							$("#uploadId").val(data.result.id);
 
 						}
 					});

@@ -74,7 +74,7 @@
 			comment : comment
 		};
 		console.log(obj);
-		$.post("http://localhost:8080/cencolshare/discussion/comment", obj,
+		$.post("${baseURL}/discussion/comment", obj,
 				onresult);
 	};
 

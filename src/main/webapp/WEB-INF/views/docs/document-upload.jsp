@@ -113,7 +113,7 @@
 				done : function(e, data) {
 					console.log(data.result);
 					//$("#fileupload").attr("src", '${pageContext.request.contextPath}/upload/fetch/' + data.result.id);
-					$("#fileUrl").val('http://localhost:8080${pageContext.request.contextPath}/upload/fetch/'+data.result.id);
+					$("#fileUrl").val('${baseURL}/upload/fetch/'+data.result.id);
 					$("#uploadId").val(data.result.id);
 					$("#fileName").html(data.result.fileName);
 					

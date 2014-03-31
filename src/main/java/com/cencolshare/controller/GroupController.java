@@ -84,7 +84,7 @@ public class GroupController extends BaseController {
 		grp.setGroupDescription(request.getParameter("groupDescription"));
 		if(request.getParameter("photo")==null || request.getParameter("photo").equals(""))
 		{
-			grp.setGroupImage("http://localhost:8080/cencolshare/resources/images/groupDefault.png");
+			grp.setGroupImage("${baseURL}/resources/images/groupDefault.png");
 		}
 		else
 		{

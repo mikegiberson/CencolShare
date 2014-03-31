@@ -135,7 +135,7 @@
 			done : function(e, data) {
 				console.log(data.result);
 				$("#profilepic").attr("src", '${pageContext.request.contextPath}/upload/fetch/' + data.result.id);
-				$("#photo").val('http://localhost:8080${pageContext.request.contextPath}/upload/fetch/'+data.result.id);
+				$("#photo").val('${baseURL}/upload/fetch/'+data.result.id);
 			}
 		});
 	});
