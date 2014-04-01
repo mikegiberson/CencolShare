@@ -20,6 +20,7 @@ import com.cencolshare.model.Email;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
 import com.cencolshare.repository.UserRepository;
+import com.cencolshare.service.GroupService;
 import com.cencolshare.service.UserService;
 import com.cencolshare.util.GeneralUtils;
 import com.cencolshare.util.MailgunEmail;
@@ -31,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	GroupService groupService;
 
 	@Autowired
 	GeneralUtils utils;
@@ -150,6 +154,10 @@ public class UserServiceImpl implements UserService {
 			if(thisGroup.getGroupId() == group.getGroupId()) {
 				isMember = Boolean.TRUE;
 			}
+		}
+		
+		if(!isMember) {
+			isMember = groupService.isAdminOfGroup(group, user);
 		}
 		
 		return isMember;
