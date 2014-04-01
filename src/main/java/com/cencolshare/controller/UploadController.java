@@ -91,10 +91,11 @@ public class UploadController extends BaseController {
 	public String displayFile(@PathVariable Long fileId,
 			HttpServletResponse response) throws IOException {
 
+		/*
 		if (getLoggedInUser() == null) {
 			return "Authentication Required";
 		}
-
+		*/
 		final Upload upload = uploadService.getUploadById(fileId);
 
 		if (upload == null) {

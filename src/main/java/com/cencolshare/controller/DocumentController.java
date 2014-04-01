@@ -67,6 +67,7 @@ public class DocumentController extends BaseController {
 		String filePath = DOMAIN_PATH + "upload/fetch/" + fileId;
 
 		mav.addObject("docPath", filePath);
+		mav.addObject("document", document);
 
 		return mav;
 	}
