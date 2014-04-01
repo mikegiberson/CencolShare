@@ -32,4 +32,6 @@ public interface GroupService {
 	
 	public Boolean isAdminOfGroup(Group group, User user);
 	
+	public List<Group> getjoinedGroups(int userId);
+	
 }
