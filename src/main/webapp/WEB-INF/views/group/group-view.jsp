@@ -65,23 +65,23 @@
 		<div class="row">
 			<div class="col-sm-8">
 
-				<c:forEach var="discussion" items="${discussions}">
+				<c:forEach var="feed" items="${groupFeeds}">
 					<ul class="media-list">
 						<li class="media"><a class="pull-left" href="#"> <img
-								class="media-object" src="${discussion.user.photo}" alt="...">
+								class="media-object" src="${feed.user.photo}" alt="...">
 						</a>
 							<div class="media-body">
 								<h4 class="media-heading">
-									<strong><c:out value="${discussion.discussionTopic}" /></strong>
+									<strong><c:out value="${feed.feedTitle}" /></strong>
 								</h4>
 								<span class="text-muted"><c:out
-										value="${discussion.discussionDate}" /></span>
+										value="${feed.dateCreated}" /></span>
 								<p>
-									<c:out value="${discussion.discussionContent}" />
+									<c:out value="${fn:substring(feed.feedDescription, 0, 200)}" />...
 								</p>
 
 								<!-- comments -->
-								<c:forEach var="thisComment" items="${discussion.comments}">
+								<c:forEach var="thisComment" items="${feed.comments}">
 									<ul class="media-list well">
 										<li class="media"><a class="pull-left" href="#"> <img
 												class="media-object" src="${thisComment.user.photo}"
@@ -102,7 +102,12 @@
 									</ul>
 								</c:forEach>
 								<!-- comments -->
-								<a href="${pageContext.request.contextPath}/discussion/view/${discussion.discussionId}">Read More</a>
+								<c:if test="${feed.feedType == 'DOCUMENT'}">
+									<a href="${pageContext.request.contextPath}/docs/view/${feed.feedId}">Preview Document</a>
+								</c:if>
+								<c:if test="${feed.feedType == 'DISCUSSION'}">
+									<a href="${pageContext.request.contextPath}/discussion/view/${feed.feedId}">Read More</a>
+								</c:if>
 							</div></li>
 					</ul>
 					<p>

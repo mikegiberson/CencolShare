@@ -1,6 +1,7 @@
 package com.cencolshare.service.impl;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,9 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cencolshare.enums.FeedType;
+import com.cencolshare.model.Discussion;
+import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
+import com.cencolshare.model.response.GroupFeed;
 import com.cencolshare.repository.GroupRepository;
+import com.cencolshare.service.DiscussionService;
+import com.cencolshare.service.DocumentService;
 import com.cencolshare.service.GroupService;
 import com.cencolshare.util.GeneralUtils;
 
@@ -30,6 +37,12 @@ public class GroupServiceImpl implements GroupService {
 	
 	@Autowired
 	GeneralUtils generalUtils;
+	
+	@Autowired
+	DiscussionService discussionService;
+	
+	@Autowired
+	DocumentService documentService;
 	
 	@PersistenceContext
 	EntityManager em;
@@ -100,6 +113,43 @@ public class GroupServiceImpl implements GroupService {
 		final String query = "SELECT u.* FROM user_to_group ug, tbl_user u WHERE u.user_id=ug.user_id AND ug.group_id="+groupId;
 		final Query q=em.createNativeQuery(query,User.class);
 		return q.getResultList();
+	}
+
+	@Override
+	public List<GroupFeed> getFeedsByGroup(Group group) {
+		
+		List<GroupFeed> groupFeeds = new ArrayList<GroupFeed>();
+		
+		List<Discussion> groupDiscussions = discussionService.getDiscussionsByGroup(group);
+		for (Discussion discussion : groupDiscussions) {
+			final GroupFeed groupFeedItem = new GroupFeed();
+			groupFeedItem.setFeedId(discussion.getDiscussionId());
+			groupFeedItem.setFeedTitle(discussion.getDiscussionTopic());
+			groupFeedItem.setFeedDescription(discussion.getDiscussionContent());
+			groupFeedItem.setUser(discussion.getUser());
+			groupFeedItem.setDateCreated(discussion.getDiscussionDate());
+			groupFeedItem.setFeedType(FeedType.DISCUSSION);
+			groupFeedItem.setComments(discussion.getComments());
+			
+			groupFeeds.add(groupFeedItem);
+		}
+		
+		List<Document> groupDocuments = documentService.getDocumentByGroup(group);
+		for(Document document : groupDocuments) {
+			final GroupFeed groupFeedItem = new GroupFeed();
+			groupFeedItem.setFeedId(document.getDocumentId().intValue());
+			groupFeedItem.setFeedTitle(document.getDocumentTitle());
+			groupFeedItem.setFeedDescription(document.getDocumentDescription());
+			groupFeedItem.setUser(document.getUser());
+			groupFeedItem.setDateCreated(document.getDateUploaded());
+			groupFeedItem.setFeedType(FeedType.DOCUMENT);
+			groupFeedItem.setComments(null);
+			
+			groupFeeds.add(groupFeedItem);
+		}
+		
+		
+		return groupFeeds;
 	}
 	
 	

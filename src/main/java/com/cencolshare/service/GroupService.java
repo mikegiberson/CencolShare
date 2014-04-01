@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
+import com.cencolshare.model.response.GroupFeed;
 
 
 public interface GroupService {
@@ -26,4 +27,6 @@ public interface GroupService {
 	public BigInteger getMemberCountbyGroupId(long groupId);
 	
 	public List<User> getAllMembersOfGroup(long groupId);
+	
+	public List<GroupFeed> getFeedsByGroup(Group group);
 }
