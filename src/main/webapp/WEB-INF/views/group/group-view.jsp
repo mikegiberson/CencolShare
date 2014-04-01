@@ -49,9 +49,9 @@
 							class="btn btn-success"> <i class="fa fa-plus-square">
 								Discuss</i>
 						</a> <a
-							href="${pageContext.request.contextPath}/group/view/${group.groupId}/upload"
-							class="btn btn-primary"> <i class="fa fa-arrow-up"> New
-								Document</i>
+							href="${pageContext.request.contextPath}/group/view/${group.groupId}/list"
+							class="btn btn-primary"><i class="fa fa-book"></i> Group
+								Documents</i>
 						</a>
 					</div>
 		</div>

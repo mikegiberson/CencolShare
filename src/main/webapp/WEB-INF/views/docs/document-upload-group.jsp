@@ -93,7 +93,7 @@
 						<i class="fa fa-cloud-upload"></i>
 					</button>
 
-					<a href="${pageContext.request.contextPath}/group/view/${groupId}"
+					<a href="${pageContext.request.contextPath}/group/view/${groupId}/list"
 						class="btn btn-danger">Cancel <i class="fa fa-times-circle"></i>
 					</a>
 
@@ -116,6 +116,7 @@
 							console.log(data.result);
 							$("div#uploadId").html("<br /><span class='label label-success'>Added " + data.result.fileName + "</span>");
 							$("#uploadId").val(data.result.id);
+							$("#fileUrl").val('${baseURL}/upload/fetch/'+data.result.id);
 
 						}
 					});

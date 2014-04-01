@@ -45,7 +45,7 @@ public class GroupController extends BaseController {
 
 	@Autowired
 	DiscussionService discussionService;
-
+	
 	@Value("${domainPath}")
 	private String DOMAIN_PATH;
 
@@ -123,14 +123,15 @@ public class GroupController extends BaseController {
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public ModelAndView viewGroup(@PathVariable Long id) {
 
+		int a=0;
+		
 		final Group grp = groupService.getGroupById(id);
 		BigInteger members = groupService.getMemberCountbyGroupId(id);
 
 		// get discussions in a group
-		// List<Discussion> discussions =
-		// discussionService.getDiscussionsByGroup(grp);
 		List<GroupFeed> groupFeeds = groupService.getFeedsByGroup(grp, getLoggedInUser());
-
+		System.out.println("Total number of feeds: " + groupFeeds.size());
+		
 		ModelAndView mav = new ModelAndView("group/group-view");
 		if (getLoggedInUser() != null) {
 			boolean check = groupUtil.checkUserInGroup(getLoggedInUser()
@@ -158,11 +159,14 @@ public class GroupController extends BaseController {
 		return setSelectedMenu(mav);
 	}
 
-	@RequestMapping(value = "/view/{id}/upload/list", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/view/{id}/list", method = RequestMethod.GET)
 	public ModelAndView listDocs(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("docs/document-list-group");
+		List<Document> documents = documentService.findAllDocumentInGroup(id);
 		mav.addObject("groupId", id);
-		return setSelectedMenu(mav);
+		mav.addObject("documents", documents);
+		return  setSelectedMenu(mav);
 	}
 
 	@RequestMapping(value = "/view/{id}/upload/save", method = RequestMethod.POST)
@@ -190,8 +194,8 @@ public class GroupController extends BaseController {
 
 		doc = documentService.saveDocument(doc);
 		if (doc.getDocumentId() > 0) {
-			return new ModelAndView(new RedirectView(DOMAIN_PATH
-					+ "group/view/" + id));
+
+			return new ModelAndView(new RedirectView("/cencolshare/group/view/" + id + "/list"));
 		}
 		return null;
 	}
@@ -202,12 +206,10 @@ public class GroupController extends BaseController {
 		final User loggedUser = getLoggedInUser();
 		int loggedUserId = loggedUser.getUserId();
 		groupService.removeUserFromGroup(loggedUserId, id);
-		if (request.getParameter("fromSearch") != null) {
-			return new ModelAndView(new RedirectView(DOMAIN_PATH
-					+ "search?searchType=group&searchInput="));
+		if(request.getParameter("fromSearch") != null) {
+			return new ModelAndView(new RedirectView("/cencolshare/search?searchType=group&searchInput="));
 		} else {
-			return new ModelAndView(new RedirectView(DOMAIN_PATH
-					+ "group/view/" + id));
+			return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
 		}
 	}
 
@@ -217,13 +219,11 @@ public class GroupController extends BaseController {
 		final User loggedUser = getLoggedInUser();
 		int loggedUserId = loggedUser.getUserId();
 		groupService.addUserToGroup(loggedUserId, id);
-
-		if (request.getParameter("fromSearch") != null) {
-			return new ModelAndView(new RedirectView(DOMAIN_PATH
-					+ "search?searchType=group&searchInput="));
+		
+		if(request.getParameter("fromSearch") != null) {
+			return new ModelAndView(new RedirectView("/cencolshare/search?searchType=group&searchInput="));
 		} else {
-			return new ModelAndView(new RedirectView(DOMAIN_PATH
-					+ "group/view/" + id));
+			return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
 		}
 
 	}

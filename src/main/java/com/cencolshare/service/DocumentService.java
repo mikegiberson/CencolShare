@@ -8,7 +8,10 @@ import com.cencolshare.model.User;
 
 public interface DocumentService {
 
-	public List<Document> findAllDocumentByUser(final User user);
+	//public List<Document> findAllDocumentByUser(final User user);
+	public List<Document> findAllDocumentByUser( int userId);
+	
+	public List<Document> findAllDocumentInGroup(long groupId);
 	
 	public Document saveDocument( Document doc);
 
