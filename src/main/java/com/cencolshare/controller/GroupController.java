@@ -145,8 +145,11 @@ public class GroupController extends BaseController {
 			}
 		}
 		
+		Boolean hasAccess = userService.isUserMemberOfGroup(getLoggedInUser(), grp);
+		
 		mav.addObject("group", grp);
 		mav.addObject("members", members);
+		mav.addObject("hasAccess", hasAccess); // if the current user has access to the group
 		mav.addObject("groupFeeds", groupFeeds);
 		// mav.addObject("joined",joinedgroups );
 		return mav;
@@ -155,7 +158,12 @@ public class GroupController extends BaseController {
 	@RequestMapping(value = "/view/{id}/upload", method = RequestMethod.GET)
 	public ModelAndView uploadDocs(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("docs/document-upload-group");
+		
+		final Group thisGroup = groupService.getGroupById(id);
+		Boolean hasAccess = userService.isUserMemberOfGroup(getLoggedInUser(), thisGroup);
+		
 		mav.addObject("groupId", id);
+		mav.addObject("hasAccess", hasAccess);
 		return setSelectedMenu(mav);
 	}
 
@@ -164,8 +172,14 @@ public class GroupController extends BaseController {
 	public ModelAndView listDocs(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("docs/document-list-group");
 		List<Document> documents = documentService.findAllDocumentInGroup(id);
+		
+		final Group thisGroup = groupService.getGroupById(id);
+		
+		Boolean hasAccess = userService.isUserMemberOfGroup(getLoggedInUser(), thisGroup);
+		
 		mav.addObject("groupId", id);
 		mav.addObject("documents", documents);
+		mav.addObject("hasAccess", hasAccess);
 		return  setSelectedMenu(mav);
 	}
 

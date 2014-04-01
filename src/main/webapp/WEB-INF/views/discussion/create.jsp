@@ -4,6 +4,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
 	<h1 class="page-header">Create New Discussion</h1>
 	<div class="row">
+		<c:if test="${hasAccess == 'true'}">
 		<div class="col-sm-8">
 			<form class="form-horizontal"
 				action="${pageContext.request.contextPath}/discussion/save"
@@ -39,6 +40,7 @@
 					</div>
 				</fieldset>
 			</form>
+			
 		</div>
 		<div class="col-sm-4">
 			<div class="panel panel-info">
@@ -52,6 +54,11 @@
 				  </div>
 				</div>
 		</div>
+		</c:if>
+		<c:if test="${hasAccess == 'false'}">
+			<div class="well">Sorry, you dont have access to create a discussion in this group. Please join the group first.</div>
+			<a onclick="window.history.back()">Go Back</a>
+		</c:if>
 	</div>
 
 </div>

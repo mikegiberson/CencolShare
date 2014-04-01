@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cencolshare.enums.Role;
 import com.cencolshare.model.Email;
+import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
 import com.cencolshare.repository.UserRepository;
 import com.cencolshare.service.UserService;
@@ -137,6 +138,22 @@ public class UserServiceImpl implements UserService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Boolean isUserMemberOfGroup(User user, Group group) {
+		
+		Boolean isMember = Boolean.FALSE;
+		final List<Group> userGroups = user.getGroups();
+		
+		for (Group thisGroup : userGroups) {
+			if(thisGroup.getGroupId() == group.getGroupId()) {
+				isMember = Boolean.TRUE;
+			}
+		}
+		
+		return isMember;
+	
 	}	
 
 }

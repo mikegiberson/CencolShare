@@ -2,6 +2,8 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
+
+	
 	<c:choose>
 		<c:when test="${requestScope.document.documentId > 0}">
 			<h1 class="page-header">Edit Document</h1>
@@ -10,7 +12,7 @@
 			<h1 class="page-header">Upload Document</h1>
 		</c:otherwise>
 	</c:choose>
-
+	<c:if test="${hasAccess == 'true' }">
 	<form class="form-horizontal" role="form" method="post"
 		action="${pageContext.request.contextPath}/group/view/${groupId}/upload/save">
 
@@ -106,6 +108,11 @@
 
 		</fieldset>
 	</form>
+	</c:if>
+	<c:if test="${hasAccess == 'false' }">
+		<div class="well">Sorry, you dont have access to upload document to this group. Please join the group first.</div>
+		<a onclick="window.history.back()">Go Back</a>
+	</c:if>
 	<script>
 		$(function() {
 			$('#fileupload').fileupload(
