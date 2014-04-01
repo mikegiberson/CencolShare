@@ -164,10 +164,12 @@ public class GroupController extends BaseController {
 		return  setSelectedMenu(mav);
 	}
 	
-	@RequestMapping(value = "/view/{id}/upload/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/view/{id}/list", method = RequestMethod.GET)
 	public ModelAndView listDocs(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("docs/document-list-group");
+		List<Document> documents = documentService.findAllDocumentInGroup(id);
 		mav.addObject("groupId", id);
+		mav.addObject("documents", documents);
 		return  setSelectedMenu(mav);
 	}
 	
@@ -196,7 +198,7 @@ public class GroupController extends BaseController {
 
 		doc = documentService.saveDocument(doc);
 		if (doc.getDocumentId() > 0) {
-			return new ModelAndView(new RedirectView("list"));
+			return new ModelAndView(new RedirectView("/cencolshare/group/view/" + id + "/list"));
 		}
 		return null;
 	}

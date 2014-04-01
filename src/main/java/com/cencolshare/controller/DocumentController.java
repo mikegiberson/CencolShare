@@ -43,8 +43,9 @@ public class DocumentController extends BaseController {
 	public ModelAndView listDocument() {
 		ModelAndView mav = new ModelAndView("docs/document-list");
 		User user = getLoggedInUser();
-		
-		List<Document> documents = documentService.findAllDocumentByUser(user);
+		int userId = user.getUserId();
+		//List<Document> documents = documentService.findAllDocumentByUser(user);
+		List<Document> documents = documentService.findAllDocumentByUser(userId);
 		mav.addObject("documents", documents);
 		return setSelectedMenu(mav);
 	}

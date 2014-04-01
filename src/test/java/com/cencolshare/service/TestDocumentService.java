@@ -46,6 +46,7 @@ public class TestDocumentService extends BaseTestCase {
 	public void testFindAllDocumentByUSer()
 	{
 		final User user = userService.insertUser(mockData.createUser());
+		int userId = user.getUserId();
 		final Upload upload =  uploadService.insertUpload(mockData.createUpload());
 		Document document = mockData.createDocument();
 		document.setUser(user);
@@ -53,7 +54,7 @@ public class TestDocumentService extends BaseTestCase {
 		final Document doc = documentService.saveDocument(document);
 		assertNotNull(doc);
 		
-		final List<Document> docs = documentService.findAllDocumentByUser(user);
+		final List<Document> docs = documentService.findAllDocumentByUser(userId);
 		
 		assertNotNull(docs);
 		assertEquals(docs.size() > 0, true);

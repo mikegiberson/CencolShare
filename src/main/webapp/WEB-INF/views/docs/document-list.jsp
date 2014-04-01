@@ -7,11 +7,11 @@
   <li><a href="upload">Upload</a></li>
 </ul>-->
 	  <h1 class="page-header">
-		My Docs <a href="favorite">
-			<span><button type="button" class="btn btn-success pull-right">My Favorite</button>
-		</a></span> &nbsp
-		<span><a href="upload">
-			<button type="button" class="btn btn-success pull-right">Upload</button>
+		My Docs 
+		<span class ="pull-right"><a href="favorite">
+			
+			<button type="button" class="btn btn-warning"><i class="fa fa-star"></i> My Favorite</button></a>
+		<a href="upload"><button type="button" class="btn btn-success "><i class="fa fa-cloud-upload"> </i> Upload</button>
 		</a></span>
 	</h1>
 <br>

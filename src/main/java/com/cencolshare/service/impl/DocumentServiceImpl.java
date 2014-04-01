@@ -24,21 +24,29 @@ public class DocumentServiceImpl implements DocumentService {
 	@Resource
 	private DocumentRepository documentRepository;
 	
-	/*@Override
+	@Override
 	@Transactional
 	public List<Document> findAllDocumentByUser(final int userId){
 	  
-	  final String query = "SELECT * FROM tbl_document WHERE user_id = userId && group_id = null";
+	  final String query = "SELECT * FROM tbl_document WHERE user_id =" +userId+" AND group_id IS NULL" ;
 	  final Query q = em.createNativeQuery(query, Document.class);
 	  return q.getResultList();
 	
-	}*/
-	@Override
+	}
+	
+	public List<Document> findAllDocumentInGroup(long groupId){
+		  
+		  final String query = "SELECT * FROM tbl_document WHERE group_id = " + groupId ;
+		  final Query q = em.createNativeQuery(query, Document.class);
+		  return q.getResultList();
+		
+		}
+	/*@Override
 	@Transactional
 	public List<Document> findAllDocumentByUser(final User user){
 		return (List<Document>) documentRepository.findByUser(user);
 	
-	}
+	}*/
 	
 	public Document saveDocument (Document doc){
 		doc = documentRepository.save(doc);
