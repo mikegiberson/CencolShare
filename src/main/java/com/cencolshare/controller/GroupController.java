@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,9 @@ public class GroupController extends BaseController {
 	
 	@Autowired
 	DiscussionService discussionService;
+	
+	@Value("${domainPath}")
+	private String DOMAIN_PATH;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listGroup() {
@@ -193,7 +197,7 @@ public class GroupController extends BaseController {
 
 		doc = documentService.saveDocument(doc);
 		if (doc.getDocumentId() > 0) {
-			return new ModelAndView(new RedirectView("list"));
+			return new ModelAndView(new RedirectView(DOMAIN_PATH + "group/view/" + id));
 		}
 		return null;
 	}
@@ -205,9 +209,9 @@ public class GroupController extends BaseController {
 		int loggedUserId = loggedUser.getUserId();
 		groupService.removeUserFromGroup(loggedUserId, id);
 		if(request.getParameter("fromSearch") != null) {
-			return new ModelAndView(new RedirectView("/cencolshare/search?searchType=group&searchInput="));
+			return new ModelAndView(new RedirectView(DOMAIN_PATH + "search?searchType=group&searchInput="));
 		} else {
-			return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
+			return new ModelAndView(new RedirectView(DOMAIN_PATH + "group/view/"+id));
 		}
 	}
 	
@@ -219,9 +223,9 @@ public class GroupController extends BaseController {
 		groupService.addUserToGroup(loggedUserId, id);
 		
 		if(request.getParameter("fromSearch") != null) {
-			return new ModelAndView(new RedirectView("/cencolshare/search?searchType=group&searchInput="));
+			return new ModelAndView(new RedirectView(DOMAIN_PATH + "search?searchType=group&searchInput="));
 		} else {
-			return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
+			return new ModelAndView(new RedirectView(DOMAIN_PATH + "group/view/"+id));
 		}
 		
 	}
