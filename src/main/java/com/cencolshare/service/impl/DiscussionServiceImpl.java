@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cencolshare.model.Comment;
 import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Group;
+import com.cencolshare.repository.CommentRepository;
 import com.cencolshare.repository.DiscussionRepository;
 import com.cencolshare.service.DiscussionService;
 
@@ -24,6 +26,9 @@ public class DiscussionServiceImpl implements DiscussionService {
 
 	@Autowired
 	DiscussionRepository discussionRepository;
+	
+	@Autowired
+	CommentRepository commentRepository;
 
 	@PersistenceContext
 	EntityManager em;
@@ -72,5 +77,13 @@ public class DiscussionServiceImpl implements DiscussionService {
 	public List<Discussion> getDiscussionsByGroup(Group group) {
 		// TODO Auto-generated method stub
 		return discussionRepository.findByGroup(group);
+	}
+
+	@Override
+	public Discussion deleteDiscussionById(Discussion discussion) {
+		
+		discussionRepository.delete(discussion);
+		
+		return discussion;
 	}
 }

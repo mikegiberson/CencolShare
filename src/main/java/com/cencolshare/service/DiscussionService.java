@@ -18,4 +18,6 @@ public interface DiscussionService {
 	public List<Discussion> searchDiscussionByNameDescription(String search);
 	
 	boolean deleteCommentById(int commentId);
+	
+	Discussion deleteDiscussionById(Discussion discussion);
 }

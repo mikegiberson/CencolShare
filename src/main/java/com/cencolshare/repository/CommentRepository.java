@@ -6,5 +6,4 @@ import com.cencolshare.model.Comment;
 
 public interface CommentRepository extends CrudRepository<Comment, Integer> {
 
-	
 }

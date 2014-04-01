@@ -28,5 +28,7 @@ public class GroupFeed {
 	private Document document;
 	
 	private Date dateCreated;
+	
+	private Boolean deleteAccess;
 
 }

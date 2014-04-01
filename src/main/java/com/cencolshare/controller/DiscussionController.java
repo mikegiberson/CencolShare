@@ -25,6 +25,8 @@ import com.cencolshare.enums.Role;
 import com.cencolshare.model.Comment;
 import com.cencolshare.model.Discussion;
 import com.cencolshare.model.DiscussionComments;
+import com.cencolshare.model.Group;
+import com.cencolshare.model.User;
 import com.cencolshare.service.CommentService;
 import com.cencolshare.service.DiscussionService;
 import com.cencolshare.service.GroupService;
@@ -50,8 +52,8 @@ public class DiscussionController extends BaseController {
 	@Autowired
 	HttpServletRequest request;
 	
-	  @Value("${domainPath}")
-	  private String DOMAIN_PATH;
+	@Value("${domainPath}")
+	private String DOMAIN_PATH;
 	
 	@RequestMapping(value="/view/{id}", method = RequestMethod.GET)
 	public ModelAndView viewDiscussion(@PathVariable int id){
@@ -145,12 +147,34 @@ public class DiscussionController extends BaseController {
 		if(!(getLoggedInUser().getRole().equals(Role.ADMIN) || (getLoggedInUser().getRole().equals(Role.MANAGER))) && comment.getUser().getUserId()!=getLoggedInUser().getUserId()){
 			ModelAndView mav = new ModelAndView("discussion/view");
 			mav.addObject("error", "You cannot delete this comment");
-			return new ModelAndView(new RedirectView("/cencolshare/discussion/view/" + discussionId));
+			return new ModelAndView(new RedirectView(DOMAIN_PATH + "discussion/view/" + discussionId));
 		}
 		
 		discussionService.deleteCommentById(id);	
 		log.debug("getting discussion id from comment: {}", discussionId);
-		return new ModelAndView(new RedirectView("/cencolshare/discussion/view/" + discussionId));
+		return new ModelAndView(new RedirectView(DOMAIN_PATH + "discussion/view/" + discussionId));
 	}
-
+	
+	@RequestMapping(value="/delete/{discussionId}", method=RequestMethod.GET)
+	public ModelAndView deleteDiscussion(@PathVariable int discussionId) {
+		
+		final User loggedInUser = getLoggedInUser();
+		final Discussion discussionToDelete = discussionService.getDiscussionById(discussionId);
+		Group currentGroup = discussionToDelete.getGroup();
+		Long currentGroupId = discussionToDelete.getGroup().getGroupId();
+		
+		//check if the logged in user is the owner of the discussion
+		// or loggedin user is the admin of the group
+		if(loggedInUser.getUserId() == discussionToDelete.getUser().getUserId() 
+				|| groupService.isAdminOfGroup(currentGroup, loggedInUser)) {
+			// user is authorized to delete the discussion
+			discussionService.deleteDiscussionById(discussionToDelete);
+			System.out.println("Discussion deleted");
+		} else {
+			// user has no access to delete the discussion
+			System.out.println("Discussion cannot be deleted");
+		}
+		
+		return new ModelAndView(new RedirectView(DOMAIN_PATH + "group/view/" + currentGroupId));
+	}
 }

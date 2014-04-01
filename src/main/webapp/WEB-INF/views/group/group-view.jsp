@@ -74,6 +74,14 @@
 								<h4 class="media-heading">
 									<strong><c:out value="${feed.feedTitle}" /></strong>
 								</h4>
+								<span class="pull-right">
+									<c:if test="${feed.deleteAccess == 'true' && feed.feedType == 'DISCUSSION'}">
+										<a href="${pageContext.request.contextPath}/discussion/delete/${feed.feedId}"">delete</a>
+									</c:if>
+									<c:if test="${feed.deleteAccess == 'true' && feed.feedType == 'DOCUMENT'}">
+										<a href="#" title="delete document not implemented">delete</a>
+									</c:if>
+								</span>
 								<span class="text-muted"><c:out
 										value="${feed.dateCreated}" /></span>
 								<p>

@@ -40,7 +40,7 @@ public class Discussion {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
-	@OneToOne(fetch = FetchType.LAZY, targetEntity=Group.class)
+	@OneToOne(fetch = FetchType.EAGER, targetEntity=Group.class)
 	@JoinColumn(name = "group_id", nullable = false)
 	private Group group;
 	

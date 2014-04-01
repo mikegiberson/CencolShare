@@ -116,7 +116,7 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public List<GroupFeed> getFeedsByGroup(Group group) {
+	public List<GroupFeed> getFeedsByGroup(Group group, User loggedInUser) {
 		
 		List<GroupFeed> groupFeeds = new ArrayList<GroupFeed>();
 		
@@ -130,6 +130,12 @@ public class GroupServiceImpl implements GroupService {
 			groupFeedItem.setDateCreated(discussion.getDiscussionDate());
 			groupFeedItem.setFeedType(FeedType.DISCUSSION);
 			groupFeedItem.setComments(discussion.getComments());
+			
+			if(loggedInUser.getUserId() == discussion.getUser().getUserId() || isAdminOfGroup(group, loggedInUser)) {
+				groupFeedItem.setDeleteAccess(Boolean.TRUE);
+			} else {
+				groupFeedItem.setDeleteAccess(Boolean.FALSE);
+			}
 			
 			groupFeeds.add(groupFeedItem);
 		}
@@ -145,12 +151,27 @@ public class GroupServiceImpl implements GroupService {
 			groupFeedItem.setFeedType(FeedType.DOCUMENT);
 			groupFeedItem.setComments(null);
 			
+			if(loggedInUser.getUserId() == document.getUser().getUserId() || isAdminOfGroup(group, loggedInUser)) {
+				groupFeedItem.setDeleteAccess(Boolean.TRUE);
+			} else {
+				groupFeedItem.setDeleteAccess(Boolean.FALSE);
+			}
+			
 			groupFeeds.add(groupFeedItem);
 		}
 		
 		
 		return groupFeeds;
 	}
-	
+
+	@Override
+	public Boolean isAdminOfGroup(Group group, User user) {
+		
+		if(group.getUser().getUserId() == user.getUserId()) {
+			return Boolean.TRUE;
+		} else {
+			return Boolean.FALSE;
+		}
+	}
 	
 }
