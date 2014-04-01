@@ -21,5 +21,5 @@ public interface DocumentService {
 	
 	public Document getDocumentById(long Id);
 	
-	public List<Document> getDocumentByGroup(Group group);
+	//public List<Document> getDocumentByGroup(Group group);
 }

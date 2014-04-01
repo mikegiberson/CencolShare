@@ -43,6 +43,7 @@
 						<p class="text-muted">Size: ${document.upload.fileSize} 
 							Format: ${document.upload.fileType }</p>
 						<p>
+						<p class="text-muted">Uploaded by: ${document.user.firstName} ${document.user.lastName}</p>
 							<a href="${pageContext.request.contextPath}/docs/view/${document.documentId}">Preview</a> | 
 							<a href="${document.fileUrl}">Download</a> | 
 							<!--<a href="${pageContext.request.contextPath}/docs/delete/${document.documentId}">Delete</a> |

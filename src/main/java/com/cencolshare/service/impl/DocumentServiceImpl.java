@@ -19,8 +19,10 @@ import com.cencolshare.service.DocumentService;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
+	
 	@PersistenceContext
 	 EntityManager em;
+	
 	@Resource
 	private DocumentRepository documentRepository;
 	
@@ -41,12 +43,6 @@ public class DocumentServiceImpl implements DocumentService {
 		  return q.getResultList();
 		
 		}
-	/*@Override
-	@Transactional
-	public List<Document> findAllDocumentByUser(final User user){
-		return (List<Document>) documentRepository.findByUser(user);
-	
-	}*/
 	
 	public Document saveDocument (Document doc){
 		doc = documentRepository.save(doc);
@@ -73,6 +69,7 @@ public class DocumentServiceImpl implements DocumentService {
 	public Document getDocumentById(long documentId) {
 		
 		return documentRepository.findOne(documentId);
+		
 	}
 
 }
