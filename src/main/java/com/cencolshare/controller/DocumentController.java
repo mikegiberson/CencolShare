@@ -16,13 +16,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.cencolshare.model.Comment;
 import com.cencolshare.model.Document;
+import com.cencolshare.model.DocumentComments;
 import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
+import com.cencolshare.service.CommentService;
 import com.cencolshare.service.DocumentService;
 import com.cencolshare.service.UploadService;
 
@@ -42,6 +45,9 @@ public class DocumentController extends BaseController {
 
 	@Autowired
 	UploadService uploadService;
+	
+	@Autowired
+	CommentService commentService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listDocument() {
@@ -64,6 +70,9 @@ public class DocumentController extends BaseController {
 
 		mav.addObject("docPath", filePath);
 		mav.addObject("document", document);
+		
+		List<DocumentComments> comments = commentService.getCommentsByDocumentId(document.getDocumentId());
+		mav.addObject("comments", comments);
 
 		return mav;
 	}
@@ -136,6 +145,7 @@ public class DocumentController extends BaseController {
 	}
 	
 	@RequestMapping(value="/comment", method=RequestMethod.POST)
+	@ResponseBody
 	public Map<String, String> saveComment(){
 		Map<String, String> result = new HashMap<String, String>();
 		int documentId = Integer.parseInt(request.getParameter("documentId"));
@@ -144,7 +154,7 @@ public class DocumentController extends BaseController {
 		Document document = documentService.getDocumentById(documentId);
 		if(document == null){
 			result.put("result", "fail");
-			result.put("message", "Discussion not found");
+			result.put("message", "Document not found");
 			return result;
 		}
 		
