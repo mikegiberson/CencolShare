@@ -42,25 +42,26 @@ public class DiscussionController extends BaseController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	CommentService commentService;
-	
+
 	@Autowired
 	GroupService groupService;
 
 	@Autowired
 	HttpServletRequest request;
-	
+
 	@Value("${domainPath}")
 	private String DOMAIN_PATH;
-	
-	@RequestMapping(value="/view/{id}", method = RequestMethod.GET)
-	public ModelAndView viewDiscussion(@PathVariable int id){
+
+	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+	public ModelAndView viewDiscussion(@PathVariable int id) {
 		ModelAndView mav = new ModelAndView("discussion/view");
 		final Discussion discussion = discussionService.getDiscussionById(id);
 		mav.addObject("discussion", discussion);
-		List<DiscussionComments> comments = commentService.getCommentsByDiscussionId(id);
+		List<DiscussionComments> comments = commentService
+				.getCommentsByDiscussionId(id);
 		mav.addObject("comments", comments);
 		return setSelectedMenu(mav);
 	}
@@ -77,12 +78,13 @@ public class DiscussionController extends BaseController {
 	public ModelAndView createNewDiscussion(@PathVariable Long groupId) {
 
 		log.info("Indide create discsussion");
-		
+
 		// TODO check if getLoggedIn user has access to the group
+
 		final User loggedInUser = getLoggedInUser();
 		final Group thisGroup = groupService.getGroupById(groupId);
 		Boolean hasAccess = userService.isUserMemberOfGroup(loggedInUser, thisGroup);
-		
+
 		ModelAndView mav = new ModelAndView("discussion/create");
 		mav.addObject("groupId", groupId);
 		mav.addObject("hasAccess", hasAccess);
@@ -96,11 +98,13 @@ public class DiscussionController extends BaseController {
 		String groupId = request.getParameter("group_id");
 
 		Discussion discussion = new Discussion();
-		discussion.setDiscussionTopic(request.getParameter("discussionHeading"));
-		discussion.setDiscussionContent(request.getParameter("discussionContents"));
+		discussion
+				.setDiscussionTopic(request.getParameter("discussionHeading"));
+		discussion.setDiscussionContent(request
+				.getParameter("discussionContents"));
 		discussion.setUser(getLoggedInUser());
 		discussion.setGroup(groupService.getGroupById(Long.parseLong(groupId)));
-		
+
 		final Discussion createdDiscussion = discussionService
 				.saveDiscussion(discussion);
 		if (createdDiscussion != null) {
@@ -112,23 +116,25 @@ public class DiscussionController extends BaseController {
 		redirectAttrs.addFlashAttribute("message", returnMessage);
 		return new RedirectView(DOMAIN_PATH + "/group/view/" + groupId, true);
 	}
-	
-	@RequestMapping(value="/comment", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/comment", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> saveComment(){
+	public Map<String, String> saveComment() {
 		Map<String, String> result = new HashMap<String, String>();
-		int discussionId = Integer.parseInt(request.getParameter("discussionId"));
+		int discussionId = Integer.parseInt(request
+				.getParameter("discussionId"));
 		String comment = request.getParameter("comment");
-		
-		Discussion discussion = discussionService.getDiscussionById(discussionId);
-		if(discussion == null){
+
+		Discussion discussion = discussionService
+				.getDiscussionById(discussionId);
+		if (discussion == null) {
 			result.put("result", "fail");
 			result.put("message", "Discussion not found");
 			return result;
 		}
-		
+
 		List<Comment> comments = discussion.getComments();
-		if(comments==null){
+		if (comments == null) {
 			comments = new ArrayList<Comment>();
 		}
 		final Comment cmt = new Comment();
@@ -136,40 +142,47 @@ public class DiscussionController extends BaseController {
 		cmt.setCommentDate(new java.sql.Date(new Date().getTime()));
 		cmt.setUser(getLoggedInUser());
 		comments.add(cmt);
-		
+
 		discussion.setComments(comments);
 		discussionService.saveDiscussion(discussion);
 		result.put("result", "success");
 		return result;
 	}
-	
-	@RequestMapping(value="/deleteComment/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/deleteComment/{id}", method = RequestMethod.GET)
 	public ModelAndView deleteComment(@PathVariable int id) {
 		final Comment comment = commentService.getCommentById(id);
 		int discussionId = commentService.getDiscussionIdByCommentId(id);
-		
-		if(!(getLoggedInUser().getRole().equals(Role.ADMIN) || (getLoggedInUser().getRole().equals(Role.MANAGER))) && comment.getUser().getUserId()!=getLoggedInUser().getUserId()){
+
+		if (!(getLoggedInUser().getRole().equals(Role.ADMIN) || (getLoggedInUser()
+				.getRole().equals(Role.MANAGER)))
+				&& comment.getUser().getUserId() != getLoggedInUser()
+						.getUserId()) {
 			ModelAndView mav = new ModelAndView("discussion/view");
 			mav.addObject("error", "You cannot delete this comment");
-			return new ModelAndView(new RedirectView(DOMAIN_PATH + "discussion/view/" + discussionId));
+			return new ModelAndView(new RedirectView(DOMAIN_PATH
+					+ "discussion/view/" + discussionId));
 		}
-		
-		discussionService.deleteCommentById(id);	
+
+		discussionService.deleteCommentById(id);
 		log.debug("getting discussion id from comment: {}", discussionId);
-		return new ModelAndView(new RedirectView(DOMAIN_PATH + "discussion/view/" + discussionId));
+		return new ModelAndView(new RedirectView(DOMAIN_PATH
+				+ "discussion/view/" + discussionId));
 	}
-	
-	@RequestMapping(value="/delete/{discussionId}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/delete/{discussionId}", method = RequestMethod.GET)
 	public ModelAndView deleteDiscussion(@PathVariable int discussionId) {
-		
+
 		final User loggedInUser = getLoggedInUser();
-		final Discussion discussionToDelete = discussionService.getDiscussionById(discussionId);
+		final Discussion discussionToDelete = discussionService
+				.getDiscussionById(discussionId);
 		Group currentGroup = discussionToDelete.getGroup();
 		Long currentGroupId = discussionToDelete.getGroup().getGroupId();
-		
-		//check if the logged in user is the owner of the discussion
+
+		// check if the logged in user is the owner of the discussion
 		// or loggedin user is the admin of the group
-		if(loggedInUser.getUserId() == discussionToDelete.getUser().getUserId() 
+		if (loggedInUser.getUserId() == discussionToDelete.getUser()
+				.getUserId()
 				|| groupService.isAdminOfGroup(currentGroup, loggedInUser)) {
 			// user is authorized to delete the discussion
 			discussionService.deleteDiscussionById(discussionToDelete);
@@ -178,7 +191,8 @@ public class DiscussionController extends BaseController {
 			// user has no access to delete the discussion
 			System.out.println("Discussion cannot be deleted");
 		}
-		
-		return new ModelAndView(new RedirectView(DOMAIN_PATH + "group/view/" + currentGroupId));
+
+		return new ModelAndView(new RedirectView(DOMAIN_PATH + "group/view/"
+				+ currentGroupId));
 	}
 }

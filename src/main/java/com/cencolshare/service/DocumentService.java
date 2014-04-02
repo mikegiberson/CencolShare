@@ -13,7 +13,7 @@ public interface DocumentService {
 	
 	public List<Document> findAllDocumentInGroup(long groupId);
 	
-	public Document saveDocument( Document doc);
+	public Document saveDocument(Document doc);
 
 	public List<Document> searchDocumentByNameDescription(String search);
 

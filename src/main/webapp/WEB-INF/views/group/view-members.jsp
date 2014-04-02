@@ -39,7 +39,12 @@
 		<hr class="colorgraph" />
 		<h2 class="text-warning">Member List</h2>	
 		<hr/>
+		<c:if test="${empty requestScope.allMembers}">
+   <div class="alert alert-info"><b>Sorry! No user has joined this group. </b></div>
+</c:if>
+		
 </div>
+<c:if test="${!empty requestScope.allMembers}">
 <c:forEach items="${requestScope.allMembers}" var="allMembers">
 <div class="col-sm-8 col-sm-offset-4 col-md-7 col-md-offset-3 main thumbnail">
     <section class="col-xs-12 col-sm-6 col-md-12">
@@ -73,6 +78,7 @@
 	</section>
 </div>
 </c:forEach>
+</c:if>
 
 
 <%@ include file="..\common\footer.jsp"%>

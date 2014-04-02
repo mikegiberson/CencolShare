@@ -16,6 +16,11 @@
 	</h1>
 
 	<hr class="colorgraph" />
+	<c:if test="${empty requestScope.groups}">
+   
+   <div class="thumbnail text-info alert alert-info"><b>Sorry! No matching group found. </b></div>
+</c:if>
+<c:if test="${!empty requestScope.groups}">
 	<c:forEach items="${requestScope.groups}" var="grp">
 		<!--checkUserInGroup(loggedInUser.groups, grp)
 		
@@ -59,6 +64,7 @@
 		</div>
 		<hr>
 	</c:forEach>
+	</c:if>
 	<!-- </table> -->
 </div>
 

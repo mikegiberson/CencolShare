@@ -26,7 +26,7 @@
 							<div class="col-xs-10 col-md-11">
 								<div>
 									<div class="mic-info">
-										By: <a href="#">${c.firstName } ${c.lastName}</a> on ${c.commentDate}
+										By: ${c.firstName } ${c.lastName} on ${c.commentDate}
 									</div>
 								</div>
 								<div class="comment-text">${c.comment}</div>

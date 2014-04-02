@@ -8,6 +8,11 @@
 	</h1>
 
 	<hr class="colorgraph" />
+	<c:if test="${empty requestScope.groups}">
+   
+   <div class="thumbnail text-info alert alert-info"><b>Sorry! User has not created any group. </b></div>
+</c:if>
+<c:if test="${!empty requestScope.groups}">
 	<c:forEach items="${requestScope.groups}" var="grp">
 		<div class="row ">
 			
@@ -30,6 +35,7 @@
 		</div>
 		<hr>
 	</c:forEach>
+	</c:if>
 	<!-- </table> -->
 </div>
 

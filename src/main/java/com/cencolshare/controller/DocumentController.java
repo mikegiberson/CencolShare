@@ -1,7 +1,10 @@
 package com.cencolshare.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,12 +16,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.cencolshare.model.Comment;
 import com.cencolshare.model.Document;
+import com.cencolshare.model.DocumentComments;
 import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
+import com.cencolshare.service.CommentService;
 import com.cencolshare.service.DocumentService;
 import com.cencolshare.service.UploadService;
 
@@ -38,6 +45,9 @@ public class DocumentController extends BaseController {
 
 	@Autowired
 	UploadService uploadService;
+	
+	@Autowired
+	CommentService commentService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listDocument() {
@@ -50,14 +60,6 @@ public class DocumentController extends BaseController {
 		return setSelectedMenu(mav);
 	}
 
-	// @RequestMapping(value = "/preview", method = RequestMethod.GET)
-	// public ModelAndView documentPreviewTest() {
-	// ModelAndView mav = new ModelAndView("document/document-preview");
-	// mav.addObject("title", "hello");
-	// mav.addObject("docPath", "sample.doc");
-	// return setSelectedMenu(mav);
-	// }
-
 	@RequestMapping(value = "/view/{docId}", method = RequestMethod.GET)
 	public ModelAndView documentPreview(@PathVariable long docId) {
 
@@ -68,6 +70,9 @@ public class DocumentController extends BaseController {
 
 		mav.addObject("docPath", filePath);
 		mav.addObject("document", document);
+		
+		List<DocumentComments> comments = commentService.getCommentsByDocumentId(document.getDocumentId());
+		mav.addObject("comments", comments);
 
 		return mav;
 	}
@@ -139,6 +144,35 @@ public class DocumentController extends BaseController {
 		return setSelectedMenu(mav);
 	}
 	
-	
+	@RequestMapping(value="/comment", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> saveComment(){
+		Map<String, String> result = new HashMap<String, String>();
+		int documentId = Integer.parseInt(request.getParameter("documentId"));
+		String comment = request.getParameter("comment");
+		
+		Document document = documentService.getDocumentById(documentId);
+		if(document == null){
+			result.put("result", "fail");
+			result.put("message", "Document not found");
+			return result;
+		}
+		
+		List<Comment> comments = document.getComments();
+		if (comments == null) {
+			comments = new ArrayList<Comment>();
+		}
+		final Comment cmt = new Comment();
+		cmt.setComment(comment);
+		cmt.setCommentDate(new java.sql.Date(new Date().getTime()));
+		cmt.setUser(getLoggedInUser());
+		comments.add(cmt);
+
+		document.setComments(comments);
+		documentService.saveDocument(document);
+		result.put("result", "success");
+
+		return result;
+	}	
 
 }

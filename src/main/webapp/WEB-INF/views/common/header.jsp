@@ -77,12 +77,19 @@
 								</button>
 							</form>
 						</li>
-						<li><a href="/cencolshare/dashboard">Dashboard</a></li>
-						<li><a href="/cencolshare/profile">My Profile</a></li>
+						<li>
+						<sec:authorize access="isAnonymous()">
+  		    	<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+  			</sec:authorize>
+
+              <a href="/cencolshare/profile">
+            	<img width="22px" height="22px" alt="" src="${loggedInUser.photo }">
+            	${loggedInUser.firstName}&nbsp;${loggedInUser.lastName}
+            </a>
+						</li>
 						<li><a href="#">Notifications</a></li>
 						<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-					</sec:authorize>
-					</li>
+					</sec:authorize>	
 				</ul>
 			</div>
 		</div>

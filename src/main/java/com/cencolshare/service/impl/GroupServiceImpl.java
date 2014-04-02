@@ -174,4 +174,13 @@ public class GroupServiceImpl implements GroupService {
 		}
 	}
 	
+	@Override
+	public List<Group> getjoinedGroups(int userId) {
+		final String query = "SELECT * FROM tbl_group WHERE group_id IN (SELECT group_id FROM user_to_group WHERE user_id ="+userId+")";
+		final Query q=em.createNativeQuery(query,Group.class);
+		return q.getResultList();
+	}
+	
 }
+
+	
