@@ -80,7 +80,7 @@ public class GroupController extends BaseController {
 		grp.setGroupDescription(request.getParameter("groupDescription"));
 		if (request.getParameter("photo") == null
 				|| request.getParameter("photo").equals("")) {
-			grp.setGroupImage("${baseURL}/resources/images/groupDefault.png");
+			grp.setGroupImage(DOMAIN_PATH +"/resources/images/groupDefault.png");
 		} else {
 			grp.setGroupImage(request.getParameter("photo"));
 		}
@@ -145,8 +145,11 @@ public class GroupController extends BaseController {
 			}
 		}
 		
+		Boolean hasAccess = userService.isUserMemberOfGroup(getLoggedInUser(), grp);
+		
 		mav.addObject("group", grp);
 		mav.addObject("members", members);
+		mav.addObject("hasAccess", hasAccess); // if the current user has access to the group
 		mav.addObject("groupFeeds", groupFeeds);
 		// mav.addObject("joined",joinedgroups );
 		return mav;
@@ -155,7 +158,12 @@ public class GroupController extends BaseController {
 	@RequestMapping(value = "/view/{id}/upload", method = RequestMethod.GET)
 	public ModelAndView uploadDocs(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("docs/document-upload-group");
+		
+		final Group thisGroup = groupService.getGroupById(id);
+		Boolean hasAccess = userService.isUserMemberOfGroup(getLoggedInUser(), thisGroup);
+		
 		mav.addObject("groupId", id);
+		mav.addObject("hasAccess", hasAccess);
 		return setSelectedMenu(mav);
 	}
 
@@ -164,8 +172,14 @@ public class GroupController extends BaseController {
 	public ModelAndView listDocs(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("docs/document-list-group");
 		List<Document> documents = documentService.findAllDocumentInGroup(id);
+		
+		final Group thisGroup = groupService.getGroupById(id);
+		
+		Boolean hasAccess = userService.isUserMemberOfGroup(getLoggedInUser(), thisGroup);
+		
 		mav.addObject("groupId", id);
 		mav.addObject("documents", documents);
+		mav.addObject("hasAccess", hasAccess);
 		return  setSelectedMenu(mav);
 	}
 
@@ -208,7 +222,9 @@ public class GroupController extends BaseController {
 		groupService.removeUserFromGroup(loggedUserId, id);
 		if(request.getParameter("fromSearch") != null) {
 			return new ModelAndView(new RedirectView("/cencolshare/search?searchType=group&searchInput="));
-		} else {
+		} else if(request.getParameter("fromJoined").equals("true"))
+			return new ModelAndView(new RedirectView("/cencolshare/group/joined"));
+		else {
 			return new ModelAndView(new RedirectView("/cencolshare/group/view/"+id));
 		}
 	}
@@ -267,5 +283,21 @@ public class GroupController extends BaseController {
 
 		return setSelectedMenu(mav);
 	}
+	
+	@RequestMapping(value = "/joined", method = RequestMethod.GET)
+	public ModelAndView listJoinedGroup() {
+		User user = getLoggedInUser();
+		List<Group> groups = groupService.getjoinedGroups(user.getUserId());
+		ModelAndView mav = new ModelAndView("group/joined-groups");
+		for (int i = 0; i < groups.size(); i++) {
+			BigInteger members = groupService.getMemberCountbyGroupId(groups
+					.get(i).getGroupId());
+			groups.get(i).setMember(members);
+		}
+		
+		mav.addObject("joinedgroups", groups);
+		return mav;
+	}
+
 
 }

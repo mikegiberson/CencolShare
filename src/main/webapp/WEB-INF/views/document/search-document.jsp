@@ -10,6 +10,11 @@
 	</h1>
 
 	<hr class="colorgraph" />
+	<c:if test="${empty requestScope.documents}">
+   
+   <div class="thumbnail text-info alert alert-info"><b>Sorry! No matching document found. </b></div>
+</c:if>
+<c:if test="${!empty requestScope.documents}">
 	<c:forEach items="${requestScope.documents}" var="document">
 		<div class="row">
 			<div class="col-sm-2 text-center">
@@ -55,6 +60,7 @@
 		</div>
 		<hr>
 	</c:forEach>
+	</c:if>
 	<!-- </table> -->
 </div>
 

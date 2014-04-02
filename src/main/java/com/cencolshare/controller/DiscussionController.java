@@ -81,8 +81,13 @@ public class DiscussionController extends BaseController {
 
 		// TODO check if getLoggedIn user has access to the group
 
+		final User loggedInUser = getLoggedInUser();
+		final Group thisGroup = groupService.getGroupById(groupId);
+		Boolean hasAccess = userService.isUserMemberOfGroup(loggedInUser, thisGroup);
+
 		ModelAndView mav = new ModelAndView("discussion/create");
 		mav.addObject("groupId", groupId);
+		mav.addObject("hasAccess", hasAccess);
 		return setSelectedMenu(mav);
 	}
 
