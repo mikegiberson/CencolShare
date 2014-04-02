@@ -3,7 +3,8 @@ package com.cencolshare.model;
 import lombok.Data;
 
 @Data
-public class DiscussionComments {
+public class DocumentComments {
+
 	private int commentId;
 	private int userId;
 	private String commentDate;

@@ -1,5 +1,6 @@
 package com.cencolshare.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -45,6 +46,7 @@ public class DocumentServiceImpl implements DocumentService {
 		}
 	
 	public Document saveDocument (Document doc){
+		doc.setDateUploaded(new Date());
 		doc = documentRepository.save(doc);
 		return doc;
 	}

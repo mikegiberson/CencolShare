@@ -40,7 +40,7 @@
 					<c:forEach items="${comments}" var="c">
 						<div class="row">
 							<div class="col-xs-2 col-md-1">
-								<img src="http://placehold.it/80"
+								<img src="${c.photo}"
 									class="img-circle img-responsive" alt="" />
 							</div>
 							<div class="col-xs-10 col-md-11">
@@ -65,12 +65,46 @@
 					<textarea class="form-control" name="comment" id="comment"
 						placeholder="Write a comment..."></textarea>
 					<br>
-					<button class="btn btn-primary pull-right" id="addComment">Add
-						Comment</button>
+					<a class="btn btn-primary pull-right" id="addComment">Add
+						Comment</a>
+					<a class="pull-right" style="padding:9px" onclick="window.history.back()">Cancel</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<br />
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#addComment").click(addComment);
+
+
+	});
+
+	function addComment() {
+		var comment = $("#comment").val();
+		if (comment === "undefined" || comment === "") {
+			$("#error").html("Please add comment");
+			return;
+		}
+		var obj = {
+			discussionId : "${discussion.discussionId}",
+			comment : comment
+		};
+		console.log(obj);
+		$.post("${baseURL}/discussion/comment", obj,
+				onresult);
+	};
+
+	function onresult(result) {
+		console.log(result);
+		if (result.result === "fail") {
+			$("#error").html(result.message);
+		} else if (result.result === "success") {
+			window.location.reload();
+		}
+	}
+</script>
+
 <%@ include file="..\common\footer.jsp"%>
