@@ -1,6 +1,8 @@
 <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
+    		<img class="profileimg" src="${loggedInUser.photo}" width="190px" /> 
+    		<hr /> 	
           <ul class="nav nav-sidebar">
             <li class="${dashboardActive }"><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></li>
             <li class="${groupActive }"><a href="${pageContext.request.contextPath}/group/list">My Groups</a></li>

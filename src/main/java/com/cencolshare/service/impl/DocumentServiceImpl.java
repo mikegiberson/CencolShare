@@ -1,5 +1,6 @@
 package com.cencolshare.service.impl;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -76,6 +77,26 @@ public class DocumentServiceImpl implements DocumentService {
 	public List<Document> getDocumentByGroup(Group group) {
 		// TODO Auto-generated method stub
 		return documentRepository.findByGroup(group);
+	}
+
+	@Override
+	public String getUsedSpaceByUser(User user) {
+			
+		DecimalFormat df = new DecimalFormat("###.##");
+		
+		double usedSpaceinKb = documentRepository.getUsedSpaceByUser(user.getUserId());
+		System.out.println("Used " + usedSpaceinKb + " kb");
+		if(usedSpaceinKb < 1024) {
+			return df.format(usedSpaceinKb) + " KB";
+		}
+		else if (usedSpaceinKb >= 1024 && usedSpaceinKb < 1048576) {
+			return df.format(usedSpaceinKb / 1024) + " MB";
+		} else {
+			return df.format(usedSpaceinKb / 131072) + " GB";
+		}
+		
+		
+
 	}
 
 }

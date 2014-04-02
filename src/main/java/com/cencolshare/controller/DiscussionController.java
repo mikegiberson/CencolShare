@@ -68,7 +68,7 @@ public class DiscussionController extends BaseController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView discussionListPage() {
 		ModelAndView mav = new ModelAndView("discussion/list");
-		List<Discussion> discussions = discussionService.getAllDiscussions();
+		List<Discussion> discussions = discussionService.getAllDiscussions(getLoggedInUser());
 		mav.addObject("discussions", discussions);
 		return setSelectedMenu(mav);
 	}
