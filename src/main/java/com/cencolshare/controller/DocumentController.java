@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.cencolshare.enums.Role;
 import com.cencolshare.model.Comment;
 import com.cencolshare.model.Document;
 import com.cencolshare.model.DocumentComments;
@@ -175,4 +176,24 @@ public class DocumentController extends BaseController {
 		return result;
 	}	
 
+	@RequestMapping(value = "/deleteComment/{id}", method = RequestMethod.GET)
+	public ModelAndView deleteComment(@PathVariable int id) {
+		final Comment comment = commentService.getCommentById(id);
+		int documentId = commentService.getDocumentIdByCommentId(id);
+
+		if (!(getLoggedInUser().getRole().equals(Role.ADMIN) || (getLoggedInUser()
+				.getRole().equals(Role.MANAGER)))
+				&& comment.getUser().getUserId() != getLoggedInUser()
+						.getUserId()) {
+			ModelAndView mav = new ModelAndView("docs/view");
+			mav.addObject("error", "You cannot delete this comment");
+			return new ModelAndView(new RedirectView(DOMAIN_PATH
+					+ "docs/view/" + documentId));
+		}
+
+		documentService.deleteCommentById(id);
+		log.debug("getting document id from comment: {}", documentId);
+		return new ModelAndView(new RedirectView(DOMAIN_PATH
+				+ "docs/view/" + documentId));
+	}
 }

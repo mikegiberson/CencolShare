@@ -52,7 +52,7 @@
 								<div class="comment-text">${c.comment}</div>
 								<div class="action">
 									<a
-										href="${pageContext.request.contextPath}/discussion/deleteComment/${c.commentId}"
+										href="${pageContext.request.contextPath}/docs/deleteComment/${c.commentId}"
 										class="btn btn-danger pull-right"> <i
 										class="fa fa-trash-o"></i>
 									</a>

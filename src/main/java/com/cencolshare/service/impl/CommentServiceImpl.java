@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cencolshare.model.Comment;
 import com.cencolshare.model.DiscussionComments;
@@ -24,6 +25,7 @@ import com.cencolshare.service.CommentService;
 
 @Service
 @Slf4j
+@Transactional
 public class CommentServiceImpl implements CommentService {
 	
 	@Autowired
@@ -81,7 +83,7 @@ public class CommentServiceImpl implements CommentService {
 	public int getDocumentIdByCommentId(int commentId) {
 		final String query = "SELECT document_id FROM document_to_comment WHERE comment_id=" + commentId;
 		  final Query q = em.createNativeQuery(query);
-		  int res = (Integer) q.getSingleResult();
+		  int res = Integer.parseInt(q.getSingleResult().toString());
 		  return res;
 	}
 

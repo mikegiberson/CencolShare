@@ -19,6 +19,7 @@ import com.cencolshare.service.DocumentService;
 
 
 @Service
+@Transactional
 public class DocumentServiceImpl implements DocumentService {
 	
 	@PersistenceContext
@@ -78,6 +79,18 @@ public class DocumentServiceImpl implements DocumentService {
 	public List<Document> getDocumentByGroup(Group group) {
 		// TODO Auto-generated method stub
 		return documentRepository.findByGroup(group);
+	}
+
+	@Override
+	public boolean deleteCommentById(int commentId) {
+		final String query = "DELETE FROM document_to_comment WHERE comment_id = " + commentId;
+		final Query q = em.createNativeQuery(query);
+		q.executeUpdate();
+		
+		final String query2 = "DELETE FROM tbl_comment WHERE comment_id = " + commentId;
+		final Query q2 = em.createNativeQuery(query2);		
+		q2.executeUpdate();
+		return true;
 	}
 
 }
