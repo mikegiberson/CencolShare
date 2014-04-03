@@ -22,6 +22,8 @@ public interface DocumentService {
 	public Document getDocumentById(long Id);
 	
 	public List<Document> getDocumentByGroup(Group group);
-	
+
 	boolean deleteCommentById(int commentId);
+
+	public String getUsedSpaceByUser(User user);
 }

@@ -4,10 +4,11 @@ import java.util.List;
 
 import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Group;
+import com.cencolshare.model.User;
 
 public interface DiscussionService {
 
-	public List<Discussion> getAllDiscussions();
+	public List<Discussion> getAllDiscussions(User user);
 	
 	public List<Discussion> getDiscussionsByGroup(Group group);
 	

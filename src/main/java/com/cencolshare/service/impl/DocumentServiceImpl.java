@@ -1,5 +1,6 @@
 package com.cencolshare.service.impl;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -91,6 +92,22 @@ public class DocumentServiceImpl implements DocumentService {
 		final Query q2 = em.createNativeQuery(query2);		
 		q2.executeUpdate();
 		return true;
+	}
+	public String getUsedSpaceByUser(User user) {
+			
+		DecimalFormat df = new DecimalFormat("###.##");
+		
+		double usedSpaceinKb = documentRepository.getUsedSpaceByUser(user.getUserId());
+		System.out.println("Used " + usedSpaceinKb + " kb");
+		if(usedSpaceinKb < 1024) {
+			return df.format(usedSpaceinKb) + " KB";
+		}
+		else if (usedSpaceinKb >= 1024 && usedSpaceinKb < 1048576) {
+			return df.format(usedSpaceinKb / 1024) + " MB";
+		} else {
+			return df.format(usedSpaceinKb / 131072) + " GB";
+		}
+		
 	}
 
 }
