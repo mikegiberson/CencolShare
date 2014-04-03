@@ -28,5 +28,10 @@ public interface GroupService {
 	
 	public List<User> getAllMembersOfGroup(long groupId);
 	
-	public List<GroupFeed> getFeedsByGroup(Group group);
+	public List<GroupFeed> getFeedsByGroup(Group group, User user);
+	
+	public Boolean isAdminOfGroup(Group group, User user);
+	
+	public List<Group> getjoinedGroups(int userId);
+	
 }

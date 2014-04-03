@@ -42,17 +42,18 @@
 					<div class="btn-group">
 						<a
 							href="${pageContext.request.contextPath}/group/members/${group.groupId}"
-							class="btn btn-info"> <i class="fa fa-list-ul"></i> View
-							Members</i>
-						</a> <a
+							class="btn btn-info"> <i class="fa fa-list-ul"></i> Members</i>
+						</a> 
+						<c:if test="${hasAccess == 'true' }" >
+						<a
 							href="${pageContext.request.contextPath}/discussion/create/${group.groupId}"
-							class="btn btn-success"> <i class="fa fa-plus-square">
-								Discuss</i>
-						</a> <a
+							class="btn btn-success"> <i class="fa fa-plus-square"> Discuss</i>
+						</a> 
+						<a
 							href="${pageContext.request.contextPath}/group/view/${group.groupId}/list"
-							class="btn btn-primary"><i class="fa fa-book"></i> Group
-								Documents</i>
+							class="btn btn-primary"><i class="fa fa-book"></i> Documents</i>
 						</a>
+						</c:if>
 					</div>
 		</div>
 		</sec:authorize>
@@ -74,6 +75,14 @@
 								<h4 class="media-heading">
 									<strong><c:out value="${feed.feedTitle}" /></strong>
 								</h4>
+								<span class="pull-right">
+									<c:if test="${feed.deleteAccess == 'true' && feed.feedType == 'DISCUSSION'}">
+										<a href="${pageContext.request.contextPath}/discussion/delete/${feed.feedId}"">delete</a>
+									</c:if>
+									<c:if test="${feed.deleteAccess == 'true' && feed.feedType == 'DOCUMENT'}">
+										<a href="#" title="delete document not implemented">delete</a>
+									</c:if>
+								</span>
 								<span class="text-muted"><c:out
 										value="${feed.dateCreated}" /></span>
 								<p>

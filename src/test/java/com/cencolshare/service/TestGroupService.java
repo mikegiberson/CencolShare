@@ -265,4 +265,23 @@ public class TestGroupService extends BaseTestCase {
 		assertEquals(joinedMembers.get(1).getUserId(),user3.getUserId());
 		assertEquals(joinedMembers.get(2).getUserId(),user4.getUserId());
 	}
+	
+	@Test
+	public void testgetjoinedGroups()
+	{
+		final User user1 = userService.insertUser(mockData.createUser());
+		final User user2 = userService.insertUser(mockData.createUser());
+		Group grp = mockData.createGroup();
+		Group grp2 =mockData.createGroup();
+		grp.setUser(user1);	
+		grp2.setUser(user1);
+		final Group group = groupService.saveGroup(grp);
+		assertNotNull("Create Group failed", group);
+		
+		final Group group1 = groupService.saveGroup(grp2);
+		assertNotNull("Create Group failed", group1);
+		
+		
+		
+	}
 }

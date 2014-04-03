@@ -15,6 +15,11 @@
 	</h1>
 
 	<hr class="colorgraph" />
+	<c:if test="${empty requestScope.discussions}">
+   
+   <div class="thumbnail text-info alert alert-info"><b>Sorry! No matching discussion found. </b></div>
+</c:if>
+<c:if test="${!empty requestScope.discussions}">
 	<c:forEach items="${requestScope.discussions}" var="discussion">
 		<div class="row">
 			
@@ -41,6 +46,7 @@
 		</div>
 		<hr>
 	</c:forEach>
+	</c:if>
 	<!-- </table> -->
 </div>
 

@@ -13,7 +13,7 @@ public interface DocumentService {
 	
 	public List<Document> findAllDocumentInGroup(long groupId);
 	
-	public Document saveDocument( Document doc);
+	public Document saveDocument(Document doc);
 
 	public List<Document> searchDocumentByNameDescription(String search);
 
@@ -21,5 +21,9 @@ public interface DocumentService {
 	
 	public Document getDocumentById(long Id);
 	
-	//public List<Document> getDocumentByGroup(Group group);
+	public List<Document> getDocumentByGroup(Group group);
+
+	boolean deleteCommentById(int commentId);
+
+	public String getUsedSpaceByUser(User user);
 }

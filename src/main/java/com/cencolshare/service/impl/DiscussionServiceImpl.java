@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Group;
+import com.cencolshare.model.User;
+import com.cencolshare.repository.CommentRepository;
 import com.cencolshare.repository.DiscussionRepository;
 import com.cencolshare.service.DiscussionService;
 
@@ -24,13 +26,16 @@ public class DiscussionServiceImpl implements DiscussionService {
 
 	@Autowired
 	DiscussionRepository discussionRepository;
+	
+	@Autowired
+	CommentRepository commentRepository;
 
 	@PersistenceContext
 	EntityManager em;
 
 	@Override
-	public List<Discussion> getAllDiscussions(){
-		List<Discussion> discussions = (List<Discussion>) discussionRepository.findAll();
+	public List<Discussion> getAllDiscussions(User user){
+		List<Discussion> discussions = (List<Discussion>) discussionRepository.findByUser(user);
 		log.debug("Discussions List Count: {}", discussions.size());	
 		return discussions;
 	}
@@ -72,5 +77,13 @@ public class DiscussionServiceImpl implements DiscussionService {
 	public List<Discussion> getDiscussionsByGroup(Group group) {
 		// TODO Auto-generated method stub
 		return discussionRepository.findByGroup(group);
+	}
+
+	@Override
+	public Discussion deleteDiscussionById(Discussion discussion) {
+		
+		discussionRepository.delete(discussion);
+		
+		return discussion;
 	}
 }
