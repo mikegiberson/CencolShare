@@ -164,10 +164,41 @@ public class GroupController extends BaseController {
 		return  setSelectedMenu(mav);
 	}
 	
+	@RequestMapping(value = "/view/{groupId}/edit/{id}", method = RequestMethod.GET)
+	public ModelAndView editDocument(@PathVariable Long id) {
+		final Document doc = documentService.getDocumentById(id);
+		Long groupId = doc.getGroup().getGroupId();
+		ModelAndView mav = new ModelAndView("docs/document-upload-group");
+		mav.addObject("document", doc);
+		mav.addObject("groupId", groupId);
+	
+			return setSelectedMenu(mav);
+						
+		
+		
+	}
+	@RequestMapping(value = "/view/{groupId}/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView deleteDocument(@PathVariable Long id) {
+
+		User user = getLoggedInUser();
+		final Document doc = documentService.getDocumentById(id);
+		Long uploadId = doc.getUpload().getId();
+		int docUserId = doc.getUser().getUserId();
+		int userID = user.getUserId();
+     	documentService.deleteDocumentbyID(id);
+		uploadService.deleteUpload(uploadId);
+		
+
+		return new ModelAndView(new RedirectView("/cencolshare/group/view/{groupId}/list"));
+	}
+	
 	@RequestMapping(value = "/view/{id}/list", method = RequestMethod.GET)
 	public ModelAndView listDocs(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView("docs/document-list-group");
 		List<Document> documents = documentService.findAllDocumentInGroup(id);
+		
+		int userId = getLoggedInUser().getUserId();
+		mav.addObject("userId", userId);
 		mav.addObject("groupId", id);
 		mav.addObject("documents", documents);
 		return  setSelectedMenu(mav);

@@ -137,6 +137,9 @@ public class DocumentController extends BaseController {
 		ModelAndView mav = new ModelAndView("docs/document-upload");
 		mav.addObject("document", doc);
 		return setSelectedMenu(mav);
+						
+		
+		
 	}
 	
 	
