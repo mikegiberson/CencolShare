@@ -65,6 +65,10 @@
 	<div>
 		<div class="row">
 			<div class="col-sm-8">
+			
+			<c:if test="${empty groupFeeds}">
+			<div class="alert alert-info">Sorry! there is no discussion in this group</div>
+			</c:if>
 
 				<c:forEach var="feed" items="${groupFeeds}">
 					<ul class="media-list">
@@ -77,10 +81,10 @@
 								</h4>
 								<span class="pull-right">
 									<c:if test="${feed.deleteAccess == 'true' && feed.feedType == 'DISCUSSION'}">
-										<a href="${pageContext.request.contextPath}/discussion/delete/${feed.feedId}"">delete</a>
+										<a href="${pageContext.request.contextPath}/discussion/delete/${feed.feedId}">delete</a>
 									</c:if>
 									<c:if test="${feed.deleteAccess == 'true' && feed.feedType == 'DOCUMENT'}">
-										<a href="#" title="delete document not implemented">delete</a>
+										<a href="${pageContext.request.contextPath}/docs/delete/${feed.feedId}/fromGroup" title="delete document not implemented">delete</a>
 									</c:if>
 								</span>
 								<span class="text-muted"><c:out
@@ -138,7 +142,7 @@
 				<div class="panel panel-info">
 				  <div class="panel-heading">Member Info</div>
 				  <div class="panel-body">
-				    <p>Total: <strong>120</strong></p>
+				    <p>Total: <strong>${members }</strong></p>
 				    <p><a href="${pageContext.request.contextPath}/group/members/${group.groupId}">View All Members</a></p>
 				  </div>
 				</div>

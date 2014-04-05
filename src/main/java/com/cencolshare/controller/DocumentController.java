@@ -119,8 +119,8 @@ public class DocumentController extends BaseController {
 		return null;
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView deleteDocument(@PathVariable Long id) {
+	@RequestMapping(value = "/delete/{id}/{page}", method = RequestMethod.GET)
+	public ModelAndView deleteDocument(@PathVariable Long id, @PathVariable String page) {
 
 		User user = getLoggedInUser();
 		final Document doc = documentService.getDocumentById(id);
@@ -132,9 +132,16 @@ public class DocumentController extends BaseController {
 
 			documentService.deleteDocumentbyID(id);
 			uploadService.deleteUpload(uploadId);
+		}	
+		
+		if(page.equals("fromGroup")) {
+			Long groupId = doc.getGroup().getGroupId();
+			return new ModelAndView(new RedirectView(DOMAIN_PATH + "group/view/" + groupId));
+		} else {
+			return new ModelAndView(new RedirectView(DOMAIN_PATH + "docs/list"));
 		}
 
-		return new ModelAndView(new RedirectView("/cencolshare/docs/list"));
+		
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)

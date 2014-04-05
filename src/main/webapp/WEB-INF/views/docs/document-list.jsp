@@ -51,7 +51,7 @@
 						<p>
 							<a href="${pageContext.request.contextPath}/docs/view/${document.documentId}">Preview</a> | 
 							<a href="${document.fileUrl}">Download</a> | 
-							<a href="${pageContext.request.contextPath}/docs/delete/${document.documentId}">Delete</a> |
+							<a href="${pageContext.request.contextPath}/docs/delete/${document.documentId}/fromMyDocs">Delete</a> |
 							<a href="${pageContext.request.contextPath}/docs/edit/${document.documentId}"> Edit</a>
 						</p>
 					</div>

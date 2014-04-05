@@ -115,7 +115,7 @@
 					//$("#fileupload").attr("src", '${pageContext.request.contextPath}/upload/fetch/' + data.result.id);
 					$("#fileUrl").val('${baseURL}/upload/fetch/'+data.result.id);
 					$("#uploadId").val(data.result.id);
-					$("#fileName").html("<br /><span class='label label-success'>Added " + data.result.fileName + "</span>");
+					$("#fileName").html("<br /><span class='label label-success'>Added " + data.result.originalFileName + "</span>");
 					
 				}
 			});
