@@ -21,7 +21,7 @@ public class GroupFeed {
 	
 	private User user;
 	
-	private List<Comment> comments;
+	private Comment lastComment;
 	
 	private FeedType feedType;
 	

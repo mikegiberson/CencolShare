@@ -94,26 +94,26 @@
 								</p>
 
 								<!-- comments -->
-								<c:forEach var="thisComment" items="${feed.comments}">
+								<c:if test="${!empty feed.lastComment}">
 									<ul class="media-list well">
 										<li class="media"><a class="pull-left" href="#"> <img
-												class="media-object" src="${thisComment.user.photo}"
+												class="media-object" src="${feed.lastComment.user.photo}"
 												style="width: 75px; height: 75px;" height="75px"
 												width="75px" alt="...">
 										</a>
 											<div class="media-body">
 												<h5 class="media-heading">
 													<strong><c:out
-															value="${thisComment.user.firstName}" /></strong> wrote:
+															value="${feed.lastComment.user.firstName}" /></strong> wrote:
 												</h5>
 												<p>
-													<c:out value="${thisComment.comment}" />
+													<c:out value="${feed.lastComment.comment}" />
 												</p>
 												<span class="text-muted"><c:out
-														value="on ${thisComment.commentDate}" /></span>
+														value="on ${feed.lastComment.commentDate}" /></span>
 											</div></li>
 									</ul>
-								</c:forEach>
+								</c:if>
 								<!-- comments -->
 								<c:if test="${feed.feedType == 'DOCUMENT'}">
 									<a href="${pageContext.request.contextPath}/docs/view/${feed.feedId}">Preview Document</a>

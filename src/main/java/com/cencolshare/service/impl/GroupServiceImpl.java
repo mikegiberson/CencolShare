@@ -129,8 +129,16 @@ public class GroupServiceImpl implements GroupService {
 			groupFeedItem.setUser(discussion.getUser());
 			groupFeedItem.setDateCreated(discussion.getDiscussionDate());
 			groupFeedItem.setFeedType(FeedType.DISCUSSION);
-			groupFeedItem.setComments(discussion.getComments());
-			
+			System.out.println("Total discussions: " + discussion.getComments().size());
+			if(discussion.getComments().size() > 0) {
+				groupFeedItem.setLastComment(discussion.getComments().get(discussion.getComments().size() - 1));
+				System.out.println("Comment: " + groupFeedItem.getLastComment());
+			}
+			else {
+				groupFeedItem.setLastComment(null);
+				System.out.println("No Comment");
+			}
+				
 			if(loggedInUser.getUserId() == discussion.getUser().getUserId() || isAdminOfGroup(group, loggedInUser)) {
 				groupFeedItem.setDeleteAccess(Boolean.TRUE);
 			} else {
@@ -149,7 +157,10 @@ public class GroupServiceImpl implements GroupService {
 			groupFeedItem.setUser(document.getUser());
 			groupFeedItem.setDateCreated(document.getDateUploaded());
 			groupFeedItem.setFeedType(FeedType.DOCUMENT);
-			groupFeedItem.setComments(null);
+			if(document.getComments().size() > 0)
+				groupFeedItem.setLastComment(document.getComments().get(document.getComments().size() - 1));
+			else
+				groupFeedItem.setLastComment(null);
 			
 			if(loggedInUser.getUserId() == document.getUser().getUserId() || isAdminOfGroup(group, loggedInUser)) {
 				groupFeedItem.setDeleteAccess(Boolean.TRUE);
