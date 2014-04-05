@@ -23,6 +23,7 @@ import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
+import com.cencolshare.model.response.GroupFeed;
 import com.cencolshare.service.DiscussionService;
 import com.cencolshare.service.DocumentService;
 import com.cencolshare.service.GroupService;
@@ -125,11 +126,15 @@ public class GroupController extends BaseController {
 		int a = 0;
 
 		final Group grp = groupService.getGroupById(id);
+		if(grp == null) {
+			return null;
+		}
 		BigInteger members = groupService.getMemberCountbyGroupId(id);
 
 		// get discussions in a group
-		List<Discussion> discussions = discussionService
-				.getDiscussionsByGroup(grp);
+		//List<Discussion> discussions = discussionService.getDiscussionsByGroup(grp);
+		
+		List<GroupFeed> groupFeeds = groupService.getFeedsByGroup(grp, getLoggedInUser());
 
 		ModelAndView mav = new ModelAndView("group/group-view");
 		if (getLoggedInUser() != null) {
@@ -149,7 +154,7 @@ public class GroupController extends BaseController {
 		mav.addObject("members", members);
 		mav.addObject("hasAccess", hasAccess); // if the current user has access
 												// to the group
-		mav.addObject("discussions", discussions);
+		mav.addObject("groupFeeds", groupFeeds);
 		// mav.addObject("joined",joinedgroups );
 		return mav;
 	}

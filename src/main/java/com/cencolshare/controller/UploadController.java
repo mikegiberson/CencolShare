@@ -77,7 +77,7 @@ public class UploadController extends BaseController {
 				upload.setOriginalFileName(multipartFile.getOriginalFilename()
 						.trim());
 				upload.setUploadDate(new Date(new Date().getTime()));
-				upload.setFilePath(UPLOAD_PATH + "\\" + fileName);
+				upload.setFilePath(UPLOAD_PATH + fileName);
 
 				uploadService.saveUpload(upload);
 				return upload;
