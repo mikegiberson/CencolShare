@@ -170,8 +170,8 @@ public class DiscussionController extends BaseController {
 				+ "discussion/view/" + discussionId));
 	}
 
-	@RequestMapping(value = "/delete/{discussionId}", method = RequestMethod.GET)
-	public ModelAndView deleteDiscussion(@PathVariable int discussionId) {
+	@RequestMapping(value = "/delete/{discussionId}/{page}", method = RequestMethod.GET)
+	public ModelAndView deleteDiscussion(@PathVariable int discussionId,  @PathVariable String page) {
 
 		final User loggedInUser = getLoggedInUser();
 		final Discussion discussionToDelete = discussionService
@@ -192,7 +192,11 @@ public class DiscussionController extends BaseController {
 			System.out.println("Discussion cannot be deleted");
 		}
 
-		return new ModelAndView(new RedirectView(DOMAIN_PATH + "group/view/"
-				+ currentGroupId));
+		if(page.equals("fromGroup")) {
+			Long groupId = discussionToDelete.getGroup().getGroupId();
+			return new ModelAndView(new RedirectView(DOMAIN_PATH + "group/view/" + groupId));
+		} else {
+			return new ModelAndView(new RedirectView(DOMAIN_PATH + "discussion/list"));
+		}
 	}
 }

@@ -19,10 +19,7 @@
 		</td>
 		<td>${d.discussionContent }</td>
   	<td>
-  		<a href="${pageContext.request.contextPath}/discussion/view/${d.discussionId}" class="btn btn-primary">
-  			<i class="fa fa-pencil-square-o"></i>
-  		</a>
-  		<a class="btn btn-danger">
+  	  		<a href="${pageContext.request.contextPath}/discussion/delete/${d.discussionId}/fromMyDiscussions" class="btn btn-danger">
   			<i class="fa fa-trash-o"></i>
   		</a>
   	</td>
