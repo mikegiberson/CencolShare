@@ -17,9 +17,11 @@ import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.User;
+import com.cencolshare.model.response.StatResponse;
 import com.cencolshare.service.DiscussionService;
 import com.cencolshare.service.DocumentService;
 import com.cencolshare.service.GroupService;
+import com.cencolshare.service.StatService;
 import com.cencolshare.util.GroupUtil;
 
 @Controller
@@ -38,11 +40,17 @@ public class NavigationController extends BaseController {
 	@Autowired
 	GroupUtil groupUtil;
 	
+	@Autowired
+	StatService statService;
+	
 	@RequestMapping(value={"/", "index"}, method=RequestMethod.GET)
 	public ModelAndView index() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		final StatResponse statResponse = statService.getStatistics(getLoggedInUser());
 		log.debug(auth.toString());
-		return new ModelAndView("index");
+		ModelAndView mav = new ModelAndView("dashboard/index");
+		mav.addObject("stats", statResponse);
+		return setSelectedMenu(mav);
 	}
 	
 	@RequestMapping(value="/search", method=RequestMethod.GET)
