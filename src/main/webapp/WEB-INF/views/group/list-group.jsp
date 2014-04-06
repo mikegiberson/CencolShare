@@ -16,12 +16,12 @@
 	<c:if test="${empty requestScope.groups}">
 
 		<div class="thumbnail text-info alert alert-info">
-			<b>Sorry! You have not creates any group. </b>
+			<b>Sorry! You have not created any group. </b>
 		</div>
 	</c:if>
 	<c:if test="${!empty requestScope.groups}">
 		<c:forEach items="${requestScope.groups}" var="grp">
-			<div class="row ">
+			<div class="row">
 
 				<div class="col-sm-2 text-center">
 					<a
