@@ -13,7 +13,6 @@
 			<b>Sorry! You have not created any discussions. </b>
 		</div>
 	</c:if>
-	<c:if test="${!empty requestScope.dicussions}">
 		<c:forEach items="${requestScope.discussions}" var="d">
 
 			<div class="row">
@@ -35,7 +34,6 @@
 			</div>
 			<hr>
 		</c:forEach>
-	</c:if>
 </div>
 
 <%@ include file="../common/footer.jsp"%>

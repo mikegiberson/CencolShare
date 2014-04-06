@@ -22,7 +22,6 @@
 			<b>Sorry! You have not uploaded any document. </b>
 		</div>
 	</c:if>
-<c:if test="${!empty requestScope.documents}">
 	<c:forEach var="document" items="${documents}">
 		
 			<div class="col-md-4">
@@ -66,7 +65,6 @@
 				</div>
 			</div>
 	</c:forEach>
-</c:if>
 	
 
 
