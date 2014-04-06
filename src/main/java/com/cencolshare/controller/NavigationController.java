@@ -83,7 +83,7 @@ public class NavigationController extends BaseController {
 			log.debug("search count: {}", searchedGroups.size());
 			mav = new ModelAndView("group/search-group");
 			mav.addObject("groups", searchedGroups);	
-			mav.addObject("loggedInUser", getLoggedInUser());
+			//mav.addObject("loggedInUser", getLoggedInUser());
 		} else if(searchType.toLowerCase().equals("document")) {
 			List<Document> documents = documentService.searchDocumentByNameDescription(searchInput);
 			mav = new ModelAndView("document/search-document");
@@ -97,7 +97,7 @@ public class NavigationController extends BaseController {
 		}
 		
 		
-		return mav;
+		return setSelectedMenu(mav);
 	}
 
 	

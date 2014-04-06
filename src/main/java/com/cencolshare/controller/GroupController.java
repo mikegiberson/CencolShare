@@ -337,7 +337,7 @@ public class GroupController extends BaseController {
 		}
 
 		mav.addObject("joinedgroups", groups);
-		return mav;
+		return setSelectedMenu(mav);
 	}
 
 }

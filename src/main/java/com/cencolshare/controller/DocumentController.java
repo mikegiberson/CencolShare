@@ -75,7 +75,7 @@ public class DocumentController extends BaseController {
 		List<DocumentComments> comments = commentService.getCommentsByDocumentId(document.getDocumentId());
 		mav.addObject("comments", comments);
 
-		return mav;
+		return setSelectedMenu(mav);
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
