@@ -11,4 +11,5 @@ public class DiscussionComments {
 	private String firstName;
 	private String lastName;
 	private String photo;
+	private Boolean showDelete;
 }

@@ -62,6 +62,13 @@ public class DiscussionController extends BaseController {
 		mav.addObject("discussion", discussion);
 		List<DiscussionComments> comments = commentService
 				.getCommentsByDiscussionId(id);
+		for (int i = 0; i < comments.size(); i++) {
+            if (!(getLoggedInUser().getRole().equals(Role.ADMIN) || (getLoggedInUser()
+                            .getRole().equals(Role.MANAGER)))
+                            && comments.get(i).getUserId() != getLoggedInUser().getUserId()) {
+                    comments.get(i).setShowDelete(true);
+            }                        
+    }
 		mav.addObject("comments", comments);
 		return setSelectedMenu(mav);
 	}

@@ -12,4 +12,5 @@ public class DocumentComments {
 	private String firstName;
 	private String lastName;
 	private String photo;
+	private Boolean showDelete;
 }

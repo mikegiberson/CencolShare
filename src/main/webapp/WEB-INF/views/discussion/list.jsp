@@ -21,8 +21,7 @@
 				<div class="col-sm-10">
 					<h2 class="text-primary">
 						<a
-							href="${pageContext.request.contextPath}/discussion/view/${d.discussionId}">${d.discussionTopic
-							}</a>
+							href="${pageContext.request.contextPath}/discussion/view/${d.discussionId}">${d.discussionTopic}</a>
 					</h2>
 
 					<p class="text-info">
