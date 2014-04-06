@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,9 @@ public class GroupController extends BaseController {
 
 	@Autowired
 	DiscussionService discussionService;
+	
+	@Value("${domainPath}")
+    private String BASE_URL;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listGroup() {
@@ -81,7 +85,7 @@ public class GroupController extends BaseController {
 		grp.setGroupDescription(request.getParameter("groupDescription"));
 		if (request.getParameter("photo") == null
 				|| request.getParameter("photo").equals("")) {
-			grp.setGroupImage("${baseURL}/resources/images/groupDefault.png");
+			grp.setGroupImage(BASE_URL + "/resources/images/groupDefault.png");
 		} else {
 			grp.setGroupImage(request.getParameter("photo"));
 		}

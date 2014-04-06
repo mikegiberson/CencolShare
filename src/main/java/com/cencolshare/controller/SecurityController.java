@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +31,9 @@ public class SecurityController extends BaseController {
 
 	@Autowired
 	HttpServletRequest request;
+	
+	@Value("${domainPath}")
+    private String BASE_URL;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login() {
@@ -87,6 +91,14 @@ public class SecurityController extends BaseController {
 			user.setOrganization(organization);
 			user.setEmail(email);
 			user.setPassword(password);
+			
+			if (request.getParameter("photo") == null
+					|| request.getParameter("photo").equals("")) {
+				user.setPhoto(BASE_URL + "/resources/images/default.png");
+			} else {
+				user.setPhoto(request.getParameter("photo"));
+			}
+			
 			userService.insertUser(user);
 			return new ModelAndView("register_success");
 		}
