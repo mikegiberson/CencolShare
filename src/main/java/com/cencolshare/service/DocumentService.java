@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
+import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
 
 public interface DocumentService {
@@ -26,4 +27,6 @@ public interface DocumentService {
 	boolean deleteCommentById(int commentId);
 
 	public String getUsedSpaceByUser(User user);
+
+	public Document getDocumentByUpload(Upload upload);
 }

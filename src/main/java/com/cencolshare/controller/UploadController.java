@@ -24,8 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cencolshare.model.Document;
 import com.cencolshare.model.Upload;
+import com.cencolshare.service.DocumentService;
+import com.cencolshare.service.GroupService;
 import com.cencolshare.service.UploadService;
+import com.cencolshare.service.UserService;
 
 @Controller
 @RequestMapping("/upload")
@@ -34,6 +38,12 @@ public class UploadController extends BaseController {
 
 	@Autowired
 	UploadService uploadService;
+
+	@Autowired
+	DocumentService documentService;
+
+	@Autowired
+	UserService userService;
 
 	@Autowired
 	HttpServletRequest request;
@@ -91,12 +101,34 @@ public class UploadController extends BaseController {
 	public String displayFile(@PathVariable Long fileId,
 			HttpServletResponse response) throws IOException {
 
-		/*
 		if (getLoggedInUser() == null) {
-			return "Authentication Required";
+			return "access_denied.jsp?error=LOGIN_FAILURE";
 		}
-		*/
+
 		final Upload upload = uploadService.getUploadById(fileId);
+		final Document document = documentService.getDocumentByUpload(upload);
+		
+		if(document != null) {
+			// if the request is not for a document, there is no need for a authenticity check
+			// for eg: request for a profile picture
+			
+			if (document.getUser().getUserId() == getLoggedInUser().getUserId()) {
+				// loggedin user is the owner of the document. allow to download
+				System.out.println("loggedin user is the owner of the document. allow to download");
+
+			} else if (document.getGroup() != null
+					&& userService.isUserMemberOfGroup(getLoggedInUser(),
+							document.getGroup())) {
+				// this document is shared in a group, so allow all its memebers to
+				// download
+				System.out.println("this document is shared in a group, so allow all its memebers to download");
+
+			} else {
+				System.out.println("No access to download the requested file");
+				return "access_denied.jsp?error=NO_ACCESS";
+			}
+		}
+		
 
 		if (upload == null) {
 			return null;
