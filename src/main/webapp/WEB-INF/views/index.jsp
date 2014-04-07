@@ -515,7 +515,7 @@
 		<section id=login>
 
 			<div class=container>
-
+			<br /><br />
 				<div class=row>
 
 					<div class=col-md-12></div>
@@ -539,11 +539,11 @@
 
 								<p>
 									<label for="username">Username</label> <input type="text"
-										id="username" name="username" class="form-control" />
+										id="username" name="username" class="form-control" required="true" />
 								</p>
 								<p>
 									<label for="password">Password</label> <input type="password"
-										id="password" name="password" class="form-control" />
+										id="password" name="password" class="form-control" required="true"  />
 								</p>
 								<input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
