@@ -2,6 +2,8 @@ package com.cencolshare.service;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -45,6 +47,36 @@ public class TestUserService extends BaseTestCase {
 		assertNotNull("Failed to update user", user);
 		assertFalse("Failed to update Occupation", updatedUser.getOccupation().equals(actualUserOccupation));
 		assertFalse("Failed to update Organization", updatedUser.getOrganization().equals(actualOrganization));
+	}
+	
+	@Test
+	public void testgetUserById()
+	{
+		final User user = userService.insertUser(mockData.createUser());
+		assertNotNull("Create User failed", user);
+
+		final User userById = userService.loadUserById(user.getUserId());
+		assertNotNull(userById);
+		
+		assertEquals(userById.getFirstName(),user.getFirstName());
+		assertEquals(userById.getLastName(),user.getLastName());
+		assertEquals(userById.getEmail(),user.getEmail());
+		assertEquals(userById.getEnabled(),user.getEnabled());
+		assertEquals(userById.getPassword(),user.getPassword());
+		assertEquals(userById.getPhoto(),user.getPhoto());
+		assertEquals(userById.getVerifyToken(),user.getVerifyToken());
+	}
+	
+	@Test
+	public void testGetAllUsers(){
+		final User user = userService.insertUser(mockData.createUser());
+		assertNotNull("Create User failed", user);
+		
+		List<User> allUsers = userService.getAllUsers();
+		assertNotNull(allUsers);
+		
+		assertEquals(allUsers.get(0).getEmail(), user.getEmail());
+		assertEquals(allUsers.get(0).getUserId(), user.getUserId());
 	}
 
 }
