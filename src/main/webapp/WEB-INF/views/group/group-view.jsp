@@ -81,7 +81,7 @@
 								</h4>
 								<span class="pull-right">
 									<c:if test="${feed.deleteAccess == 'true' && feed.feedType == 'DISCUSSION'}">
-										<a href="${pageContext.request.contextPath}/discussion/delete/${feed.feedId}">delete</a>
+										<a href="${pageContext.request.contextPath}/discussion/delete/${feed.feedId}/fromGroup">delete</a>
 									</c:if>
 									<c:if test="${feed.deleteAccess == 'true' && feed.feedType == 'DOCUMENT'}">
 										<a href="${pageContext.request.contextPath}/docs/delete/${feed.feedId}/fromGroup" title="delete document not implemented">delete</a>

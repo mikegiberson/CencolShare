@@ -51,11 +51,13 @@
 								</div>
 								<div class="comment-text">${c.comment}</div>
 								<div class="action">
+								<c:if test="${!c.showDelete}">
 									<a
 										href="${pageContext.request.contextPath}/docs/deleteComment/${c.commentId}"
 										class="btn btn-danger pull-right"> <i
 										class="fa fa-trash-o"></i>
 									</a>
+									</c:if>
 								</div>
 							</div>
 						</div>

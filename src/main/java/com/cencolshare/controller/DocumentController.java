@@ -73,9 +73,17 @@ public class DocumentController extends BaseController {
 		mav.addObject("document", document);
 		
 		List<DocumentComments> comments = commentService.getCommentsByDocumentId(document.getDocumentId());
+		for (int i = 0; i < comments.size(); i++) {
+            if (!(getLoggedInUser().getRole().equals(Role.ADMIN) || (getLoggedInUser()
+                            .getRole().equals(Role.MANAGER)))
+                            && comments.get(i).getUserId() != getLoggedInUser().getUserId()) {
+                    comments.get(i).setShowDelete(true);
+            }                        
+    }
+		
 		mav.addObject("comments", comments);
 
-		return mav;
+		return setSelectedMenu(mav);
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)

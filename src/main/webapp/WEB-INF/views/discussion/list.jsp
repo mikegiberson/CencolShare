@@ -2,32 +2,38 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-<h1 class="page-header">My Discussions</h1>
 
-<br>
-<table class="table table-bordered">
-	<tr>
-		<th>Discussion Title</th>
-		<th>Discussion Content</th>
-		<th>Actions</th>
-	</tr>
-<c:forEach items="${requestScope.discussions}" var="d">
-  <tr > 
-  	<td>
-  		<a href="${pageContext.request.contextPath}/discussion/view/${d.discussionId}">${d.discussionTopic }</a>
-		
-		</td>
-		<td>${d.discussionContent }</td>
-  	<td>
-  		<a href="${pageContext.request.contextPath}/discussion/view/${d.discussionId}" class="btn btn-primary">
-  			<i class="fa fa-pencil-square-o"></i>
-  		</a>
-  		<a class="btn btn-danger">
-  			<i class="fa fa-trash-o"></i>
-  		</a>
-  	</td>
-  </tr>
-</c:forEach>
-</table>
+	<span>
+		<h1 class="page-header">My Discussions</h1>
+	</span>
+
+	<c:if test="${empty requestScope.discussions}">
+
+		<div class="thumbnail text-info alert alert-info">
+			<b>Sorry! You have not created any discussions. </b>
+		</div>
+	</c:if>
+		<c:forEach items="${requestScope.discussions}" var="d">
+
+			<div class="row">
+
+				<div class="col-sm-10">
+					<h2 class="text-primary">
+						<a
+							href="${pageContext.request.contextPath}/discussion/view/${d.discussionId}">${d.discussionTopic}</a>
+					</h2>
+
+					<p class="text-info">
+						${d.discussionContent } <span class="pull-right"> <a
+							href="${pageContext.request.contextPath}/discussion/delete/${d.discussionId}/fromMyDiscussions"
+							class="btn btn-danger"> <i class="fa fa-trash-o"></i>
+						</a>
+						</span>
+					</p>
+				</div>
+			</div>
+			<hr>
+		</c:forEach>
+</div>
 
 <%@ include file="../common/footer.jsp"%>
