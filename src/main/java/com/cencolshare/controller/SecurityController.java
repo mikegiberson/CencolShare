@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.cencolshare.enums.Role;
 import com.cencolshare.model.User;
+import com.cencolshare.model.response.StatResponse;
 import com.cencolshare.service.UserService;
 
 @Controller
@@ -34,6 +36,14 @@ public class SecurityController extends BaseController {
 	
 	@Value("${domainPath}")
     private String BASE_URL;
+	
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public ModelAndView index() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		log.debug(auth.toString());
+		ModelAndView mav = new ModelAndView("index");
+		return setSelectedMenu(mav);
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login() {

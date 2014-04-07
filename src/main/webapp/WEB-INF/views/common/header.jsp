@@ -32,7 +32,6 @@
 	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
 	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script

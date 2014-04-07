@@ -43,7 +43,7 @@ public class NavigationController extends BaseController {
 	@Autowired
 	StatService statService;
 	
-	@RequestMapping(value={"/", "index"}, method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView index() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		final StatResponse statResponse = statService.getStatistics(getLoggedInUser());
