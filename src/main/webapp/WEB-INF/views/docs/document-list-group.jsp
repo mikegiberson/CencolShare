@@ -19,23 +19,23 @@
 					<br />
 					<c:choose>
 						<c:when test="${document.upload.fileType=='.doc'}">
-							<img src="/cencolshare/resources/images/word.jpg"
+							<img src="${pageContext.request.contextPath}/resources/images/word.jpg"
 								class="media-object">
 						</c:when>
 						<c:when test="${document.upload.fileType=='.pdf'}">
-							<img src="/cencolshare/resources/images/pdf.jpg"
+							<img src="${pageContext.request.contextPath}/resources/images/pdf.jpg"
 								class="media-object">
 						</c:when>
 						<c:when test="${document.upload.fileType=='.ppt'}">
-							<img src="/cencolshare/resources/images/ppt.png"
+							<img src="${pageContext.request.contextPath}/resources/images/ppt.png"
 								class="media-object">
 						</c:when>
 						<c:when test="${document.upload.fileType=='.xlsx'}">
-							<img src="/cencolshare/resources/images/excel.png"
+							<img src="${pageContext.request.contextPath}/resources/images/excel.png"
 								class="media-object">
 						</c:when>
 						<c:otherwise>
-							<img src="/cencolshare/resources/images/doc.jpg"
+							<img src="${pageContext.request.contextPath}/resources/images/doc.jpg"
 								class="media-object">
 						</c:otherwise>
 					</c:choose>

@@ -21,23 +21,23 @@
 				<c:choose>
 					<c:when test="${document.upload.fileType =='.pdf'}">
 						<img class="pull-left " width="120px" height="120px" alt=""
-							src="/cencolshare/resources/images/pdf.jpg">
+							src="${pageContext.request.contextPath}/resources/images/pdf.jpg">
 					</c:when>
 					<c:when test="${document.upload.fileType=='.doc'}">
 						<img class="pull-left " width="120px" height="120px" alt=""
-							src="/cencolshare/resources/images/word.jpg">
+							src="${pageContext.request.contextPath}/resources/images/word.jpg">
 					</c:when>
 					<c:when test="${document.upload.fileType=='.xlsx'}">
 						<img class="pull-left " width="120px" height="120px" alt=""
-							src="/cencolshare/resources/images/excel.png">
+							src="${pageContext.request.contextPath}/resources/images/excel.png">
 					</c:when>
 					<c:when test="${document.upload.fileType=='.ppt'}">
 						<img class="pull-left " width="120px" height="120px" alt=""
-							src="/cencolshare/resources/images/ppt.png">
+							src="${pageContext.request.contextPath}/resources/images/ppt.png">
 					</c:when>
 					<c:otherwise>
 							<img class="pull-left " width="120px" height="120px" alt=""
-							src="/cencolshare/resources/images/doc.jpg">
+							src="${pageContext.request.contextPath}/resources/images/doc.jpg">
 								
 						</c:otherwise>
 				</c:choose>
