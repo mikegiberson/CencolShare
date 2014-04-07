@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Document;
@@ -46,10 +47,12 @@ public class NavigationController extends BaseController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView index() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		final StatResponse statResponse = statService.getStatistics(getLoggedInUser());
-		log.debug(auth.toString());
-		ModelAndView mav = new ModelAndView("dashboard/index");
-		mav.addObject("stats", statResponse);
+		
+		if(getLoggedInUser() != null) {
+			// user is already logged in
+			return new ModelAndView(new RedirectView("dashboard"));
+		}
+		ModelAndView mav = new ModelAndView("index");
 		return setSelectedMenu(mav);
 	}
 	
