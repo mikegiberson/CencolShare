@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
+import com.cencolshare.model.Upload;
 import com.cencolshare.model.User;
 import com.cencolshare.repository.DocumentRepository;
 import com.cencolshare.service.DocumentService;
@@ -108,6 +109,12 @@ public class DocumentServiceImpl implements DocumentService {
 			return df.format(usedSpaceinKb / 131072) + " GB";
 		}
 		
+	}
+
+	@Override
+	public Document getDocumentByUpload(Upload upload) {
+		// TODO Auto-generated method stub
+		return documentRepository.findByUpload(upload);
 	}
 
 }
