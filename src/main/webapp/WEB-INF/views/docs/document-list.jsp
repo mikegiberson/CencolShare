@@ -27,6 +27,7 @@
 			<div class="col-md-4">
 				<div class="thumbnail" >
 					<br />
+					<a href="${pageContext.request.contextPath}/docs/view/${document.documentId}">
 					<c:choose>
 						<c:when test="${document.upload.fileType=='.doc'}">
 							<img src="${pageContext.request.contextPath}/resources/images/word.jpg"
@@ -49,10 +50,12 @@
 								class="media-object">
 						</c:otherwise>
 					</c:choose>
+					</a>
 					<div class="caption">
-
-						<h3>${document.documentTitle}</h3>
-						<p>${document.documentDescription}</p>
+						<div class="row-fluid">
+						<a href="${pageContext.request.contextPath}/docs/view/${document.documentId}"><h3>${document.documentTitle}</h3></a>
+						</div>
+						<!-- <p>${document.documentDescription}</p> -->
 						<p class="text-muted">Size: ${document.upload.fileSize} 
 							Format: ${document.upload.fileType }</p>
 						<p>
