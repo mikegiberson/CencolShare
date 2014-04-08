@@ -122,7 +122,7 @@ public class GroupController extends BaseController {
 			log.info("User is authenticated to delete grp");
 			groupService.deleteGroupbyID(id);
 		}
-		return new ModelAndView(new RedirectView("/cencolshare/group/list"));
+		return new ModelAndView(new RedirectView(BASE_URL+"group/list"));
 	}
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
@@ -203,8 +203,8 @@ public class GroupController extends BaseController {
 		documentService.deleteDocumentbyID(id);
 		uploadService.deleteUpload(uploadId);
 
-		return new ModelAndView(new RedirectView(
-				"/cencolshare/group/view/{groupId}/list"));
+		return new ModelAndView(new RedirectView(BASE_URL+
+				"group/view/{groupId}/list"));
 	}
 
 	@RequestMapping(value = "/view/{id}/list", method = RequestMethod.GET)
@@ -247,7 +247,7 @@ public class GroupController extends BaseController {
 
 		doc = documentService.saveDocument(doc);
 		if (doc.getDocumentId() > 0) {
-			return new ModelAndView(new RedirectView("/cencolshare/group/view/"
+			return new ModelAndView(new RedirectView(BASE_URL+"group/view/"
 					+ id + "/list"));
 		}
 		return null;
@@ -260,13 +260,13 @@ public class GroupController extends BaseController {
 		int loggedUserId = loggedUser.getUserId();
 		groupService.removeUserFromGroup(loggedUserId, id);
 		if (request.getParameter("fromSearch") != null) {
-			return new ModelAndView(new RedirectView(
-					"/cencolshare/search?searchType=group&searchInput="));
+			return new ModelAndView(new RedirectView(BASE_URL+
+					"search?searchType=group&searchInput="));
 		} else if (request.getParameter("fromJoined").equals("true"))
 			return new ModelAndView(new RedirectView(
-					"/cencolshare/group/joined"));
+					BASE_URL+"group/joined"));
 		else {
-			return new ModelAndView(new RedirectView("/cencolshare/group/view/"
+			return new ModelAndView(new RedirectView(BASE_URL+"group/view/"
 					+ id));
 		}
 	}
@@ -280,9 +280,9 @@ public class GroupController extends BaseController {
 
 		if (request.getParameter("fromSearch") != null) {
 			return new ModelAndView(new RedirectView(
-					"/cencolshare/search?searchType=group&searchInput="));
+					BASE_URL+"search?searchType=group&searchInput="));
 		} else {
-			return new ModelAndView(new RedirectView("/cencolshare/group/view/"
+			return new ModelAndView(new RedirectView(BASE_URL+"group/view/"
 					+ id));
 		}
 

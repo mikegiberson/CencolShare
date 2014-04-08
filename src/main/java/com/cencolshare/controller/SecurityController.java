@@ -172,7 +172,7 @@ public class SecurityController extends BaseController {
 				user.setRole(Role.ADMIN);
 			}
 			userService.insertUser(user);			
-			return new ModelAndView(new RedirectView("/cencolshare/user"));
+			return new ModelAndView(new RedirectView(BASE_URL+"user"));
 		}
 
 		user.setEnabled(getLoggedInUser().getEnabled());
@@ -181,7 +181,7 @@ public class SecurityController extends BaseController {
 		user.setRole(getLoggedInUser().getRole());
 		userService.insertUser(user);
 
-		return new ModelAndView(new RedirectView("/cencolshare/profile"));
+		return new ModelAndView(new RedirectView(BASE_URL+"profile"));
     }
 	
 	@RequestMapping(value="/resetpassword", method=RequestMethod.POST)
