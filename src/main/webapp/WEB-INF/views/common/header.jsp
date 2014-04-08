@@ -53,14 +53,16 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="${pageContext.request.contextPath}/">CENCOLSHARE</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/">
+					<img alt="CencolShare" style="height:30px" src="${pageContext.request.contextPath}/resources/images/logo.png">
+				</a>
 			</div>
 
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<sec:authorize access="isAnonymous()">
-						<li><a href="${pageContext.request.contextPath}/register">Register</a></li>
-						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+						<!-- <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+						<li><a href="${pageContext.request.contextPath}/login">Login</a></li> -->
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 						<li>

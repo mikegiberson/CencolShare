@@ -579,8 +579,6 @@
 									value="${_csrf.token}" />
 								<button class="btn btn-primary" type="submit" class="btn">Log
 									in</button>
-								<a class="btn btn-link" data-toggle="modal"
-									data-target="#forgetPasswordModal">Forgot Password</a>
 							</div>
 						</form>
 						<!-- login form (end) -->

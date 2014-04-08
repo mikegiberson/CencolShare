@@ -1,9 +1,9 @@
 <%@ include file="common/header.jsp"%>
 
 <div class="container"> 
-   
+   <br />
 <c:url value="/login" var="loginUrl"/>
-<form action="${loginUrl}" method="post" class="col-xs-4 form-signin" role="form"> 
+<form action="${loginUrl}" method="post" class="col-xs-6 col-sm-5 form-signin" role="form"> 
 	<h2 class="form-signin-heading">Please sign in</h2>      
     <c:if test="${param.error != null}">        
         <p class="alert alert-danger">
@@ -57,7 +57,6 @@
 	
 <script>
 function resetPassword(){
-	alert("reset works");
 	var email = $("#email").val();
 	$("#result").html("");
 	var url = "${pageContext.request.contextPath}/resetpassword";
