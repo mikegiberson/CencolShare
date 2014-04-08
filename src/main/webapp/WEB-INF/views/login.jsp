@@ -20,7 +20,7 @@
         <input type="text" id="username" name="username" class="form-control"/>	
     </p>
     <p>
-        <label for="password">Password</label>
+        <label for="password">Password</label>4
         <input type="password" id="password" name="password" class="form-control"/>	
     </p>
     <input type="hidden"                        

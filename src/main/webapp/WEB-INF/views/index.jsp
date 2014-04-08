@@ -5,9 +5,10 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="baseURL" value="${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, pageContext.request.contextPath)}" />
-<c:url value="/login" var="loginUrl"/>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="baseURL"
+	value="${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, pageContext.request.contextPath)}" />
+<c:url value="/login" var="loginUrl" />
 
 <!DOCTYPE html>
 
@@ -107,9 +108,7 @@
 
 						<li><a href=#about> About </a></li>
 
-						<li><a href=#services> Services </a></li>
-
-						<li><a href=#portfolio> Portfolio </a></li>
+						<li><a href=#services> Features </a></li>
 
 						<li><a href=#team> Team </a></li>
 
@@ -154,7 +153,8 @@
 					<div class=carousel-caption>
 
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>Single place to store and Discuss about a document!</h3>
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Single
+							place to store and Discuss about a document!</h3>
 
 
 						<span class="wow bounceInRight" data-wow-duration=2s> Nulla
@@ -174,7 +174,8 @@
 
 						<!-- h3 class="wow bounceInLeft" data-wow-duration=2s>Create groups and discussions</h3-->
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>Create and discuss about a topic or document</h3>
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Create and
+							discuss about a topic or document</h3>
 
 						<span class="wow bounceInRight" data-wow-duration=2s> Lorem
 							ipsum dolor sit amet, consectetur adipiscing elit. </span>
@@ -191,7 +192,8 @@
 
 					<div class=carousel-caption>
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>Document management made easy</h3>
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Document
+							management made easy</h3>
 
 						<span class="wow bounceInRight" data-wow-duration=2s>
 							Praesent commodo cursus magna, vel scelerisque nisl consectetur.
@@ -218,54 +220,39 @@
 			<div class=container>
 
 				<div class=row>
-
+				
 					<div class=col-md-12>
 
 						<h3>About</h3>
 
 					</div>
-
+						<br /><br />
 					<div class="col-md-6 col-sm-6 wow bounceInLeft">
 
-						<p>Lorem ipsum dolor sit amet, ne qui animal regione
-							adversarium, ferri nonumes signiferumque qui no, errem doming
-							persecuti pro at. At sit suavitate consectetuer. Ad nec vide
-							tincidunt. An esse docendi his, pro eius dicta dicit id. Qui an
-							ludus albucius delectus, nec in meis corpora, dolorum nusquam
-							torquatos quo ex.</p>
+						<p>CencolShare is a web platform used by students across
+							different Universities and Colleges to share academic documents
+							and discuss on it. CencolShare provides features to hold
+							discussions online about surveys, articles, literature,
+							technology or any matter of that sort online. Students can
+							actively participate and communicate with other members, form
+							group and share the knowledge and content that they have.</p>
 
-						<p>Ad quot facilisis conceptam pro. Per omnis movet ei. Vis
-							tation euismod cu, cu quod dolorem mediocritatem qui, qui
-							suscipit vulputate eloquentiam in. His malis simul percipitur id.
-							In nam graece nostrum deserunt, eos sonet omittam expetenda ei.
-							Ei sed paulo nonumes petentium.</p>
+						<p></p>
 
 					</div>
 
 					<div class="col-md-6 col-sm-6 wow bounceInRight">
 
-						<p>Mazim hendrerit at mei. Mei no nibh quaeque deserunt, ea
-							veniam doctus adipisci quo. Feugiat reprehendunt ad nec. Delenit
-							denique his et. Te verear accusamus pro, cum indoctum consequat
-							dissentiunt ut, ex sumo labore eos. Propriae posidonium
-							definitionem has te, ignota delectus apeirian te pri. Ne per
-							autem periculis consequuntur.</p>
-
-						<p class=icon-about>
-
-							<a href=#> <i class="fa fa-weibo"> </i>
-							</a> <a href=#> <i class="fa fa-facebook-square"> </i>
-							</a> <a href=#> <i class="fa fa-twitter-square"> </i>
-							</a> <a href=#> <i class="fa fa-google-plus-square"> </i>
-							</a> <a href=#> <i class="fa fa-pinterest-square"> </i>
-							</a> <a href=#> <i class="fa fa-linkedin"> </i>
-							</a>
-
-						</p>
+						<p>Students can upload or download documents that are useful
+							to other students. Sharing the document, and conducting
+							discussions on it is an useful feature. CencolShare integrated
+							document preview feature so that, students can preview the
+							document online even before downloading it</p>
 
 					</div>
 
 				</div>
+				<br /><br /><br /><br />
 
 			</div>
 
@@ -279,7 +266,7 @@
 
 					<div class=col-md-12>
 
-						<h3>Our Services</h3>
+						<h3>Features</h3>
 
 					</div>
 
@@ -290,7 +277,7 @@
 							</span>
 						</p>
 
-						<h4>User Interface</h4>
+						<h4>Document Preview</h4>
 
 						<p>Lorem ipsum dolor sit amet, ne qui animal regione
 							adversarium, ferri nonumes signiferumque qui no, errem doming
@@ -305,7 +292,7 @@
 							</span>
 						</p>
 
-						<h4>Mobile Aplications</h4>
+						<h4>Groups and Discussions</h4>
 
 						<p>Mazim hendrerit at mei. Mei no nibh quaeque deserunt, ea
 							veniam doctus adipisci quo. Feugiat reprehendunt ad nec. Delenit
@@ -320,77 +307,11 @@
 							</span>
 						</p>
 
-						<h4>Corporate Branding</h4>
+						<h4>Mobile Compatible</h4>
 
 						<p>Mazim hendrerit at mei. Mei no nibh quaeque deserunt, ea
 							veniam doctus adipisci quo. Feugiat reprehendunt ad nec. Delenit
 							denique his et.</p>
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</section>
-
-		<section id=portfolio>
-
-			<div class=container>
-
-				<div class=row>
-
-					<div class=col-md-12>
-
-						<h3>Portfolio</h3>
-
-					</div>
-
-					<div class="col-md-4 col-sm-4 wow bounceInLeft">
-
-						<div class=imgport data-toggle=modal data-target=#modal-login>
-
-							<span class="wow fadeInDown"> view </span> <img
-								src="${pageContext.request.contextPath}/resources/images/1.jpg"
-								alt=1>
-
-						</div>
-
-						<h4>Portfolio 1</h4>
-
-						<p>Published on Jan 17, 2014</p>
-
-					</div>
-
-					<div class="col-md-4 col-sm-4 wow bounceInUp">
-
-						<div class=imgport data-toggle=modal data-target=#modal-login>
-
-							<span class="wow fadeInDown"> view </span> <img
-								src="${pageContext.request.contextPath}/resources/images/2.jpg"
-								alt=2>
-
-						</div>
-
-						<h4>Portfolio 2</h4>
-
-						<p>Published on Jan 18, 2014</p>
-
-					</div>
-
-					<div class="col-md-4 col-sm-4 wow bounceInRight">
-
-						<div class=imgport data-toggle=modal data-target=#modal-login>
-
-							<span class="wow fadeInDown"> view </span> <img
-								src="${pageContext.request.contextPath}/resources/images/3.jpg"
-								alt=3>
-
-						</div>
-
-						<h4>Portfolio 3</h4>
-
-						<p>Published on Jan 19, 2014</p>
 
 					</div>
 
@@ -535,8 +456,9 @@
 						<p>Developer</p>
 
 					</div>
-					
-					<div class="col-md-2 col-sm-2 wow bounceInRight">
+
+
+					<div class="col-md-3 col-sm-3 wow bounceInRight">
 
 						<div class=imgteam>
 
@@ -576,7 +498,7 @@
 		<section id=login>
 
 			<div class=container>
-			<br /><br />
+				<br /> <br />
 				<div class=row>
 
 					<div class=col-md-12></div>
@@ -600,11 +522,13 @@
 
 								<p>
 									<label for="username">Username</label> <input type="text"
-										id="username" name="username" class="form-control" required="true" />
+										id="username" name="username" class="form-control"
+										required="true" />
 								</p>
 								<p>
 									<label for="password">Password</label> <input type="password"
-										id="password" name="password" class="form-control" required="true"  />
+										id="password" name="password" class="form-control"
+										required="true" />
 								</p>
 								<input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
@@ -737,7 +661,8 @@
 
 						<p class=mail>
 
-							<i class="fa fa-map-marker"> </i> &nbsp; 941 Progress Ave, Toronto
+							<i class="fa fa-map-marker"> </i> &nbsp; 941 Progress Ave,
+							Toronto
 						</p>
 
 						<p class=mail>
@@ -806,7 +731,7 @@
 
 		<footer>
 
-			Copyright &copy; 2014 CencolShare <br> 
+			Copyright &copy; 2014 CencolShare <br>
 
 
 		</footer>

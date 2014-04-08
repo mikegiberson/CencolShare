@@ -89,7 +89,6 @@
             	${loggedInUser.firstName}&nbsp;${loggedInUser.lastName}
             </a>
 						</li>
-						<li><a href="#">Notifications</a></li>
 						<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 					</sec:authorize>	
 				</ul>

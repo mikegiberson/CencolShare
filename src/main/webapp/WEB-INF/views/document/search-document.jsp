@@ -19,28 +19,27 @@
 		<div class="row">
 			<div class="col-sm-2 text-center">
 				<c:choose>
-					<c:when test="${document.upload.fileType =='.pdf'}">
-						<img class="pull-left " width="120px" height="120px" alt=""
-							src="${pageContext.request.contextPath}/resources/images/pdf.jpg">
-					</c:when>
-					<c:when test="${document.upload.fileType=='.doc'}">
-						<img class="pull-left " width="120px" height="120px" alt=""
-							src="${pageContext.request.contextPath}/resources/images/word.jpg">
-					</c:when>
-					<c:when test="${document.upload.fileType=='.xlsx'}">
-						<img class="pull-left " width="120px" height="120px" alt=""
-							src="${pageContext.request.contextPath}/resources/images/excel.png">
-					</c:when>
-					<c:when test="${document.upload.fileType=='.ppt'}">
-						<img class="pull-left " width="120px" height="120px" alt=""
-							src="${pageContext.request.contextPath}/resources/images/ppt.png">
-					</c:when>
-					<c:otherwise>
-							<img class="pull-left " width="120px" height="120px" alt=""
-							src="${pageContext.request.contextPath}/resources/images/doc.jpg">
-								
+						<c:when test="${fn:contains(document.upload.fileType, '.doc')}">
+							<img src="${pageContext.request.contextPath}/resources/images/word.jpg"
+								class="media-object">
+						</c:when>
+						<c:when test="${document.upload.fileType=='.pdf'}">
+							<img src="${pageContext.request.contextPath}/resources/images/pdf.jpg"
+								class="media-object">
+						</c:when>
+						<c:when test="${fn:contains(document.upload.fileType, '.ppt')}">
+							<img src="${pageContext.request.contextPath}/resources/images/ppt.png"
+								class="media-object">
+						</c:when>
+						<c:when test="${fn:contains(document.upload.fileType, '.xls')}">
+							<img src="${pageContext.request.contextPath}/resources/images/excel.png"
+								class="media-object">
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/resources/images/doc.jpg"
+								class="media-object">
 						</c:otherwise>
-				</c:choose>
+					</c:choose>
 
 			</div>
 			<div class="col-sm-10">

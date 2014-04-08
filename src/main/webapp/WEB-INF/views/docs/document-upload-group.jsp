@@ -58,7 +58,7 @@
 
 						<input id="fileupload" type="file" name="file" data-input="true"
 							data-url="${pageContext.request.contextPath}/upload/do" single>
-						<div id="uploadId"></div>
+						<span id="fileName"></span>
 					</div>
 				</div>
 
@@ -82,7 +82,7 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="uploadBtn"></label>
 					<div class="col-md-8">
-						<button id="uploadBtn" class="btn btn-success" type="submit">
+						<button id="uploadBtn" class="btn btn-success" type="submit" disabled>
 							<c:choose>
 								<c:when test="${requestScope.document.documentId > 0}">
 				Save
@@ -116,14 +116,18 @@
 	</c:if>
 	<script>
 		$(function() {
+			$("input:file").change(function (){
+				 var fileName = $(this).val();
+				 $("#fileName").html("Please wait...<img src='${pageContext.request.contextPath}/resources/images/loader.gif' />");
+			});
 			$('#fileupload')
 					.fileupload(
 							{
-
+								
 								dataType : 'json',
 								done : function(e, data) {
 									console.log(data.result);
-									$("div#uploadId").html(
+									$("#fileName").html(
 											"<br /><span class='label label-success'>Added "
 													+ data.result.originalFileName
 													+ "</span>");
@@ -131,6 +135,7 @@
 									$("#fileUrl").val(
 											'${baseURL}/upload/fetch/'
 													+ data.result.id);
+									$('#uploadBtn').prop('disabled', false);
 
 								}
 							});
