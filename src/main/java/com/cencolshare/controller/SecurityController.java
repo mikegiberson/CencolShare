@@ -196,7 +196,7 @@ public class SecurityController extends BaseController {
 			return "User does not exist";
 		}
 		if(userService.resetPassword(user)) {
-			return "Password reset successful";
+			return "Password reset successful. Check your email for new password.";
 		}
 		return "Unable to send email";
 	}

@@ -132,8 +132,7 @@
 
 					<div class=carousel-caption>
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>Modern,
-							Creative, Responsive!</h3>
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>File Sharing Made Simple</h3>
 
 						<span class="wow bounceInRight" data-wow-duration=2s> Nulla
 							vitae elit libero, a pharetra augue mollis interdum. </span>
@@ -150,8 +149,7 @@
 
 					<div class=carousel-caption>
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>One Page
-							Responsive Template</h3>
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Create groups and discussions</h3>
 
 						<span class="wow bounceInRight" data-wow-duration=2s> Lorem
 							ipsum dolor sit amet, consectetur adipiscing elit. </span>
@@ -168,8 +166,7 @@
 
 					<div class=carousel-caption>
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>Simple,
-							Beautiful Design</h3>
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Document sharing is now easy</h3>
 
 						<span class="wow bounceInRight" data-wow-duration=2s>
 							Praesent commodo cursus magna, vel scelerisque nisl consectetur.
@@ -407,15 +404,15 @@
 
 							</ul>
 
-							<img
-								src="${pageContext.request.contextPath}/resources/images/p1.jpg"
+							<img height="350px" width="50px"
+								src="${pageContext.request.contextPath}/resources/images/Lovu.jpg"
 								alt=p1>
 
 						</div>
 
-						<h4>Alexander Kruv</h4>
+						<h4>Lovu Dhiraj Sharma</h4>
 
-						<p>Senior Developer</p>
+						<p>CEO</p>
 
 					</div>
 
@@ -436,15 +433,15 @@
 
 							</ul>
 
-							<img
-								src="${pageContext.request.contextPath}/resources/images/p2.jpg"
+							<img height="350px" width="50px"
+								src="${pageContext.request.contextPath}/resources/images/Ruby.jpg"
 								alt=p2>
 
 						</div>
 
-						<h4>Nabila Ratna</h4>
+						<h4>Ruby Verma</h4>
 
-						<p>User Interface Designer</p>
+						<p>Developer</p>
 
 					</div>
 
@@ -465,15 +462,15 @@
 
 							</ul>
 
-							<img
-								src="${pageContext.request.contextPath}/resources/images/p3.jpg"
+							<img height="350px" width="50px"
+								src="${pageContext.request.contextPath}/resources/images/Sonny.jpg"
 								alt=p3>
 
 						</div>
 
-						<h4>Victor M.</h4>
+						<h4>Sonny K Raju</h4>
 
-						<p>Marketing</p>
+						<p>Senior Developer</p>
 
 					</div>
 
@@ -494,15 +491,44 @@
 
 							</ul>
 
-							<img
+							<img height="350px" width="50px"
 								src="${pageContext.request.contextPath}/resources/images/p4.jpg"
 								alt=p4>
 
 						</div>
 
-						<h4>John Reymond</h4>
+						<h4>Tram Do</h4>
 
-						<p>Senior Developer</p>
+						<p>Developer</p>
+
+					</div>
+					
+										<div class="col-md-3 col-sm-3 wow bounceInRight">
+
+						<div class=imgteam>
+
+							<ul class="wow fadeInUp">
+
+								<li><a href=#> <i class="fa fa-linkedin"> </i>
+								</a></li>
+
+								<li><a href=#> <i class="fa fa-facebook-square"> </i>
+								</a></li>
+
+								<li><a href=#> <i class="fa fa-twitter-square"> </i>
+								</a></li>
+
+							</ul>
+
+							<img height="350px" width="50px"
+								src="${pageContext.request.contextPath}/resources/images/p3.jpg"
+								alt=p3>
+
+						</div>
+
+						<h4>Mike Giberson</h4>
+
+						<p>Project Manager</p>
 
 					</div>
 
@@ -678,13 +704,12 @@
 
 						<p class=mail>
 
-							<i class="fa fa-map-marker"> </i> &nbsp; 1230 Albert Street # 12
-							-090 Singapore
+							<i class="fa fa-map-marker"> </i> &nbsp; 941 Progress Ave, Toronto
 						</p>
 
 						<p class=mail>
 
-							<i class="fa fa-phone-square"> </i> &nbsp; +65123456-NUMBER
+							<i class="fa fa-phone-square"> </i> &nbsp; +1 647-786-2335
 						</p>
 
 					</div>
@@ -746,8 +771,7 @@
 		</main>
 
 		<footer>
-			Copyright &copy; 2014 Company <br> Default - One Page Responsive
-			Templates by <a href=http://templatesuper.com> TemplateSuper </a>
+			Copyright &copy; 2014 CencolShare <br> 
 
 		</footer>
 
