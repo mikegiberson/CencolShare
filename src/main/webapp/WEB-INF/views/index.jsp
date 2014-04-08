@@ -31,8 +31,8 @@
 	rel="stylesheet" />
 
 <link
-	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
-	rel="stylesheet" />
+	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+	rel="stylesheet">
 
 <link
 	href="${pageContext.request.contextPath}/resources/css/montserrat_font.css"
@@ -40,6 +40,27 @@
 
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700'
 	rel=stylesheet type=text/css>
+	
+<style>
+#team ul {
+ top: 70%;
+}
+
+#team ul li {
+ background-color: transparent;
+ background: transparent;
+}
+
+#team ul li:hover {
+ background-color: transparent;
+ background: transparent;
+}
+
+#team ul li a:hover{
+ background-color: transparent;
+ background: transparent;
+}
+</style>
 
 <!--[if lt IE 9]>
 
@@ -308,28 +329,30 @@
 
 					<div class=col-md-12>
 
-						<h3>Solid Team</h3>
+						<h3>Cencol Team</h3>
 
 					</div>
 
-					<div class="col-md-3 col-sm-3 wow bounceInLeft">
+					<div class="col-md-offset-1 col-md-2 col-sm-2 wow bounceInLeft">
 
 						<div class=imgteam>
 
 							<ul class="wow fadeInUp">
 
-								<li><a href=#> <i class="fa fa-linkedin"> </i>
+								<li><a target="_blank" href="https://ca.linkedin.com/pub/lovu-dhiraj-sharma/51/335/291"> <i class="fa fa-linkedin"> </i>
 								</a></li>
 
-								<li><a href=#> <i class="fa fa-facebook-square"> </i>
+								<li><a target="_blank" href="https://github.com/lovudsharma"> <i class="fa fa-github-alt"> </i>
 								</a></li>
 
+							<!-- 
 								<li><a href=#> <i class="fa fa-twitter-square"> </i>
 								</a></li>
+								 -->
 
 							</ul>
 
-							<img height="350px" width="50px"
+							<img height="250px"
 								src="${pageContext.request.contextPath}/resources/images/Lovu.jpg"
 								alt=p1>
 
@@ -341,24 +364,26 @@
 
 					</div>
 
-					<div class="col-md-3 col-sm-3 wow bounceInLeft">
+					<div class="col-md-2 col-sm-2 wow bounceInLeft">
 
 						<div class=imgteam>
 
 							<ul class="wow fadeInUp">
 
-								<li><a href=#> <i class="fa fa-linkedin"> </i>
+								<li><a target="_blank" href="http://ca.linkedin.com/in/rubyverma"> <i class="fa fa-linkedin"> </i>
 								</a></li>
 
-								<li><a href=#> <i class="fa fa-facebook-square"> </i>
+								<li><a target="_blank" href="https://github.com/rubyverma"> <i class="fa fa-github-alt"> </i>
 								</a></li>
 
+								<!-- 
 								<li><a href=#> <i class="fa fa-twitter-square"> </i>
 								</a></li>
+								 -->
 
 							</ul>
 
-							<img height="350px" width="50px"
+							<img height="250px"
 								src="${pageContext.request.contextPath}/resources/images/Ruby.jpg"
 								alt=p2>
 
@@ -370,24 +395,26 @@
 
 					</div>
 
-					<div class="col-md-3 col-sm-3 wow bounceInRight">
+					<div class="col-md-2 col-sm-2 wow bounceInRight">
 
 						<div class=imgteam>
 
 							<ul class="wow fadeInUp">
 
-								<li><a href=#> <i class="fa fa-linkedin"> </i>
+								<li><a target="_blank"  href="http://ca.linkedin.com/in/sonnykr"> <i class="fa fa-linkedin"> </i>
 								</a></li>
 
-								<li><a href=#> <i class="fa fa-facebook-square"> </i>
+								<li><a target="_blank" href="https://github.com/sonnykr"> <i class="fa fa-github-alt"> </i>
 								</a></li>
 
+								<!-- 
 								<li><a href=#> <i class="fa fa-twitter-square"> </i>
 								</a></li>
+								 -->
 
 							</ul>
 
-							<img height="350px" width="50px"
+							<img height="250px"
 								src="${pageContext.request.contextPath}/resources/images/Sonny.jpg"
 								alt=p3>
 
@@ -399,25 +426,27 @@
 
 					</div>
 
-					<div class="col-md-3 col-sm-3 wow bounceInRight">
+					<div class="col-md-2 col-sm-2 wow bounceInRight">
 
 						<div class=imgteam>
 
 							<ul class="wow fadeInUp">
 
-								<li><a href=#> <i class="fa fa-linkedin"> </i>
+								<li><a target="_blank" href="https://ca.linkedin.com/pub/tram-do/75/b7b/240"> <i class="fa fa-linkedin"> </i>
 								</a></li>
 
-								<li><a href=#> <i class="fa fa-facebook-square"> </i>
+								<li><a target="_blank" href="https://github.com/TramDo"> <i class="fa fa-github-alt"> </i>
 								</a></li>
 
+								<!-- 
 								<li><a href=#> <i class="fa fa-twitter-square"> </i>
 								</a></li>
+								 -->
 
 							</ul>
 
-							<img height="350px" width="50px"
-								src="${pageContext.request.contextPath}/resources/images/p4.jpg"
+							<img height="250px" width="50px"
+								src="${pageContext.request.contextPath}/resources/images/Tram.jpg"
 								alt=p4>
 
 						</div>
@@ -428,25 +457,28 @@
 
 					</div>
 
-					<div class="col-md-3 col-sm-3 wow bounceInRight">
+
+					<div class="col-md-2 col-sm-2 wow bounceInRight">
 
 						<div class=imgteam>
 
 							<ul class="wow fadeInUp">
 
-								<li><a href=#> <i class="fa fa-linkedin"> </i>
+								<li><a target="_blank" href="http://ca.linkedin.com/pub/michael-giberson/26/886/5a1"> <i class="fa fa-linkedin"> </i>
 								</a></li>
 
-								<li><a href=#> <i class="fa fa-facebook-square"> </i>
+								<li><a target="_blank" href="https://github.com/mikegiberson"> <i class="fa fa-github-alt"> </i>
 								</a></li>
 
-								<li><a href=#> <i class="fa fa-twitter-square"> </i>
+								<!-- 
+								<li><a href=> <i class="fa fa-twitter-square"> </i>
 								</a></li>
+								 -->
 
 							</ul>
 
-							<img height="350px" width="50px"
-								src="${pageContext.request.contextPath}/resources/images/p3.jpg"
+							<img height="250px"
+								src="${pageContext.request.contextPath}/resources/images/Mike.jpg"
 								alt=p3>
 
 						</div>

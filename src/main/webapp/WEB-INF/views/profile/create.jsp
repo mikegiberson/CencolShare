@@ -26,6 +26,13 @@
     </div>
   </div>
   
+   <div class="form-group">
+    <label for="location_name" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-4">
+      <input type="password" class="form-control" id="password" placeholder="Password" name="password" required="true">
+    </div>
+  </div>
+  
   <c:if test="${loggedInUser.role.toString().equals(\"ADMIN\")}">
 	  <div class="form-group">
 	    <label for="description" class="col-sm-2 control-label">Enabled</label>
@@ -84,6 +91,8 @@
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-6">
       <button class="btn btn-success" id="btnSuccess"><i class="fa fa-floppy-o"></i> Save</button>
+      <a href="${pageContext.request.contextPath}/user"
+					class="btn btn-default">Cancel</a>
     </div>
   </div>
 </form>
