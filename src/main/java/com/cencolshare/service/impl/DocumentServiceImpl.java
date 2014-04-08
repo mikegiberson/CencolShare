@@ -58,7 +58,10 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override 
 	 public List<Document> searchDocumentByNameDescription(String search) {
 	  
-	  final String query = "SELECT * FROM tbl_document WHERE document_description LIKE '%"+search+"%' OR document_title LIKE '%"+search+"%'";
+	  final String query = "SELECT * FROM tbl_document WHERE "
+	  		+ "(document_description LIKE '%"+search+"%' "
+	  		+ "OR document_title LIKE '%"+search+"%') "
+	  		+ "AND group_id IS NOT NULL";
 	  final Query q = em.createNativeQuery(query, Document.class);
 	  return q.getResultList();
 	  
