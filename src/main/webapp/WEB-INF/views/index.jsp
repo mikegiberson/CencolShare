@@ -132,8 +132,7 @@
 
 					<div class=carousel-caption>
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>Modern,
-							Creative, Responsive!</h3>
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Single place to store and Discuss about a document!</h3>
 
 						<span class="wow bounceInRight" data-wow-duration=2s> Nulla
 							vitae elit libero, a pharetra augue mollis interdum. </span>
@@ -150,8 +149,7 @@
 
 					<div class=carousel-caption>
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>One Page
-							Responsive Template</h3>
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Create and discuss about a topic or document</h3>
 
 						<span class="wow bounceInRight" data-wow-duration=2s> Lorem
 							ipsum dolor sit amet, consectetur adipiscing elit. </span>
@@ -168,8 +166,7 @@
 
 					<div class=carousel-caption>
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>Simple,
-							Beautiful Design</h3>
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Document management made easy</h3>
 
 						<span class="wow bounceInRight" data-wow-duration=2s>
 							Praesent commodo cursus magna, vel scelerisque nisl consectetur.
@@ -668,86 +665,13 @@
 					width="600" height="350" frameborder="0" style="border: 0"></iframe>
 			</div>
 
-			<div class=container>
-
-				<div class=row>
-
-					<div class="col-md-4 col-sm-4 wow bounceInLeft">
-
-						<br>
-
-						<p class=mail>
-
-							<i class="fa fa-map-marker"> </i> &nbsp; 1230 Albert Street # 12
-							-090 Singapore
-						</p>
-
-						<p class=mail>
-
-							<i class="fa fa-phone-square"> </i> &nbsp; +65123456-NUMBER
-						</p>
-
-					</div>
-
-					<div class="col-md-8 col-sm-8 wow bounceInRight">
-
-						<form role=form class=frm method=post action=contactus.php>
-
-							<div class=col-md-6>
-
-								<div class=form-group>
-
-									<label for=Name> Name * </label> <input type=text
-										class=form-control name=Name id=Name placeholder="Enter name">
-
-								</div>
-
-							</div>
-
-							<div class=col-md-6>
-
-								<div class=form-group>
-
-									<label for=Email> Email * </label> <input type=email
-										class=form-control Name=Email id=Email
-										placeholder="Enter email">
-
-								</div>
-
-							</div>
-
-							<div class=col-md-12>
-
-								<div class=form-group>
-
-									<label for=Message> Messages * </label>
-
-									<textarea name=Message id=Message class=form-control rows=3
-										placeholder="Enter messages">
-                      </textarea>
-
-								</div>
-
-								<input type=submit name=submit value="Send Message"
-									class="btn btn-primary btn-lg btn-block btn-biru" />
-
-							</div>
-
-						</form>
-
-					</div>
-
-				</div>
-
-			</div>
 
 		</section>
 
 		</main>
 
 		<footer>
-			Copyright &copy; 2014 Company <br> Default - One Page Responsive
-			Templates by <a href=http://templatesuper.com> TemplateSuper </a>
+			Copyright &copy; 2014 CencolShare</a>
 
 		</footer>
 
