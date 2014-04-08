@@ -16,18 +16,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="shortcut icon" href="/cencolshare/resources/icon/favicon.ico">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/icon/favicon.ico">
 
 
 <title>CencolShare</title>
 
 <!-- Bootstrap core CSS -->
-<link href="/cencolshare/resources/css/bootstrap.css" rel="stylesheet"
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"
 	type="text/css">
-<link href="/cencolshare/resources/css/cencol_custom.css"
+<link href="${pageContext.request.contextPath}/resources/css/cencol_custom.css"
 	rel="stylesheet" type="text/css">
 <!-- Custom styles for this template -->
-<link href="/cencolshare/resources/css/dashboard.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/dashboard.css" rel="stylesheet">
 <link
 	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
 	rel="stylesheet">
