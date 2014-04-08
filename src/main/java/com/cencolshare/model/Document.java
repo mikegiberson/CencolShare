@@ -39,7 +39,7 @@ public class Document {
 	@Column(name="document_title", nullable=false)
 	private String documentTitle;
 	
-	@Column(name="document_description")
+	@Column(name="document_description", length=2000)
 	private String documentDescription;
 	
 	@Column(name="file_url", nullable=false)
