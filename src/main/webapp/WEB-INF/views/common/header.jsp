@@ -85,7 +85,7 @@
   		    	<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
   			</sec:authorize>
 
-              <a href="/cencolshare/profile">
+              <a href="${pageContext.request.contextPath}/profile">
             	<img width="22px" height="22px" alt="" src="${loggedInUser.photo }">
             	${loggedInUser.firstName}&nbsp;${loggedInUser.lastName}
             </a>
