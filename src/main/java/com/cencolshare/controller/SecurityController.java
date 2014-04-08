@@ -61,7 +61,7 @@ public class SecurityController extends BaseController {
 	public String logout(ModelMap model, HttpServletRequest request,
 			HttpServletResponse response) {
 		SecurityContextHolder.clearContext();
-		return "redirect:/login";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)

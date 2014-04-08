@@ -95,7 +95,7 @@
 
 					<a class=navbar-brand href=index.html> <img
 						src="${pageContext.request.contextPath}/resources/images/logo.png"
-						alt="Logo">
+						alt="Logo" style="height:60px">
 					</a>
 
 				</div>

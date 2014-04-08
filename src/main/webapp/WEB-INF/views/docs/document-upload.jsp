@@ -53,10 +53,12 @@
 				<label class="col-md-4 control-label" for="fileBtn">File
 					Upload</label>
 				<div class="col-md-4">
-					
+					<span class="label label-success">${requestScope.document.upload.originalFileName}</span>
+					<c:if test="${!(not empty requestScope.document.documentId)}">
 						 <input id="fileupload" name="file" class="input-file" type="file" 
 						 data-url="${pageContext.request.contextPath}/upload/do" single>
 						 <span id="fileName"></span>
+					</c:if>
 				</div>
 			</div>
 
@@ -107,6 +109,10 @@
 	</form>
 	<script>
 		$(function() {
+			if($("#fileName").val() != "") {
+				$('#uploadBtn').prop('disabled', false);
+			}
+			
 			$("input:file").change(function (){
 			 var fileName = $(this).val();
 			 $("#fileName").html("Please wait...<img src='${pageContext.request.contextPath}/resources/images/loader.gif' />");

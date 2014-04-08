@@ -54,7 +54,7 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/">
-					<img alt="CencolShare" style="height:30px" src="${pageContext.request.contextPath}/resources/images/logo.png">
+					<img alt="CencolShare" style="margin-top:-15px; height:50px" src="${pageContext.request.contextPath}/resources/images/logo.png">
 				</a>
 			</div>
 
