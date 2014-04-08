@@ -2,7 +2,8 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	<h1 class="page-header">Dashboard</h1>
+	<h1>Dashboard</h1>
+	<hr class="colorgraph" />
 	
 	<div class="well">Lorem Ipsum is simply dummy text of the
 		printing and typesetting industry. Lorem Ipsum has been the industry's

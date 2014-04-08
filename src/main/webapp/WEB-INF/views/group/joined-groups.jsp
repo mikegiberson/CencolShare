@@ -5,7 +5,8 @@
 
 
 	<span>
-		<h1 class="page-header">Joined Groups</h1>
+		<h1>Joined Groups</h1>
+		<hr class="colorgraph" />
 	</span>
 <c:if test="${empty requestScope.joinedgroups}">
    

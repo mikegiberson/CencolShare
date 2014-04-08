@@ -1,7 +1,7 @@
 <%@ include file="../common/header.jsp"%>
 <%@ include file="../common/sidebar.jsp"%>
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	<h1 class="page-header">
+	<h1>
 		Group Documents <span class ="pull-right"><a href="${pageContext.request.contextPath}/group/view/${groupId}">
  			
  			<button type="button" class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Back</button></a>
@@ -10,6 +10,7 @@
  		<a href="upload"><button type="button" class="btn btn-success "><i class="fa fa-cloud-upload"> </i> Upload</button>
  		</a></c:if></span>
 	</h1>
+	<hr class="colorgraph" />
 	<br>
 	<c:if test="${hasAccess == 'true'}">
 		<c:forEach var="document" items="${documents}">

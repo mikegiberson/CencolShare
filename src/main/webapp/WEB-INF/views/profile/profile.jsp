@@ -9,6 +9,7 @@
   	<input type="hidden" name="email" value="${user.email}">
   <div class="form-group">
     <h1>Update Profile</h1>
+    <hr class="colorgraph" />
     <hr>	
   <div class="form-group">
     <label for="title" class="col-sm-2 control-label">First Name</label>

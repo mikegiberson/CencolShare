@@ -2,7 +2,8 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	<h1 class="page-header">Create New Discussion</h1>
+	<h1>Create New Discussion</h1>
+	<hr class="colorgraph" />
 	<div class="row">
 		<c:if test="${hasAccess == 'true'}">
 		<div class="col-sm-8">

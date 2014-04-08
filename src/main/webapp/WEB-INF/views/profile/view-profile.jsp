@@ -4,7 +4,7 @@
 <form class="form-horizontal" role="form" action="${pageContext.request.contextPath}/profile/save" method="post">
   <div class="form-group">
     <h1>User Profile</h1>
-    <hr>	
+    <hr class="colorgraph" />	
   <div class="form-group">
     <label for="title" class="col-sm-2 control-label">First Name</label>
     <div class="col-sm-4">
