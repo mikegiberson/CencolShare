@@ -52,6 +52,9 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	
 <script>
 function resetPassword(){
 	alert("reset works");
