@@ -5,8 +5,9 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="baseURL" value="${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, pageContext.request.contextPath)}" />
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="baseURL"
+	value="${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, pageContext.request.contextPath)}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,18 +17,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/icon/favicon.ico">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/icon/favicon.ico">
 
 
 <title>CencolShare</title>
 
 <!-- Bootstrap core CSS -->
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"
-	type="text/css">
-<link href="${pageContext.request.contextPath}/resources/css/cencol_custom.css"
+<link
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="${pageContext.request.contextPath}/resources/css/cencol_custom.css"
 	rel="stylesheet" type="text/css">
 <!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/resources/css/dashboard.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/dashboard.css"
+	rel="stylesheet">
 <link
 	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
 	rel="stylesheet">
@@ -40,7 +46,7 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery.iframe-transport.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.fileupload.js"></script>
-	
+
 </head>
 <body>
 
@@ -54,7 +60,8 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/">
-					<img alt="CencolShare" style="margin-top:-15px; height:50px" src="${pageContext.request.contextPath}/resources/images/logo.png">
+					<img alt="CencolShare" style="margin-top: -15px; height: 50px"
+					src="${pageContext.request.contextPath}/resources/images/logo.png">
 				</a>
 			</div>
 
@@ -79,18 +86,14 @@
 								</button>
 							</form>
 						</li>
-						<li>
-						<sec:authorize access="isAnonymous()">
-  		    	<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-  			</sec:authorize>
-
-              <a href="${pageContext.request.contextPath}/profile">
-            	<img width="22px" height="22px" alt="" src="${loggedInUser.photo }">
-            	${loggedInUser.firstName}&nbsp;${loggedInUser.lastName}
-            </a>
-						</li>
+						<li><sec:authorize access="isAnonymous()">
+								<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+							</sec:authorize> <a href="${pageContext.request.contextPath}/profile"> <img
+								width="22px" height="22px" alt="" src="${loggedInUser.photo }">
+								${loggedInUser.firstName}&nbsp;${loggedInUser.lastName}
+						</a></li>
 						<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-					</sec:authorize>	
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>
