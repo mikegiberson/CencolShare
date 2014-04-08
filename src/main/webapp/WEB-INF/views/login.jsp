@@ -6,12 +6,12 @@
 <form action="${loginUrl}" method="post" class="col-xs-4 form-signin" role="form"> 
 	<h2 class="form-signin-heading">Please sign in</h2>      
     <c:if test="${param.error != null}">        
-        <p>
+        <p class="alert alert-danger">
             Invalid username and password, or your account is disabled.
         </p>
     </c:if>
     <c:if test="${param.logout != null}">       
-        <p>
+        <p class="alert alert-info">
             You have been logged out.
         </p>
     </c:if>
@@ -54,6 +54,7 @@
 
 <script>
 function resetPassword(){
+	alert("reset works");
 	var email = $("#email").val();
 	$("#result").html("");
 	var url = "${pageContext.request.contextPath}/resetpassword";

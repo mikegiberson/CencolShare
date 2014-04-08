@@ -4,10 +4,6 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Query;
-import javax.persistence.criteria.Join;
-import javax.servlet.http.HttpServletRequest;
-
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.Upload;

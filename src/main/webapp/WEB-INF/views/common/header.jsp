@@ -41,6 +41,9 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.fileupload.js"></script>
 
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	
 </head>
 <body>
 
