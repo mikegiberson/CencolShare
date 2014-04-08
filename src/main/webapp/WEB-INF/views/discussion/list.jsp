@@ -18,7 +18,7 @@
 
 			<div class="row">
 
-				<div class="col-sm-10">
+				<div class="col-sm-12">
 					<h2 class="text-primary">
 						<a
 							href="${pageContext.request.contextPath}/discussion/view/${d.discussionId}">${d.discussionTopic}</a>

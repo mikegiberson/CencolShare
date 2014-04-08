@@ -41,9 +41,11 @@
 						class="pull-right"> <a
 						href="${pageContext.request.contextPath}/group/edit/${grp.groupId}"
 						class="btn btn-primary"> <i class="fa fa-pencil-square-o"></i>
-					</a> <a
+					</a> 
+					<!-- <a
 						href="${pageContext.request.contextPath}/group/delete/${grp.groupId}"
 						class="btn btn-danger"> <i class="fa fa-trash-o"></i>
+					-->
 					</a>
 				</div>
 
