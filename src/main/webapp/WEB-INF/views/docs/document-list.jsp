@@ -11,7 +11,7 @@
 
 		<span class ="pull-right"><a href="favorite">
 			
-			<button type="button" class="btn btn-warning"><i class="fa fa-star"></i> My Favorite</button></a>
+			<!-- <button type="button" class="btn btn-warning"><i class="fa fa-star"></i> My Favorite</button> -->
 		<a href="upload"><button type="button" class="btn btn-success "><i class="fa fa-cloud-upload"> </i> Upload</button>
 		</a></span>
 	</h1>
