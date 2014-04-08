@@ -458,7 +458,7 @@
 					</div>
 
 
-					<div class="col-md-3 col-sm-3 wow bounceInRight">
+					<div class="col-md-2 col-sm-2 wow bounceInRight">
 
 						<div class=imgteam>
 
