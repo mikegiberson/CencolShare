@@ -132,7 +132,9 @@
 
 					<div class=carousel-caption>
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>File Sharing Made Simple</h3>
+
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Single place to store and Discuss about a document!</h3>
+
 
 						<span class="wow bounceInRight" data-wow-duration=2s> Nulla
 							vitae elit libero, a pharetra augue mollis interdum. </span>
@@ -149,7 +151,9 @@
 
 					<div class=carousel-caption>
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>Create groups and discussions</h3>
+						<!-- h3 class="wow bounceInLeft" data-wow-duration=2s>Create groups and discussions</h3-->
+
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Create and discuss about a topic or document</h3>
 
 						<span class="wow bounceInRight" data-wow-duration=2s> Lorem
 							ipsum dolor sit amet, consectetur adipiscing elit. </span>
@@ -166,7 +170,7 @@
 
 					<div class=carousel-caption>
 
-						<h3 class="wow bounceInLeft" data-wow-duration=2s>Document sharing is now easy</h3>
+						<h3 class="wow bounceInLeft" data-wow-duration=2s>Document management made easy</h3>
 
 						<span class="wow bounceInRight" data-wow-duration=2s>
 							Praesent commodo cursus magna, vel scelerisque nisl consectetur.
@@ -694,6 +698,7 @@
 					width="600" height="350" frameborder="0" style="border: 0"></iframe>
 			</div>
 
+<<<<<<< HEAD
 			<div class=container>
 
 				<div class=row>
@@ -765,13 +770,19 @@
 				</div>
 
 			</div>
+=======
+>>>>>>> d72531502e313879a5b76fb6648730e4ecabd8e0
 
 		</section>
 
 		</main>
 
 		<footer>
+<<<<<<< HEAD
 			Copyright &copy; 2014 CencolShare <br> 
+=======
+			Copyright &copy; 2014 CencolShare</a>
+>>>>>>> d72531502e313879a5b76fb6648730e4ecabd8e0
 
 		</footer>
 

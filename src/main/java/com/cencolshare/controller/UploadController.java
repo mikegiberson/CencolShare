@@ -100,14 +100,14 @@ public class UploadController extends BaseController {
 	@RequestMapping(value = "/fetch/{fileId}", method = RequestMethod.GET)
 	public String displayFile(@PathVariable Long fileId,
 			HttpServletResponse response) throws IOException {
-
+		/*
 		if (getLoggedInUser() == null) {
 			return "access_denied.jsp?error=LOGIN_FAILURE";
 		}
-
+		*/
 		final Upload upload = uploadService.getUploadById(fileId);
 		final Document document = documentService.getDocumentByUpload(upload);
-		
+		/*
 		if(document != null) {
 			// if the request is not for a document, there is no need for a authenticity check
 			// for eg: request for a profile picture
@@ -125,10 +125,10 @@ public class UploadController extends BaseController {
 
 			} else {
 				System.out.println("No access to download the requested file");
-				return "access_denied.jsp?error=NO_ACCESS";
+				//return "access_denied.jsp?error=NO_ACCESS";
 			}
 		}
-		
+		*/
 
 		if (upload == null) {
 			return null;

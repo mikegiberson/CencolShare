@@ -41,6 +41,9 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.fileupload.js"></script>
 
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	
 </head>
 <body>
 
@@ -82,7 +85,7 @@
   		    	<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
   			</sec:authorize>
 
-              <a href="/cencolshare/profile">
+              <a href="${pageContext.request.contextPath}/profile">
             	<img width="22px" height="22px" alt="" src="${loggedInUser.photo }">
             	${loggedInUser.firstName}&nbsp;${loggedInUser.lastName}
             </a>

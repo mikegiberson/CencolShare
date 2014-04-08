@@ -4,10 +4,6 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Query;
-import javax.persistence.criteria.Join;
-import javax.servlet.http.HttpServletRequest;
-
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.cencolshare.model.Discussion;
 import com.cencolshare.model.Document;
 import com.cencolshare.model.Group;
 import com.cencolshare.model.Upload;
@@ -85,7 +80,7 @@ public class GroupController extends BaseController {
 		grp.setGroupDescription(request.getParameter("groupDescription"));
 		if (request.getParameter("photo") == null
 				|| request.getParameter("photo").equals("")) {
-			grp.setGroupImage(BASE_URL + "/resources/images/groupDefault.png");
+			grp.setGroupImage(BASE_URL + "resources/images/groupDefault.png");
 		} else {
 			grp.setGroupImage(request.getParameter("photo"));
 		}
@@ -122,7 +117,9 @@ public class GroupController extends BaseController {
 			log.info("User is authenticated to delete grp");
 			groupService.deleteGroupbyID(id);
 		}
-		return new ModelAndView(new RedirectView("/cencolshare/group/list"));
+
+		return new ModelAndView(new RedirectView(BASE_URL+"group/list"));
+
 	}
 
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
@@ -203,8 +200,10 @@ public class GroupController extends BaseController {
 		documentService.deleteDocumentbyID(id);
 		uploadService.deleteUpload(uploadId);
 
-		return new ModelAndView(new RedirectView(
-				"/cencolshare/group/view/{groupId}/list"));
+
+		return new ModelAndView(new RedirectView(BASE_URL+
+				"group/view/{groupId}/list"));
+
 	}
 
 	@RequestMapping(value = "/view/{id}/list", method = RequestMethod.GET)
@@ -247,8 +246,10 @@ public class GroupController extends BaseController {
 
 		doc = documentService.saveDocument(doc);
 		if (doc.getDocumentId() > 0) {
-			return new ModelAndView(new RedirectView("/cencolshare/group/view/"
+
+			return new ModelAndView(new RedirectView(BASE_URL+"group/view/"
 					+ id + "/list"));
+
 		}
 		return null;
 	}
@@ -260,14 +261,16 @@ public class GroupController extends BaseController {
 		int loggedUserId = loggedUser.getUserId();
 		groupService.removeUserFromGroup(loggedUserId, id);
 		if (request.getParameter("fromSearch") != null) {
-			return new ModelAndView(new RedirectView(
-					"/cencolshare/search?searchType=group&searchInput="));
+			return new ModelAndView(new RedirectView(BASE_URL+
+					"search?searchType=group&searchInput="));
 		} else if (request.getParameter("fromJoined").equals("true"))
 			return new ModelAndView(new RedirectView(
-					"/cencolshare/group/joined"));
+					BASE_URL+"group/joined"));
 		else {
-			return new ModelAndView(new RedirectView("/cencolshare/group/view/"
+
+			return new ModelAndView(new RedirectView(BASE_URL+"group/view/"
 					+ id));
+
 		}
 	}
 
@@ -280,9 +283,10 @@ public class GroupController extends BaseController {
 
 		if (request.getParameter("fromSearch") != null) {
 			return new ModelAndView(new RedirectView(
-					"/cencolshare/search?searchType=group&searchInput="));
+					BASE_URL+"search?searchType=group&searchInput="));
 		} else {
-			return new ModelAndView(new RedirectView("/cencolshare/group/view/"
+
+			return new ModelAndView(new RedirectView(BASE_URL+"group/view/"
 					+ id));
 		}
 
