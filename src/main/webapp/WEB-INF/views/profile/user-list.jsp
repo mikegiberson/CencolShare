@@ -15,7 +15,7 @@
 		
 	</span>
 	<h1>View Users</h1>
-	<hr/>
+	<hr class="colorgraph" />
 	<div class="col-md-12">	    
 		<c:forEach items="${users}" var="u">
 			<h2>${u.firstName} ${u.lastName}</h2>

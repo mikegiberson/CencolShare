@@ -7,7 +7,7 @@
 	${discussion.discussionContent }
 
 	${error }
-	<hr>
+	<hr class="colorgraph" />
 	<div class="container" style="width: 100%">
 		<div class="row">
 			<div class="panel panel-default widget">

@@ -4,7 +4,8 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
 
 	<span>
-		<h1 class="page-header">My Discussions</h1>
+		<h1>My Discussions</h1>
+		<hr class="colorgraph" />
 	</span>
 
 	<c:if test="${empty requestScope.discussions}">
@@ -17,7 +18,7 @@
 
 			<div class="row">
 
-				<div class="col-sm-12">
+				<div class="col-sm-10">
 					<h2 class="text-primary">
 						<a
 							href="${pageContext.request.contextPath}/discussion/view/${d.discussionId}">${d.discussionTopic}</a>

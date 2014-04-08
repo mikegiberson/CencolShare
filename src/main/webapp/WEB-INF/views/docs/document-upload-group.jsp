@@ -6,12 +6,13 @@
 
 	<c:choose>
 		<c:when test="${requestScope.document.documentId > 0}">
-			<h1 class="page-header">Edit Document</h1>
+			<h1>Edit Document</h1>
 		</c:when>
 		<c:otherwise>
-			<h1 class="page-header">Upload Document</h1>
+			<h1>Upload Document</h1>
 		</c:otherwise>
 	</c:choose>
+	<hr class="colorgraph" />
 	<c:if test="${hasAccess == 'true' }">
 		<form class="form-horizontal" role="form" method="post"
 			action="${pageContext.request.contextPath}/group/view/${groupId}/upload/save">

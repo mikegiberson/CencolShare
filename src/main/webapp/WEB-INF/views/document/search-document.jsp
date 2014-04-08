@@ -18,6 +18,7 @@
 	<c:forEach items="${requestScope.documents}" var="document">
 		<div class="row">
 			<div class="col-sm-2 text-center">
+			<a href="${pageContext.request.contextPath}/docs/view/${document.documentId}">
 				<c:choose>
 						<c:when test="${fn:contains(document.upload.fileType, '.doc')}">
 							<img src="${pageContext.request.contextPath}/resources/images/word.jpg"
@@ -40,11 +41,12 @@
 								class="media-object">
 						</c:otherwise>
 					</c:choose>
+					</a>
 
 			</div>
 			<div class="col-sm-10">
 
-				<h2 class="text-primary">${document.documentTitle}</h2>
+				<h2 class="text-primary"><a href="${pageContext.request.contextPath}/docs/view/${document.documentId}">${document.documentTitle}</a></h2>
 				<p class="text-info">${document.documentDescription}</p>
 				<span class="label label-warning">Size:
 					${document.upload.fileSize} </span> &nbsp <span

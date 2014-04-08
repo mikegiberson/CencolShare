@@ -23,22 +23,23 @@
 	<c:forEach items="${requestScope.discussions}" var="discussion">
 		<div class="row">
 			
-			<div class="col-sm-10">
+			<div class="col-sm-12">
 
-				<h2 class="text-primary">${discussion.discussionTopic}</h2>
+				<h2 class="text-primary"><a href="${pageContext.request.contextPath}/discussion/view/${discussion.discussionId}">${discussion.discussionTopic}</a></h2>
 				<p class="text-info">${discussion.discussionContent} </p>
 				<span
 					class="label label-warning"><b>Comments: ${discussion.comments.size() }</b></span>
 				<span class="pull-right">
-				<sec:authorize access="isAuthenticated()"> 
+		<!-- 		<sec:authorize access="isAuthenticated()"> 
 	<a href="${pageContext.request.contextPath}/document/edit/${grp.groupId}" class="btn btn-success">
   			<i class="fa fa-thumbs-up"> Join</i></a>
   			<a href="${pageContext.request.contextPath}/document/edit/${grp.groupId}" class="btn btn-danger">
   		<i class="fa fa-thumbs-down"> Leave</i>
   		</a>
 </sec:authorize>
+ -->
 				
-  		<a href="${pageContext.request.contextPath}/discussion/view/${grp.groupId}" class="btn btn-primary">
+  		<a href="${pageContext.request.contextPath}/discussion/view/${discussion.discussionId}" class="btn btn-primary">
   			<i class="fa fa-arrow-circle-right"> View</i>
   		</a>
 			</div>

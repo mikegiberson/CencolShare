@@ -519,7 +519,7 @@
 								<c:if test="${param.logout != null}">
 									<p>You have been logged out.</p>
 								</c:if>
-
+								
 								<p>
 									<label for="username">Username</label> <input type="text"
 										id="username" name="username" class="form-control"

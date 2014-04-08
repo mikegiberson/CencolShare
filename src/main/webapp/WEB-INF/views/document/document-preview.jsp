@@ -5,22 +5,24 @@
 
 	<div class="row">
 		<div class="col-sm-10">
-			<h1>${document.documentTitle}</h1>
+			<h1 class="text">${document.documentTitle}</h1>
 		</div>
 		<div class="col-sm-2">
 			<br />
-			<a class="pull-right" style="padding: 9px" onclick="window.history.back()">Go Back</a>
+			<a class="pull-right" style="padding: 9px" onclick="window.history.back()"><i class="fa fa-arrow-circle-left"></i> Go Back</a>
 		</div>
 	</div>
+	<hr class="colorgraph" />
 	
+	<h4 class="text text-info">${document.documentDescription}</h4>
 	 
 	<iframe style="display: block; border: 1px solid #86B404;" width="100%"
 		height="500"
 		src="https://docs.google.com/viewer?embedded=true&url=${ docPath }"></iframe>
 		</iframe>
 	<br />
-	<p>${document.documentDescription}</p>
-	<p class="muted">Uploaded on: ${document.dateUploaded}</p>
+	
+	<p class="text-muted">Uploaded on: ${document.dateUploaded}</p>
 	 <!--
 	<iframe style="display: block; border: 1px solid #86B404;" width="100%"
 		height="500"

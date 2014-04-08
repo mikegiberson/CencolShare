@@ -11,7 +11,8 @@
 		</a>
 	</div>
 	<span>
-		<h1 class="page-header">My Groups</h1>
+		<h1>My Groups</h1>
+		<hr class="colorgraph" />
 	</span>
 	<c:if test="${empty requestScope.groups}">
 

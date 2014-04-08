@@ -3,7 +3,8 @@
 <%@ include file="../common/sidebar.jsp"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-	<h1 class="page-header">Change Password</h1>
+	<h1>Change Password</h1>
+	<hr class="colorgraph" />
 
 	<form class="form-horizontal col-sm-10" role="form" method="post" onsubmit="return matchPassword();"
 		action="${pageContext.request.contextPath}/profile/resetpassword">

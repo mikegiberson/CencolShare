@@ -6,14 +6,16 @@
   <li><a href="#">My Favorites</a></li>
   <li><a href="upload">Upload</a></li>
 </ul>-->
-	  <h1 class="page-header">
+	  <h1>
 		My Docs 
+
 		<span class ="pull-right"><a href="favorite">
 			
 			<button type="button" class="btn btn-warning"><i class="fa fa-star"></i> My Favorite</button></a>
 		<a href="upload"><button type="button" class="btn btn-success "><i class="fa fa-cloud-upload"> </i> Upload</button>
 		</a></span>
 	</h1>
+	<hr class="colorgraph" />
 <br>
 
 <c:if test="${empty requestScope.documents}">
