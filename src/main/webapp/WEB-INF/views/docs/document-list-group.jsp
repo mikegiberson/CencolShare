@@ -18,7 +18,7 @@
 				<div class="thumbnail">
 					<br />
 					<c:choose>
-						<c:when test="${document.upload.fileType=='.doc'}">
+						<c:when test="${fn:contains(document.upload.fileType, '.doc')}">
 							<img src="${pageContext.request.contextPath}/resources/images/word.jpg"
 								class="media-object">
 						</c:when>
@@ -26,11 +26,11 @@
 							<img src="${pageContext.request.contextPath}/resources/images/pdf.jpg"
 								class="media-object">
 						</c:when>
-						<c:when test="${document.upload.fileType=='.ppt'}">
+						<c:when test="${fn:contains(document.upload.fileType, '.ppt')}">
 							<img src="${pageContext.request.contextPath}/resources/images/ppt.png"
 								class="media-object">
 						</c:when>
-						<c:when test="${document.upload.fileType=='.xlsx'}">
+						<c:when test="${fn:contains(document.upload.fileType, '.xls')}">
 							<img src="${pageContext.request.contextPath}/resources/images/excel.png"
 								class="media-object">
 						</c:when>
