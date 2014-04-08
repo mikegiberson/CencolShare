@@ -698,7 +698,6 @@
 					width="600" height="350" frameborder="0" style="border: 0"></iframe>
 			</div>
 
-<<<<<<< HEAD
 			<div class=container>
 
 				<div class=row>
@@ -770,19 +769,16 @@
 				</div>
 
 			</div>
-=======
->>>>>>> d72531502e313879a5b76fb6648730e4ecabd8e0
+
 
 		</section>
 
 		</main>
 
 		<footer>
-<<<<<<< HEAD
+
 			Copyright &copy; 2014 CencolShare <br> 
-=======
-			Copyright &copy; 2014 CencolShare</a>
->>>>>>> d72531502e313879a5b76fb6648730e4ecabd8e0
+
 
 		</footer>
 
